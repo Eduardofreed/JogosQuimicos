@@ -6,18 +6,18 @@ const tabuleiro = document.getElementById('tabuleiro-jogo');
 
 // --- DADOS DO JOGO ---
 const dadosBaseCartas = [
-    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na.png' },
-    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg.png' },
-    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K.png' },
-    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al.png' },
-    { nome: 'Cálcio', simbolo: 'Ca', quantidade: 1, carga: 2, imagem: 'imagens/Ca.png' },
-    { nome: 'Bário', simbolo: 'Ba', quantidade: 1, carga: 2, imagem: 'imagens/Ba.png' },
-    { nome: 'Lítio', simbolo: 'Li', quantidade: 1, carga: 1, imagem: 'imagens/Li.png' },
-    { nome: 'Césio', simbolo: 'Cs', quantidade: 1, carga: 1, imagem: 'imagens/Cs.png' },
-    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
-    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O.png' },
-    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
-    { nome: 'Iodo', simbolo: 'I', quantidade: 2, carga: -1, imagem: 'imagens/I.png' }
+    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imgs/Na.png' },
+    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imgs/Mg.png' },
+    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imgs/K.png' },
+    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imgs/Al.png' },
+    { nome: 'Cálcio', simbolo: 'Ca', quantidade: 1, carga: 2, imagem: 'imgs/Ca.png' },
+    { nome: 'Bário', simbolo: 'Ba', quantidade: 1, carga: 2, imagem: 'imgs/Ba.png' },
+    { nome: 'Lítio', simbolo: 'Li', quantidade: 1, carga: 1, imagem: 'imgs/Li.png' },
+    { nome: 'Césio', simbolo: 'Cs', quantidade: 1, carga: 1, imagem: 'imgs/Cs.png' },
+    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imgs/Cl.png' },
+    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imgs/O.png' },
+    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imgs/Br.png' },
+    { nome: 'Iodo', simbolo: 'I', quantidade: 2, carga: -1, imagem: 'imgs/I.png' }
 ];
 
 // ESTADO DO JOGO
