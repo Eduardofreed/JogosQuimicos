@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
@@ -14,7 +14,7 @@ body{
     min-height: 100vh;
 }
 
-header{
+header {
     padding: 20px;
     background-color: #4a6da7;
     color: white;
@@ -23,26 +23,36 @@ header{
     margin-bottom: 20px;
 }
 
-#infojogo{
+#info-jogo {
     display: flex;
     justify-content: space-around;
     width: 80%;
     max-width: 900px;
     margin-bottom: 20px;
-    font-size: 1,2em;
+    font-size: 1.2em;
 }
 
-#tabuleiro-jogo{
+#tabuleiro-jogo {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr); 
     gap: 10px;
     width: 95%;
     max-width: 1000px;
     margin: 0 auto;
-    perspective: 1000px;
+    perspective: 1000px; 
 }
 
-.carta{
+#botao-reiniciar {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 8px;
+    border: none;
+    background-color: #4a6da7;
+    color: white;
+}
+.carta {
     width: 120px;
     height: 170px;
     position: relative;
@@ -51,28 +61,35 @@ header{
     transition: transform 0.6s;
 }
 
-.cartavirada{
-    transform: rotateY(180deg);
+.carta.virada {
+    transform: rotateY(180deg); 
 }
- 
-.face{
+
+.carta.combinada {
+    /* Efeito de brilho para indicar sucesso */
+    box-shadow: 0 0 20px 5px #ffdf00;
+    transform: scale(1.05); /* Um leve zoom */
+}
+
+.face {
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(red, green, blue, alpha);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    backface-visibility: hidden;
 }
 
-.verso{
-    background-image: url("imgs/verso-institucional.png");
+.verso {
+    background-image: url('imagens/verso-institucional.png');
     background-size: cover;
+    background-position: center;
 }
 
-.frente{
-    background-color: #ffff;
-    transform: rotateY(180deg);
+.frente {
+    background-color: #ffffff;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transform: rotateY(180deg);
 }
