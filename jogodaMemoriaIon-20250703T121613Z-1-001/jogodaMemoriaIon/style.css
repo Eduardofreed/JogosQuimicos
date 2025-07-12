@@ -1,95 +1,164 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
     color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
-
-header {
-    padding: 20px;
-    background-color: #4a6da7;
-    color: white;
-    width: 100%;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-#info-jogo {
-    display: flex;
-    justify-content: space-around;
-    width: 80%;
-    max-width: 900px;
-    margin-bottom: 20px;
+
+#tela-inicio { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+    color: white; 
+}
+
+#tela-inicio h1 { 
+    font-size: 3.5em;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+#tela-inicio .subtitulo { 
     font-size: 1.2em;
+    margin-bottom: 40px; 
+    opacity: 0.9; 
+}
+.input-nomes { 
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
-#tabuleiro-jogo {
-    display: grid;
+.input-nomes input { 
+    padding: 12px;
+    font-size: 1em;
+    border: none; 
+    border-radius: 8px; 
+    width: 200px; 
+    text-align: center; 
+}
+
+#botao-iniciar-jogo { 
+    padding: 15px 30px; 
+    font-size: 1.3em; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 10px; 
+    background-color: #f0f0f0;
+    color: #2193b0; 
+    font-weight: 600; 
+    transition: transform 0.2s; 
+}
+
+#botao-iniciar-jogo:hover { 
+    transform: scale(1.05); 
+}
+
+/* --- ESTILOS DA TELA DE JOGO --- */
+header { 
+    padding: 20px; 
+    background-color: #4a6da7; 
+    color: white; 
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+nav { 
+    margin-top: 15px; 
+}
+
+nav a { 
+    text-decoration: none;
+    color: #ffffff; 
+    padding: 8px 15px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+nav a:hover { 
+    background-color: rgba(255, 255, 255, 0.2); 
+}
+
+#info-jogo { 
+    display: flex; 
+    justify-content: space-around; 
+    width: 90%; 
+    max-width: 900px; 
+    margin: 0 auto 20px auto; 
+    font-size: 1.2em; 
+    background-color: rgba(255,255,255,0.2); 
+    padding: 10px; 
+    border-radius: 8px; 
+    color: white; 
+}
+
+#tabuleiro-jogo { 
+    display: grid; 
     grid-template-columns: repeat(7, 1fr); 
-    gap: 10px;
-    width: 95%;
-    max-width: 1000px;
+    gap: 10px; 
+    width: 95%; 
+    max-width: 1000px; 
     margin: 0 auto;
     perspective: 1000px; 
 }
 
-#botao-reiniciar {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    cursor: pointer;
-    border-radius: 8px;
-    border: none;
-    background-color: #4a6da7;
-    color: white;
-}
-.carta {
-    width: 120px;
-    height: 170px;
-    position: relative;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
+#botao-reiniciar { 
+    margin: 20px auto; 
+    display: block; 
+    padding: 10px 20px; 
+    font-size: 1.2em; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    border: none; 
+    background-color: #4a6da7; 
+    color: white; 
 }
 
-.carta.virada {
+/* --- ESTILOS DAS CARTAS (sem mudanças) --- */
+.carta { 
+    width: 120px; 
+    height: 170px; 
+    position: relative; 
+    cursor: pointer; 
+    transform-style: preserve-3d; 
+    transition: transform 0.6s; 
+}
+
+.carta.virada { 
     transform: rotateY(180deg); 
 }
 
-.carta.combinada {
-    /* Efeito de brilho para indicar sucesso */
-    box-shadow: 0 0 20px 5px #ffdf00;
-    transform: scale(1.05); /* Um leve zoom */
+.carta.combinada { 
+    box-shadow: 0 0 20px 5px #ffdf00; 
+    transform: scale(1.05); 
 }
 
-.face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    backface-visibility: hidden;
+.face { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    backface-visibility: hidden; 
 }
 
-.verso {
-    background-image: url('imagens/verso-institucional.png');
-    background-size: cover;
-    background-position: center;
+.verso { background-image: url('imagens/verso-institucional.png');
+    background-size: cover; 
+    background-position: center; 
 }
 
-.frente {
-    background-color: #ffffff;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: rotateY(180deg);
+.frente { background-color: #ffffff; 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    transform: rotateY(180deg); 
 }

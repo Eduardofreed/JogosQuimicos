@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início - Jogo Iônico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="tela-inicio">
+        <h1>Jogo da Memória da Ligação Iônica</h1>
+        <p class="subtitulo">Um projeto educacional de Iniciação Científica</p>
+        <div class="input-nomes">
+            <input type="text" id="nome-j1" placeholder="Nome do Jogador 1">
+            <input type="text" id="nome-j2" placeholder="Nome do Jogador 2">
+        </div>
+        <button id="botao-iniciar-jogo">Iniciar Jogo</button>
+    </div>
+
+    <script>
+        // Pequeno script SÓ para esta página
+        const botaoIniciar = document.getElementById('botao-iniciar-jogo');
+        const inputNomeJ1 = document.getElementById('nome-j1');
+        const inputNomeJ2 = document.getElementById('nome-j2');
+
+        botaoIniciar.addEventListener('click', () => {
+            // Pega os nomes ou usa o padrão
+            const nome1 = inputNomeJ1.value.trim() || "Jogador 1";
+            const nome2 = inputNomeJ2.value.trim() || "Jogador 2";
+
+            // Salva os nomes no "bloco de notas" do navegador
+            localStorage.setItem('nomeJogador1', nome1);
+            localStorage.setItem('nomeJogador2', nome2);
+
+            // Redireciona para a página do jogo
+            window.location.href = 'jogo.html';
+        });
+    </script>
+</body>
+</html>
