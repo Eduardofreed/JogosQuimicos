@@ -3,41 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início - Jogo Iônico</title>
+    <title>Jovens Talentos - Jogos Químicos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="fundo-quimico"></div>
     <div id="tela-inicio">
-        <h1>Jogo da Memória da Ligação Iônica</h1>
-        <p class="subtitulo">Um projeto educacional de Iniciação Científica</p>
+        <h1>Jogos Químicos Educacionais</h1>
+        <p class="subtitulo">Projeto de Iniciação Científica - Jovens Talentos</p>
+        
         <div class="input-nomes">
             <input type="text" id="nome-j1" placeholder="Nome do Jogador 1">
             <input type="text" id="nome-j2" placeholder="Nome do Jogador 2">
         </div>
-        <button id="botao-iniciar-jogo">Iniciar Jogo</button>
+        
+        <div class="botoes-jogos">
+            <button id="botao-memoria-ionica" class="botao-jogo">
+                <span class="titulo-jogo">Jogo da Memória Iônica</span>
+                <span class="descricao-jogo">Combine íons para formar compostos</span>
+            </button>
+            
+            <button id="botao-super-trunfo" class="botao-jogo">
+                <span class="titulo-jogo">Super Trunfo Químico</span>
+                <span class="descricao-jogo">Compare propriedades dos elementos</span>
+            </button>
+        </div>
     </div>
 
     <script>
-        // Pequeno script SÓ para esta página
-        const botaoIniciar = document.getElementById('botao-iniciar-jogo');
+        // Script para a página de início
+        const botaoMemoria = document.getElementById('botao-memoria-ionica');
+        const botaoSuperTrunfo = document.getElementById('botao-super-trunfo');
         const inputNomeJ1 = document.getElementById('nome-j1');
         const inputNomeJ2 = document.getElementById('nome-j2');
 
-        botaoIniciar.addEventListener('click', () => {
-            // Pega os nomes ou usa o padrão
+        function salvarNomes() {
             const nome1 = inputNomeJ1.value.trim() || "Jogador 1";
             const nome2 = inputNomeJ2.value.trim() || "Jogador 2";
-
-            // Salva os nomes no "bloco de notas" do navegador
+            
             localStorage.setItem('nomeJogador1', nome1);
             localStorage.setItem('nomeJogador2', nome2);
+        }
 
-            // Redireciona para a página do jogo
-            window.location.href = 'jogo.html';
+        botaoMemoria.addEventListener('click', () => {
+            salvarNomes();
+            window.location.href = 'memoriaIonica.html';
         });
+
+        botaoSuperTrunfo.addEventListener('click', () => {
+            salvarNomes();
+            window.location.href = 'supertrunfo.html';
+        });
+
+        // ANIMAÇÃO DE PARTÍCULAS QUÍMICAS
+        const particulasQuimicas = [
+            { tipo: 'Na', img: 'imagens/Na_atomo.png' },
+            { tipo: 'Cl', img: 'imagens/Cl_atomo.png' },
+            { tipo: 'O', img: 'imagens/O_atomo.png' },
+            { tipo: 'C', img: 'imagens/C_atomo.svg.png' },
+        ];
+
+        function criarParticula(tipo, x, y) {
+            const el = document.createElement('img');
+            el.src = particulasQuimicas.find(p => p.tipo === tipo).img;
+            el.className = 'particula-quimica';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.style.position = 'absolute';
+            el.style.width = '48px';
+            el.style.height = '48px';
+            el.style.pointerEvents = 'none';
+            document.getElementById('fundo-quimico').appendChild(el);
+            animarParticula(el);
+        }
+
+        function animarParticula(el) {
+            // Movimento aleatório simples
+            const mover = () => {
+                const x = Math.random() * (window.innerWidth - 60);
+                const y = Math.random() * (window.innerHeight - 60);
+                el.style.transition = 'left 4s linear, top 4s linear';
+                el.style.left = x + 'px';
+                el.style.top = y + 'px';
+                setTimeout(mover, 4000 + Math.random() * 2000);
+            };
+            mover();
+        }
+
+        // Criar partículas iniciais
+        for (let i = 0; i < 10; i++) {
+            const tipo = particulasQuimicas[Math.floor(Math.random() * particulasQuimicas.length)].tipo;
+            criarParticula(tipo, Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+        }
     </script>
+    <script src="particulas.js"></script>
 </body>
 </html>

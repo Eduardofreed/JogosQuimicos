@@ -1,6 +1,6 @@
 "use strict";
 
-// --- REFERÊNCIAS AOS ELEMENTOS DO JOGO ---
+// REFERÊNCIAS AOS ELEMENTOS DO JOGO
 const tabuleiro = document.getElementById('tabuleiro-jogo');
 const labelJ1 = document.getElementById('label-j1');
 const labelJ2 = document.getElementById('label-j2');
@@ -9,10 +9,10 @@ const pontosJ2 = document.getElementById('pontos-j2');
 const statusTexto = document.getElementById('status-texto');
 const botaoReiniciar = document.getElementById('botao-reiniciar');
 
-// --- EVENT LISTENER DO JOGO ---
+// EVENT LISTENER DO JOGO
 botaoReiniciar.addEventListener('click', iniciarJogo);
 
-// --- DADOS DO JOGO ---
+// DADOS DO JOGO 
 const dadosBaseCartas = [
     { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na.png' },
     { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
@@ -23,7 +23,7 @@ const dadosBaseCartas = [
     { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
 ];
 
-// --- VARIÁVEIS DE ESTADO DO JOGO ---
+// VARIÁVEIS DE ESTADO DO JOGO
 let cartasViradas = [];
 let travarCliques = false;
 let pontosJogador1 = 0;
@@ -32,7 +32,7 @@ let jogadorAtual = 1;
 let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
 let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
 
-// --- FUNÇÕES DO JOGO ---
+// FUNÇÕES DO JOGO
 function criarBaralho() {
     const baralho = [];
     dadosBaseCartas.forEach(tipoCarta => {
