@@ -11,25 +11,61 @@
 </head>
 <body>
     <div id="fundo-quimico"></div>
+    
     <div id="tela-inicio">
-        <h1>Jogos Químicos Educacionais</h1>
-        <p class="subtitulo">Projeto de Iniciação Científica - Jovens Talentos</p>
-        
-        <div class="input-nomes">
-            <input type="text" id="nome-j1" placeholder="Nome do Jogador 1">
-            <input type="text" id="nome-j2" placeholder="Nome do Jogador 2">
-        </div>
-        
-        <div class="botoes-jogos">
-            <button id="botao-memoria-ionica" class="botao-jogo">
-                <span class="titulo-jogo">Jogo da Memória Iônica</span>
-                <span class="descricao-jogo">Combine íons para formar compostos</span>
-            </button>
-            
-            <button id="botao-super-trunfo" class="botao-jogo">
-                <span class="titulo-jogo">Super Trunfo Químico</span>
-                <span class="descricao-jogo">Compare propriedades dos elementos</span>
-            </button>
+        <div class="jogos-container">
+            <!-- Header com Logo e Instituições -->
+            <header class="header-principal">
+                <div class="logo-container">
+                    <div class="logo-jt">
+                        <div class="logo-bolinha">
+                            <span>JT</span>
+                        </div>
+                        <div class="logo-texto">
+                            <h2>Jovens Talentos</h2>
+                            <p>Programa de Iniciação Científica</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instituicoes">
+                    <div class="logo-instituicao" id="logo-faperj">
+                        <img src="imagens/faperj-logo.png" alt="FAPERJ">
+                    </div>
+                    <div class="logo-instituicao" id="logo-iserj">
+                        <img src="imagens/iserj-logo.png" alt="ISERJ">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Conteúdo Principal -->
+            <main class="conteudo-principal">
+                <h1>Jogos Químicos Educacionais</h1>
+                <p class="subtitulo">Explore a química através de jogos interativos</p>
+                
+                <div class="input-nomes">
+                    <input type="text" id="nome-j1" placeholder="Nome do Jogador 1">
+                    <input type="text" id="nome-j2" placeholder="Nome do Jogador 2">
+                </div>
+                
+                <div class="botoes-jogos">
+                    <button id="botao-memoria-ionica" class="botao-jogo">
+                        <div class="botao-icon">🧪</div>
+                        <div class="botao-conteudo">
+                            <span class="titulo-jogo">Jogo da Memória Iônica</span>
+                            <span class="descricao-jogo">Combine íons para formar compostos</span>
+                        </div>
+                    </button>
+                    
+                    <button id="botao-super-trunfo" class="botao-jogo">
+                        <div class="botao-icon">⚛️</div>
+                        <div class="botao-conteudo">
+                            <span class="titulo-jogo">Super Trunfo Químico</span>
+                            <span class="descricao-jogo">Compare propriedades dos elementos</span>
+                        </div>
+                    </button>
+                </div>
+            </main>
         </div>
     </div>
 
@@ -58,12 +94,13 @@
             window.location.href = 'supertrunfo.html';
         });
 
-        // ANIMAÇÃO DE PARTÍCULAS QUÍMICAS
+        // --- ESQUELETO ANIMAÇÃO DE PARTÍCULAS QUÍMICAS ---
         const particulasQuimicas = [
             { tipo: 'Na', img: 'imagens/Na_atomo.png' },
             { tipo: 'Cl', img: 'imagens/Cl_atomo.png' },
             { tipo: 'O', img: 'imagens/O_atomo.png' },
             { tipo: 'C', img: 'imagens/C_atomo.svg.png' },
+            // Adicione mais conforme desejar
         ];
 
         function criarParticula(tipo, x, y) {

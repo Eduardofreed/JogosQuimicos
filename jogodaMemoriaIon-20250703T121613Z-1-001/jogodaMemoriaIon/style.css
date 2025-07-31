@@ -6,111 +6,353 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(-45deg, #6dd5ed, #2193b0, #b721ff, #21d4fd);
-    background-size: 400% 400%;
-    animation: gradientBG 12s ease infinite;
-    color: #333;
+    background: linear-gradient(135deg, #0a1929 0%, #1a365d 50%, #2d5a87 100%);
+    color: #ffffff;
     text-align: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
 }
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* Fundo com padrão de pontos inspirado na imagem */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(33, 212, 253, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#fundo-quimico {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
 }
 
 #tela-inicio { 
+    position: relative;
+    z-index: 10;
     display: flex; 
     flex-direction: column; 
     justify-content: center;
     align-items: center; 
-    height: 100vh; 
-    color: white; 
-    background: rgba(0,0,0,0.15);
-    border-radius: 18px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(2px);
-    margin: 30px auto;
-    max-width: 500px;
+    min-height: 100vh; 
+    padding: 20px;
 }
 
-#tela-inicio h1 { 
-    font-size: 3.5em;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+.jogos-container {
+    background: rgba(10, 25, 41, 0.8);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 212, 253, 0.1);
+    max-width: 800px;
+    width: 100%;
 }
 
-#tela-inicio .subtitulo { 
+/* Header com Logo e Instituições */
+.header-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(33, 212, 253, 0.2);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-jt {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-bolinha {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
     font-size: 1.2em;
-    margin-bottom: 40px; 
-    opacity: 0.9; 
+    color: white;
+    box-shadow: 0 0 20px rgba(33, 212, 253, 0.5);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.logo-bolinha::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    animation: pulse-ring 2s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+.logo-texto h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.logo-texto p {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.instituicoes {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin-left: 40px;
+}
+
+.logo-instituicao {
+    width: 120px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.logo-instituicao:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(33, 212, 253, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(33, 212, 253, 0.2);
+}
+
+.logo-instituicao img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.conteudo-principal h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.conteudo-principal .subtitulo {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
 }
 
 .input-nomes { 
     display: flex;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .input-nomes input { 
-    padding: 12px;
+    flex: 1;
+    padding: 15px;
     font-size: 1em;
     border: none; 
-    border-radius: 8px; 
-    width: 200px; 
+    border-radius: 12px; 
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
     text-align: center; 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     outline: none;
-    transition: box-shadow 0.2s;
+    transition: all 0.3s;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+}
+
+.input-nomes input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .input-nomes input:focus {
-    box-shadow: 0 0 0 2px #21d4fd;
+    border-color: #21d4fd;
+    box-shadow: 0 0 0 3px rgba(33, 212, 253, 0.2);
+    background: rgba(255, 255, 255, 0.15);
 }
 
-/* NOVOS ESTILOS PARA BOTÕES DE JOGOS */
+/* Botões de Jogos Redesenhados */
 .botoes-jogos {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
 }
 
 .botao-jogo {
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
     font-size: 1.1em;
     cursor: pointer;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
     color: #fff;
-    font-weight: 600;
-    box-shadow: 0 6px 20px 0 rgba(33,212,253,0.25);
-    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
-    filter: brightness(0.95);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-jogo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.botao-jogo:hover::before {
+    left: 100%;
 }
 
 .botao-jogo:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 32px 0 rgba(33,212,253,0.35);
-    filter: brightness(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(33, 212, 253, 0.3);
+    border-color: #21d4fd;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.2) 0%, rgba(183, 33, 255, 0.2) 100%);
+}
+
+.botao-icon {
+    font-size: 2em;
+    min-width: 50px;
+    text-align: center;
+}
+
+.botao-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
 }
 
 .titulo-jogo {
     font-size: 1.2em;
     font-weight: 600;
+    color: #ffffff;
 }
 
 .descricao-jogo {
     font-size: 0.9em;
-    opacity: 0.9;
-    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
 }
 
+/* Partículas Químicas */
+.particula-quimica {
+    transition: filter 0.3s;
+    filter: drop-shadow(0 0 8px rgba(33, 212, 253, 0.3)) brightness(1.1);
+    animation: girar 8s linear infinite;
+}
+
+.particula-quimica.brilho {
+    filter: drop-shadow(0 0 16px rgba(33, 212, 253, 0.8)) brightness(1.7) saturate(1.5);
+    animation: girar 2s linear infinite;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .jogos-container {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .header-principal {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .instituicoes {
+        justify-content: center;
+    }
+    
+    .conteudo-principal h1 {
+        font-size: 2em;
+    }
+    
+    .input-nomes {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .botao-jogo {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .botao-icon {
+        font-size: 1.5em;
+    }
+}
+
+/* Manter estilos existentes para outros jogos */
 #botao-iniciar-jogo, #botao-reiniciar { 
     padding: 15px 30px; 
     font-size: 1.3em; 
@@ -132,23 +374,7 @@ body {
     filter: brightness(1.08);
 }
 
-.particula-quimica {
-    transition: filter 0.3s;
-    filter: drop-shadow(0 0 8px #fff3) brightness(1.1);
-    animation: girar 8s linear infinite;
-}
-
-.particula-quimica.brilho {
-    filter: drop-shadow(0 0 16px #fff) brightness(1.7) saturate(1.5);
-    animation: girar 2s linear infinite;
-}
-
-@keyframes girar {
-    0% { transform: rotate(0deg);}
-    100% { transform: rotate(360deg);}
-}
-
-/* ESTILOS DA TELA DE JOGO */
+/* Estilos existentes para outros jogos */
 header { 
     padding: 20px; 
     background: linear-gradient(90deg, #4a6da7 60%, #21d4fd 100%); 
@@ -224,7 +450,6 @@ nav a:hover {
     filter: brightness(0.98);
 }
 
-/* ESTILOS DAS CARTAS */
 .carta { 
     width: 120px; 
     height: 170px; 
@@ -310,7 +535,7 @@ nav a:hover {
     min-width: 180px;
 }
 
-/* ESTILOS DO SUPER TRUNFO */
+/* Estilos do Super Trunfo */
 #area-jogo {
     display: flex;
     justify-content: space-around;
@@ -481,34 +706,4 @@ nav a:hover {
     0% { opacity: 0.8; transform: scale(0.7);}
     60% { opacity: 1; transform: scale(1.2);}
     100% { opacity: 0; transform: scale(2);}
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-    #area-jogo {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .area-carta {
-        min-width: 250px;
-    }
-    
-    .carta-super-trunfo {
-        width: 250px;
-        height: 340px;
-    }
-    
-    #tela-inicio h1 {
-        font-size: 2.5em;
-    }
-    
-    .input-nomes {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .input-nomes input {
-        width: 100%;
-    }
 }
