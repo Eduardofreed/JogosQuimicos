@@ -4,12 +4,12 @@
 
 Este é um conjunto de jogos educacionais interativos desenvolvido para tornar o aprendizado de química mais divertido e acessível. O projeto foi criado no âmbito do **Programa Jovens Talentos** de Iniciação Científica, com o apoio da **FAPERJ** e **ISERJ**.
 
-### �� Objetivo
+### Objetivo
 Transformar conceitos complexos da química em experiências lúdicas e educativas, permitindo que estudantes aprendam através da interação e do jogo.
 
 ## 🎮 Jogos Disponíveis
 
-### 1. �� Jogo da Memória Iônica
+### 1. Jogo da Memória Iônica
 **Como funciona:** Combine íons para formar compostos químicos!
 
 - **Objetivo:** Encontrar 5 cartas que formem um composto químico válido
@@ -75,7 +75,7 @@ jogosQuimicos/
 - **Animações:** Partículas químicas flutuantes no fundo
 - **Interface intuitiva:** Botões e elementos fáceis de usar
 
-## �� Conceitos Químicos Abordados
+## Conceitos Químicos Abordados
 
 ### Jogo da Memória Iônica
 - **Ligações iônicas:** Como íons se combinam
@@ -89,7 +89,7 @@ jogosQuimicos/
 - **Tabela periódica:** Conhecimento dos elementos
 - **Comparação de dados:** Análise de valores numéricos
 
-## �� Público-Alvo
+## Público-Alvo
 
 - **Estudantes do ensino médio:** Aprendendo química básica
 - **Professores:** Ferramenta educacional para aulas
@@ -112,7 +112,7 @@ jogosQuimicos/
 4. **Discussão:** Debata os conceitos aprendidos
 5. **Avaliação:** Use como ferramenta de revisão
 
-## �� Personalização
+## Personalização
 
 Os jogos podem ser facilmente expandidos:
 - Adicionar mais elementos químicos
