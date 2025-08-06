@@ -1,0 +1,965 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0a1929 0%, #1a365d 50%, #2d5a87 100%);
+    color: #ffffff;
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fundo com padrão de pontos inspirado na imagem */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(33, 212, 253, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+#fundo-quimico {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#tela-inicio { 
+    position: relative;
+    z-index: 10;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh; 
+    padding: 20px;
+}
+
+.jogos-container {
+    background: rgba(10, 25, 41, 0.8);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 212, 253, 0.1);
+    max-width: 800px;
+    width: 100%;
+}
+
+/* Header com Logo e Instituições */
+.header-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba(33, 212, 253, 0.2);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-jt {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-bolinha {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: white;
+    box-shadow: 0 0 20px rgba(33, 212, 253, 0.5);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.logo-bolinha::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    animation: pulse-ring 2s infinite;
+    z-index: -1;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.5); opacity: 0; }
+}
+
+.logo-texto h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.logo-texto p {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.instituicoes {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    margin-left: 40px;
+}
+
+.logo-instituicao {
+    width: 120px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.logo-instituicao:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(33, 212, 253, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(33, 212, 253, 0.2);
+}
+
+.logo-instituicao img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    filter: brightness(1.1) contrast(1.1);
+}
+
+/* Conteúdo Principal */
+.conteudo-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.conteudo-principal h1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.conteudo-principal .subtitulo {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.input-nomes { 
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.input-nomes input { 
+    flex: 1;
+    padding: 15px;
+    font-size: 1em;
+    border: none; 
+    border-radius: 12px; 
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-align: center; 
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    outline: none;
+    transition: all 0.3s;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+}
+
+.input-nomes input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-nomes input:focus {
+    border-color: #21d4fd;
+    box-shadow: 0 0 0 3px rgba(33, 212, 253, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Botões de Jogos Redesenhados */
+.botoes-jogos {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.botao-jogo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    color: #fff;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+}
+
+.botao-jogo::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.botao-jogo:hover::before {
+    left: 100%;
+}
+
+.botao-jogo:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(33, 212, 253, 0.3);
+    border-color: #21d4fd;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.2) 0%, rgba(183, 33, 255, 0.2) 100%);
+}
+
+.botao-icon {
+    font-size: 2em;
+    min-width: 50px;
+    text-align: center;
+}
+
+.botao-conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.titulo-jogo {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.descricao-jogo {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Partículas Químicas */
+.particula-quimica {
+    transition: filter 0.3s;
+    filter: drop-shadow(0 0 8px rgba(33, 212, 253, 0.3)) brightness(1.1);
+    animation: girar 8s linear infinite;
+}
+
+.particula-quimica.brilho {
+    filter: drop-shadow(0 0 16px rgba(33, 212, 253, 0.8)) brightness(1.7) saturate(1.5);
+    animation: girar 2s linear infinite;
+}
+
+@keyframes girar {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .jogos-container {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+    
+    .header-principal {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .instituicoes {
+        justify-content: center;
+    }
+    
+    .conteudo-principal h1 {
+        font-size: 2em;
+    }
+    
+    .input-nomes {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .botao-jogo {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .botao-icon {
+        font-size: 1.5em;
+    }
+}
+
+/* Manter estilos existentes para outros jogos */
+#botao-iniciar-jogo, #botao-reiniciar { 
+    padding: 15px 30px; 
+    font-size: 1.3em; 
+    cursor: pointer; 
+    border: none; 
+    border-radius: 10px; 
+    background: linear-gradient(90deg, #21d4fd 0%, #b721ff 100%);
+    color: #fff; 
+    font-weight: 600; 
+    box-shadow: 0 4px 16px 0 rgba(33,212,253,0.15);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    filter: brightness(0.98);
+    margin-top: 10px;
+}
+
+#botao-iniciar-jogo:hover, #botao-reiniciar:hover { 
+    transform: scale(1.07); 
+    box-shadow: 0 8px 32px 0 rgba(33,212,253,0.25);
+    filter: brightness(1.08);
+}
+
+/* Estilos existentes para outros jogos */
+header { 
+    padding: 20px; 
+    background: linear-gradient(90deg, #4a6da7 60%, #21d4fd 100%); 
+    color: white; 
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    box-shadow: 0 2px 12px 0 rgba(33,212,253,0.10);
+    border-radius: 0 0 18px 18px;
+}
+
+nav { 
+    margin-top: 15px; 
+}
+
+nav a { 
+    text-decoration: none;
+    color: #ffffff; 
+    padding: 8px 15px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+nav a:hover { 
+    background-color: rgba(255, 255, 255, 0.2); 
+    box-shadow: 0 4px 16px rgba(33,212,253,0.15);
+}
+
+#info-jogo { 
+    display: flex; 
+    justify-content: space-around; 
+    width: 90%; 
+    max-width: 900px; 
+    margin: 0 auto 20px auto; 
+    font-size: 1.2em; 
+    background: rgba(255,255,255,0.18); 
+    padding: 18px 10px; 
+    border-radius: 18px; 
+    color: white; 
+    box-shadow: 0 2px 12px 0 rgba(33,212,253,0.10);
+    backdrop-filter: blur(2px);
+}
+
+#tabuleiro-jogo { 
+    display: grid; 
+    grid-template-columns: repeat(7, 1fr); 
+    gap: 16px; 
+    width: 95%; 
+    max-width: 1000px; 
+    margin: 0 auto;
+    perspective: 1000px; 
+    animation: tabuleiroFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes tabuleiroFadeIn {
+    from { opacity: 0; transform: translateY(40px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+}
+
+#botao-reiniciar { 
+    margin: 20px auto; 
+    display: block; 
+    padding: 10px 20px; 
+    font-size: 1.2em; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    border: none; 
+    background: linear-gradient(90deg, #21d4fd 0%, #b721ff 100%);
+    color: white; 
+    box-shadow: 0 4px 16px 0 rgba(33,212,253,0.15);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    filter: brightness(0.98);
+}
+
+.carta { 
+    width: 120px; 
+    height: 170px; 
+    position: relative; 
+    cursor: pointer; 
+    transform-style: preserve-3d; 
+    transition: transform 0.6s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.2s;
+    box-shadow: 0 6px 24px 0 rgba(33,212,253,0.15), 0 1.5px 4px rgba(0,0,0,0.10);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.10);
+    margin-bottom: 4px;
+    animation: cartaFadeIn 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes cartaFadeIn {
+    from { opacity: 0; transform: scale(0.8) rotateY(30deg); }
+    to { opacity: 1; transform: none; }
+}
+
+.carta:hover:not(.virada):not(.combinada) {
+    box-shadow: 0 12px 32px 0 #21d4fd44, 0 2px 8px rgba(0,0,0,0.12);
+    transform: scale(1.04) rotateY(2deg);
+    z-index: 2;
+}
+
+.carta.virada { 
+    transform: rotateY(180deg); 
+}
+
+.carta.combinada { 
+    box-shadow: 0 0 32px 8px #ffdf00, 0 2px 8px rgba(0,0,0,0.12); 
+    transform: scale(1.08);
+    filter: brightness(1.15);
+}
+
+.face { 
+    position: absolute; 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.10); 
+    backface-visibility: hidden; 
+}
+
+.verso { 
+    background-image: url('imagens/verso-institucional.png');
+    background-size: cover; 
+    background-position: center; 
+    background-color: #4a6da7;
+}
+
+.frente { 
+    background-color: #ffffff; 
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    transform: rotateY(180deg); 
+    border: 2px solid #21d4fd44;
+}
+
+#status-rodada {
+    margin-top: 10px;
+    font-size: 1.2em;
+    background: rgba(33,212,253,0.13);
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 0;
+    box-shadow: 0 2px 8px rgba(33,212,253,0.10);
+    min-width: 180px;
+    display: inline-block;
+}
+
+#placar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+    background: rgba(33,212,253,0.13);
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 18px;
+    box-shadow: 0 2px 8px rgba(33,212,253,0.10);
+    min-width: 180px;
+}
+
+/* Estilos do Super Trunfo */
+#area-jogo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.area-carta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 280px;
+}
+
+.area-carta h3 {
+    color: white;
+    font-size: 1.3em;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.carta-super-trunfo {
+    width: 280px;
+    height: 380px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(33,212,253,0.25);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid rgba(33,212,253,0.2);
+}
+
+.carta-super-trunfo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(33,212,253,0.35);
+}
+
+.carta-super-trunfo.carta-oculta {
+    background: linear-gradient(135deg, #4a6da7 0%, #21d4fd 100%);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.carta-super-trunfo-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+}
+
+.carta-cabecalho {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.carta-cabecalho h4 {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.simbolo-elemento {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #21d4fd;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.carta-imagem {
+    flex: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 15px 0;
+    min-height: 120px;
+}
+
+.carta-dados {
+    margin-top: 15px;
+}
+
+.dado-elemento {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(33,212,253,0.1);
+}
+
+.dado-elemento:last-child {
+    border-bottom: none;
+}
+
+.dado-elemento .label {
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+.dado-elemento .valor {
+    font-size: 1em;
+    color: #333;
+    font-weight: 600;
+}
+
+.carta-oculta-texto {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 4em;
+    color: rgba(255,255,255,0.8);
+    font-weight: bold;
+}
+
+#area-atributos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    min-width: 250px;
+}
+
+#area-atributos h3 {
+    color: white;
+    font-size: 1.3em;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+#botoes-atributos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.botao-atributo {
+    padding: 15px 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(33,212,253,0.25);
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    filter: brightness(0.95);
+}
+
+.botao-atributo:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(33,212,253,0.35);
+    filter: brightness(1.1);
+}
+
+.botao-atributo:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@keyframes combustao {
+    0% { opacity: 0.8; transform: scale(0.7);}
+    60% { opacity: 1; transform: scale(1.2);}
+    100% { opacity: 0; transform: scale(2);}
+}
+
+/* --- ESTILOS PARA PÁGINAS DE JOGO (Memória Iônica e Super Trunfo) --- */
+
+/* Header do Jogo */
+.header-jogo {
+    background: rgba(10, 25, 41, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(33, 212, 253, 0.2);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-jogo {
+    display: flex;
+    align-items: center;
+}
+
+.botao-voltar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.botao-voltar:hover {
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.2) 0%, rgba(183, 33, 255, 0.2) 100%);
+    border-color: #21d4fd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(33, 212, 253, 0.3);
+}
+
+.botao-voltar span:first-child {
+    font-size: 1.2em;
+}
+
+/* Main do Jogo */
+.main-jogo {
+    min-height: calc(100vh - 100px);
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.jogo-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Seção de Informações */
+.info-jogo-section {
+    background: rgba(10, 25, 41, 0.8);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 212, 253, 0.1);
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.placar-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.placar-jogador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(33, 212, 253, 0.2);
+    transition: all 0.3s ease;
+}
+
+.placar-jogador:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(33, 212, 253, 0.2);
+}
+
+.avatar-jogador {
+    font-size: 1.5em;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.dados-jogador {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.nome-jogador {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.pontos-jogador {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #21d4fd;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicador {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.15) 0%, rgba(183, 33, 255, 0.15) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(33, 212, 253, 0.3);
+}
+
+.status-icon {
+    font-size: 1.2em;
+    animation: pulse 2s infinite;
+}
+
+.status-texto {
+    font-weight: 600;
+    color: white;
+}
+
+/* Seção do Tabuleiro */
+.tabuleiro-section {
+    background: rgba(10, 25, 41, 0.6);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(33, 212, 253, 0.1);
+}
+
+.tabuleiro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Seção de Ações */
+.acoes-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-acao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 30px;
+    background: linear-gradient(135deg, #21d4fd 0%, #b721ff 100%);
+    border: none;
+    border-radius: 16px;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(33, 212, 253, 0.3);
+}
+
+.botao-acao:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(33, 212, 253, 0.4);
+    filter: brightness(1.1);
+}
+
+.botao-icon {
+    font-size: 1.2em;
+}
+
+/* Atualizar estilos existentes do tabuleiro */
+#tabuleiro-jogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    width: 100%;
+    perspective: 1000px;
+    animation: tabuleiroFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+/* Responsividade para páginas de jogo */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .info-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .placar-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .tabuleiro-section {
+        padding: 20px 15px;
+    }
+    
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 15px;
+    }
+    
+    .carta {
+        width: 100px;
+        height: 140px;
+    }
+}

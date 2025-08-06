@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovens Talentos - Jogo da Memória Iônica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="fundo-quimico"></div>
+    
+    <!-- Header com Logo e Navegação -->
+    <header class="header-jogo">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo-jt">
+                    <div class="logo-bolinha">
+                        <span>JT</span>
+                    </div>
+                    <div class="logo-texto">
+                        <h2>Jovens Talentos</h2>
+                        <p>Memória Iônica</p>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="nav-jogo">
+                <a href="inicio.html" class="botao-voltar">
+                    <span>←</span>
+                    Voltar ao Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-jogo">
+        <!-- Container Principal do Jogo -->
+        <div class="jogo-container">
+            <!-- Informações do Jogo -->
+            <section class="info-jogo-section">
+                <div class="info-container">
+                    <div class="placar-container">
+                        <div class="placar-jogador">
+                            <div class="avatar-jogador">👤</div>
+                            <div class="dados-jogador">
+                                <span class="nome-jogador" id="label-j1">Jogador 1</span>
+                                <span class="pontos-jogador" id="pontos-j1">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="placar-jogador">
+                            <div class="avatar-jogador">👤</div>
+                            <div class="dados-jogador">
+                                <span class="nome-jogador" id="label-j2">Jogador 2</span>
+                                <span class="pontos-jogador" id="pontos-j2">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-container">
+                        <div class="status-indicador">
+                            <span class="status-icon">⚡</span>
+                            <span class="status-texto" id="status-texto">Vez do Jogador 1</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Tabuleiro do Jogo -->
+            <section class="tabuleiro-section">
+                <div class="tabuleiro-container">
+                    <div id="tabuleiro-jogo"></div>
+                </div>
+            </section>
+            
+            <!-- Botões de Ação -->
+            <section class="acoes-section">
+                <button id="botao-reiniciar" class="botao-acao">
+                    <span class="botao-icon">🔄</span>
+                    <span class="botao-texto">Novo Jogo</span>
+                </button>
+            </section>
+        </div>
+    </main>
+    
+    <script src="memoriaIonica.js"></script>
+</body>
+</html>

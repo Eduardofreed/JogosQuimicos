@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Trunfo Químico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Super Trunfo Químico</h1>
+        <nav>
+            <a href="inicio.html">Voltar ao Menu</a>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="info-jogo">
+            <div id="placar">
+                <p><span id="label-j1">Jogador 1</span>: <span id="pontos-j1">0</span></p>
+                <p><span id="label-j2">Jogador 2</span>: <span id="pontos-j2">0</span></p>
+            </div>
+            <div id="status-rodada">
+                <p id="status-texto">Escolha um atributo</p>
+            </div>
+        </section>
+        
+        <section id="area-jogo">
+            <div id="carta-jogador" class="area-carta">
+                <h3>Sua Carta</h3>
+                <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
+            </div>
+            
+            <div id="area-atributos">
+                <h3>Escolha um Atributo</h3>
+                <div id="botoes-atributos">
+                    <button class="botao-atributo" data-atributo="eletronegatividade">Eletronegatividade</button>
+                    <button class="botao-atributo" data-atributo="raio-atomico">Raio Atômico</button>
+                </div>
+            </div>
+            
+            <div id="carta-cpu" class="area-carta">
+                <h3>Carta da CPU</h3>
+                <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
+            </div>
+        </section>
+        
+        <button id="botao-reiniciar">Novo Jogo</button>
+    </main>
+    
+    <script src="supertrunfo.js"></script>
+</body>
+</html> 
