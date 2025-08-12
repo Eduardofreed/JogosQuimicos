@@ -18,7 +18,7 @@ const moleculas = [
     {
         nome: 'CO2',
         componentes: ['C', 'O', 'O'],
-        img: 'imagens/CO2.png'
+        img: 'imagens/CO2_molecula.svg'
     }
 ];
 
@@ -86,9 +86,9 @@ function checarFormacaoMoleculas() {
             if (proximas) {
                 indices.forEach(idx => todas[idx].classList.add('brilho'));
                 setTimeout(() => {
-                    indices.forEach(idx => todas[idx].remove());
                     const x = indices.map(idx => parseFloat(todas[idx].style.left)).reduce((a,b)=>a+b,0)/indices.length;
                     const y = indices.map(idx => parseFloat(todas[idx].style.top)).reduce((a,b)=>a+b,0)/indices.length;
+                    indices.forEach(idx => todas[idx].remove());
                     criarMolecula(mol, x, y);
                 }, 600);
                 break;
