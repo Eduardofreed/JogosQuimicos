@@ -419,16 +419,7 @@ nav a:hover {
     backdrop-filter: blur(2px);
 }
 
-#tabuleiro-jogo { 
-    display: grid; 
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 16px; 
-    width: 95%; 
-    max-width: 1000px; 
-    margin: 0 auto;
-    perspective: 1000px; 
-    animation: tabuleiroFadeIn 1.2s cubic-bezier(.68,-0.55,.27,1.55);
-}
+/* Definição antiga de #tabuleiro-jogo removida em favor da versão responsiva abaixo */
 
 @keyframes tabuleiroFadeIn {
     from { opacity: 0; transform: translateY(40px) scale(0.98); }

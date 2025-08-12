@@ -204,27 +204,36 @@ function escolherAtributo(atributo) {
     criarCarta(cartaAtualCPU, cartaCPU, true);
     cartaCPU.classList.remove('carta-oculta');
     
-    // Compara os valores
-    const valorJogador = cartaAtualJogador[atributo];
-    const valorCPU = cartaAtualCPU[atributo];
+    // Mapear atributo e comparar valores
+    const mapaAtributos = {
+        'eletronegatividade': 'eletronegatividade',
+        'raio-atomico': 'raioAtomico'
+    };
+
+    const chave = mapaAtributos[atributo];
+    if (!chave) {
+        statusTexto.textContent = 'Atributo inválido.';
+        return;
+    }
+
+    const valorJogador = cartaAtualJogador[chave];
+    const valorCPU = cartaAtualCPU[chave];
     
     let vencedor;
     let mensagem;
-    
-    if (atributo === 'raio-atomico') {
-        // Maior raio vence
+
+    if (chave === 'raioAtomico') {
         if (valorJogador > valorCPU) {
             vencedor = 'jogador';
-            mensagem = `${nomeJogador1} vence! Raio maior (${valorJogador} pm > ${valorCPU} pm)`;
+            mensagem = `${nomeJogador1} vence! Raio atômico maior (${valorJogador} pm > ${valorCPU} pm)`;
         } else if (valorCPU > valorJogador) {
             vencedor = 'cpu';
-            mensagem = `${nomeJogador2} vence! Raio maior (${valorCPU} pm > ${valorJogador} pm)`;
+            mensagem = `${nomeJogador2} vence! Raio atômico maior (${valorCPU} pm > ${valorJogador} pm)`;
         } else {
             vencedor = 'empate';
-            mensagem = 'Empate! Raios iguais';
+            mensagem = 'Empate! Raios atômicos iguais';
         }
     } else {
-        // Maior eletronegatividade vence
         if (valorJogador > valorCPU) {
             vencedor = 'jogador';
             mensagem = `${nomeJogador1} vence! Eletronegatividade maior (${valorJogador} > ${valorCPU})`;
