@@ -1,13 +1,13 @@
-# 🧪 Jogos Químicos Educacionais - Jovens Talentos
+# Jogos Químicos Educacionais - Jovens Talentos
 
-## 📋 Sobre o Projeto
+## Sobre o Projeto
 
 Este é um conjunto de jogos educacionais interativos desenvolvido para tornar o aprendizado de química mais divertido e acessível. O projeto foi criado no âmbito do **Programa Jovens Talentos** de Iniciação Científica, com o apoio da **FAPERJ** e **ISERJ**.
 
 ### Objetivo
 Transformar conceitos complexos da química em experiências lúdicas e educativas, permitindo que estudantes aprendam através da interação e do jogo.
 
-## 🎮 Jogos Disponíveis
+## Jogos Disponíveis
 
 ### 1. Jogo da Memória Iônica
 **Como funciona:** Combine íons para formar compostos químicos!
@@ -23,7 +23,7 @@ Transformar conceitos complexos da química em experiências lúdicas e educativ
 - Sódio (Na⁺), Cloro (Cl⁻), Magnésio (Mg²⁺), Oxigênio (O²⁻)
 - Alumínio (Al³⁺), Potássio (K⁺), Bromo (Br⁻)
 
-### 2. ⚛️ Super Trunfo Químico
+### 2. Super Trunfo Químico
 **Como funciona:** Compare propriedades dos elementos químicos!
 
 - **Objetivo:** Vencer rodadas escolhendo atributos onde seu elemento tem valores superiores
@@ -45,7 +45,7 @@ Transformar conceitos complexos da química em experiências lúdicas e educativ
 3. **Escolha o jogo:** Clique no jogo que deseja jogar
 4. **Divirta-se:** Siga as instruções específicas de cada jogo
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 - **HTML5:** Estrutura das páginas
 - **CSS3:** Estilização e animações
@@ -53,7 +53,7 @@ Transformar conceitos complexos da química em experiências lúdicas e educativ
 - **Fontes:** Google Fonts (Poppins)
 - **Design:** Interface moderna com gradientes e efeitos visuais
 
-## 📁 Estrutura do Projeto
+## Estrutura do Projeto
 
 jogosQuimicos/
 ├── inicio.html # Página principal com menu de jogos
@@ -68,7 +68,7 @@ jogosQuimicos/
 └── logos institucionais
 
 
-## 🎨 Características Visuais
+## Características Visuais
 
 - **Design responsivo:** Funciona em desktop e dispositivos móveis
 - **Tema químico:** Cores e elementos visuais inspirados na química
@@ -96,7 +96,7 @@ jogosQuimicos/
 - **Interessados em química:** Qualquer pessoa curiosa sobre o tema
 - **Famílias:** Atividade educativa para fazer em casa
 
-## 🏆 Benefícios Educacionais
+## Benefícios Educacionais
 
 - **Aprendizado ativo:** Aprender fazendo
 - **Memorização:** Conceitos fixados através do jogo
@@ -120,16 +120,12 @@ Os jogos podem ser facilmente expandidos:
 - Criar novos atributos para o Super Trunfo
 - Modificar a dificuldade dos jogos
 
-## 📞 Suporte
+## Suporte
 
 Para dúvidas ou sugestões sobre o projeto, entre em contato através das instituições parceiras:
 - **FAPERJ:** Fundação de Amparo à Pesquisa do Estado do Rio de Janeiro
 - **ISERJ:** Instituto Superior de Educação do Rio de Janeiro
 
-## 📄 Licença
+## Licença
 
 Este projeto foi desenvolvido para fins educacionais no âmbito do Programa Jovens Talentos.
-
----
-
-**Desenvolvido com ❤️ para tornar a química mais acessível e divertida!**
