@@ -1,6 +1,6 @@
 "use strict";
 
-// --- REFERÊNCIAS AOS ELEMENTOS DO JOGO ---
+// REFERÊNCIAS AOS ELEMENTOS DO JOGO
 const tabuleiro = document.getElementById('tabuleiro-jogo');
 const labelJ1 = document.getElementById('label-j1');
 const labelJ2 = document.getElementById('label-j2');
@@ -9,21 +9,24 @@ const pontosJ2 = document.getElementById('pontos-j2');
 const statusTexto = document.getElementById('status-texto');
 const botaoReiniciar = document.getElementById('botao-reiniciar');
 
-// --- EVENT LISTENER DO JOGO ---
-botaoReiniciar.addEventListener('click', iniciarJogo);
+// EVENT LISTENER DO JOGO
+botaoReiniciar.addEventListener('click', () => {
+    tocarClick();
+    iniciarJogo();
+});
 
-// --- DADOS DO JOGO ---
+// DADOS DO JOGO
 const dadosBaseCartas = [
     { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na.png' },
     { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
     { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg.png' },
     { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O.png' },
-    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al.png' },
+    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al(2).png' },
     { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K.png' },
     { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
 ];
 
-// --- VARIÁVEIS DE ESTADO DO JOGO ---
+// VARIÁVEIS DE ESTADO DO JOGO
 let cartasViradas = [];
 let travarCliques = false;
 let pontosJogador1 = 0;
@@ -32,7 +35,7 @@ let jogadorAtual = 1;
 let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
 let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
 
-// --- FUNÇÕES DO JOGO ---
+// FUNÇÕES DO JOGO
 function criarBaralho() {
     const baralho = [];
     dadosBaseCartas.forEach(tipoCarta => {
@@ -63,7 +66,7 @@ function distribuirCartas(baralho) {
 
         const frente = document.createElement('div');
         frente.classList.add('face', 'frente');
-        frente.style.backgroundImage = `url(${infoCarta.imagem})`;
+        frente.style.backgroundImage = `url('${infoCarta.imagem}')`;
 
         cartaElemento.appendChild(verso);
         cartaElemento.appendChild(frente);
@@ -81,6 +84,7 @@ function virarCarta(evento) {
     if (cartasViradas.length < 5) {
         cartaClicada.classList.add('virada');
         cartasViradas.push(cartaClicada);
+        tocarVirarCarta(); // Som de virar carta
     }
 
     if (cartasViradas.length === 5) {
@@ -164,6 +168,8 @@ function tratarSucesso(combinacao) {
         pontosJ2.textContent = pontosJogador2;
     }
 
+    tocarCombinacao();
+
     combinacao.forEach(carta => carta.classList.add('combinada'));
     setTimeout(() => {
         combinacao.forEach(carta => carta.remove());
@@ -213,14 +219,25 @@ function verificarFimDeJogo() {
 function anunciarVencedor() {
     travarCliques = true;
     let mensagemFinal = "Fim de Jogo! ";
+    let vencedor;
+    
     if (pontosJogador1 > pontosJogador2) {
         mensagemFinal += `${nomeJogador1} venceu!`;
+        vencedor = nomeJogador1;
     } else if (pontosJogador2 > pontosJogador1) {
         mensagemFinal += `${nomeJogador2} venceu!`;
+        vencedor = nomeJogador2;
     } else {
         mensagemFinal += "Empate!";
+        vencedor = 'empate';
     }
+    
     statusTexto.textContent = mensagemFinal;
+    
+    // Toca som de vitória final (exceto em empate)
+    if (vencedor !== 'empate') {
+        tocarVitoriaFinal();
+    }
 }
 
 function iniciarJogo() {

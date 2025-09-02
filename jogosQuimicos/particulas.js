@@ -1,12 +1,8 @@
-// Fundo animado de partículas químicas para o início do jogo
-// Adapte as imagens conforme necessário na pasta 'imagens/'
-
 const particulasQuimicas = [
     { tipo: 'Na', img: 'imagens/Na_atomo.png' },
     { tipo: 'Cl', img: 'imagens/Cl_atomo.png' },
     { tipo: 'O', img: 'imagens/O_atomo.png' },
     { tipo: 'C', img: 'imagens/C_atomo.svg.png' },
-    // Adicione mais conforme desejar
 ];
 
 const moleculas = [
@@ -18,7 +14,7 @@ const moleculas = [
     {
         nome: 'CO2',
         componentes: ['C', 'O', 'O'],
-        img: 'imagens/CO2.png'
+        img: 'imagens/CO2_molecula.svg'
     }
 ];
 
@@ -86,9 +82,9 @@ function checarFormacaoMoleculas() {
             if (proximas) {
                 indices.forEach(idx => todas[idx].classList.add('brilho'));
                 setTimeout(() => {
-                    indices.forEach(idx => todas[idx].remove());
                     const x = indices.map(idx => parseFloat(todas[idx].style.left)).reduce((a,b)=>a+b,0)/indices.length;
                     const y = indices.map(idx => parseFloat(todas[idx].style.top)).reduce((a,b)=>a+b,0)/indices.length;
+                    indices.forEach(idx => todas[idx].remove());
                     criarMolecula(mol, x, y);
                 }, 600);
                 break;
@@ -131,7 +127,6 @@ function efeitoCombustao(x, y) {
     setTimeout(()=>fogo.remove(), 1000);
 }
 
-// Inicialização
 window.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i < 10; i++) {
         const tipo = particulasQuimicas[Math.floor(Math.random() * particulasQuimicas.length)].tipo;

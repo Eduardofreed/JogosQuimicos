@@ -3,54 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Trunfo Químico</title>
+    <title>Jovens Talentos - Super Trunfo Químico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Super Trunfo Químico</h1>
-        <nav>
-            <a href="inicio.html">Voltar ao Menu</a>
-        </nav>
-    </header>
+    <div id="fundo-quimico"></div>
     
-    <main>
-        <section id="info-jogo">
-            <div id="placar">
-                <p><span id="label-j1">Jogador 1</span>: <span id="pontos-j1">0</span></p>
-                <p><span id="label-j2">Jogador 2</span>: <span id="pontos-j2">0</span></p>
-            </div>
-            <div id="status-rodada">
-                <p id="status-texto">Escolha um atributo</p>
-            </div>
-        </section>
-        
-        <section id="area-jogo">
-            <div id="carta-jogador" class="area-carta">
-                <h3>Sua Carta</h3>
-                <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
-            </div>
-            
-            <div id="area-atributos">
-                <h3>Escolha um Atributo</h3>
-                <div id="botoes-atributos">
-                    <button class="botao-atributo" data-atributo="eletronegatividade">Eletronegatividade</button>
-                    <button class="botao-atributo" data-atributo="raio-atomico">Raio Atômico</button>
+    <header class="header-jogo">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo-jt">
+                    <div class="logo-bolinha">
+                        <span>JT</span>
+                    </div>
+                    <div class="logo-texto">
+                        <h2>Jovens Talentos</h2>
+                        <p>Super Trunfo Químico</p>
+                    </div>
                 </div>
             </div>
             
-            <div id="carta-cpu" class="area-carta">
-                <h3>Carta da CPU</h3>
-                <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
-            </div>
-        </section>
-        
-        <button id="botao-reiniciar">Novo Jogo</button>
+            <nav class="nav-jogo">
+                <a href="inicio.html" class="botao-voltar">
+                    <span>←</span>
+                    Voltar ao Menu
+                </a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-jogo">
+        <div class="jogo-container">
+            <section class="info-jogo-section">
+                <div class="info-container">
+                    <div class="placar-container">
+                        <div class="placar-jogador">
+                            <div class="avatar-jogador">👤</div>
+                            <div class="dados-jogador">
+                                <span class="nome-jogador" id="label-j1">Jogador 1</span>
+                                <span class="pontos-jogador" id="pontos-j1">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="placar-jogador">
+                            <div class="avatar-jogador">👤</div>
+                            <div class="dados-jogador">
+                                <span class="nome-jogador" id="label-j2">Jogador 2</span>
+                                <span class="pontos-jogador" id="pontos-j2">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="status-container">
+                        <div class="status-indicador">
+                            <span class="status-icon">⚡</span>
+                            <span class="status-texto" id="status-texto">Escolha um atributo</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="tabuleiro-section">
+                <div id="area-jogo">
+                    <div id="carta-jogador" class="area-carta">
+                        <h3>Sua Carta</h3>
+                        <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
+                    </div>
+                    
+                    <div id="area-atributos">
+                        <h3>Escolha um Atributo</h3>
+                        <div id="botoes-atributos">
+                            <button class="botao-atributo" data-atributo="eletronegatividade">Eletronegatividade</button>
+                            <button class="botao-atributo" data-atributo="raio-atomico">Raio Atômico</button>
+                            <button class="botao-atributo" data-atributo="massa-atomica">Massa Atômica</button>
+                            <button class="botao-atributo" data-atributo="ponto-fusao">Ponto de Fusão</button>
+                            <button class="botao-atributo" data-atributo="densidade">Densidade</button>
+                            <button class="botao-atributo" data-atributo="energia-ionizacao">Energia de Ionização</button>
+                        </div>
+                    </div>
+                    
+                    <div id="carta-cpu" class="area-carta">
+                        <h3>Carta da CPU</h3>
+                        <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="acoes-section">
+                <button id="botao-reiniciar" class="botao-acao">
+                    <span class="botao-icon">🔄</span>
+                    <span class="botao-texto">Novo Jogo</span>
+                </button>
+                <button id="botao-historico" class="botao-acao">
+                    <span class="botao-icon">📊</span>
+                    <span class="botao-texto">Histórico</span>
+                </button>
+            </section>
+        </div>
     </main>
     
+    <script src="sons.js"></script>
     <script src="supertrunfo.js"></script>
 </body>
 </html> 
