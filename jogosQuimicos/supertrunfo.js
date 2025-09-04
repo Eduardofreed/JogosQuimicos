@@ -29,10 +29,10 @@ botoesAtributos.forEach(botao => {
 
 // DADOS DOS ELEMENTOS
 const dadosElementos = [
-    { 
-        nome: 'Sódio', 
-        simbolo: 'Na', 
-        imagem: 'imagens/Na(2).png',
+    {
+        nome: 'Sódio',
+        simbolo: 'Na',
+        imagem: 'imagens/Na.png', // Caminho da imagem da carta completa
         eletronegatividade: 0.93,
         raioAtomico: 186,
         massaAtomica: 22.99,
@@ -45,10 +45,10 @@ const dadosElementos = [
         grupo: 'Metais Alcalinos',
         periodo: 3
     },
-    { 
-        nome: 'Cloro', 
-        simbolo: 'Cl', 
-        imagem: 'imagens/Cl(2).png',
+    {
+        nome: 'Cloro',
+        simbolo: 'Cl',
+        imagem: 'imagens/Cl.png', // Caminho da imagem da carta completa
         eletronegatividade: 3.16,
         raioAtomico: 99,
         massaAtomica: 35.45,
@@ -61,10 +61,10 @@ const dadosElementos = [
         grupo: 'Halogênios',
         periodo: 3
     },
-    { 
-        nome: 'Magnésio', 
-        simbolo: 'Mg', 
-        imagem: 'imagens/Mg(2).png',
+    {
+        nome: 'Magnésio',
+        simbolo: 'Mg',
+        imagem: 'imagens/Mg.png', // Caminho da imagem da carta completa
         eletronegatividade: 1.31,
         raioAtomico: 160,
         massaAtomica: 24.31,
@@ -77,10 +77,10 @@ const dadosElementos = [
         grupo: 'Metais Alcalino-Terrosos',
         periodo: 3
     },
-    { 
-        nome: 'Oxigênio', 
-        simbolo: 'O', 
-        imagem: 'imagens/O(2).png',
+    {
+        nome: 'Oxigênio',
+        simbolo: 'O',
+        imagem: 'imagens/O.png', // Caminho da imagem da carta completa
         eletronegatividade: 3.44,
         raioAtomico: 66,
         massaAtomica: 16.00,
@@ -93,10 +93,10 @@ const dadosElementos = [
         grupo: 'Calcogênios',
         periodo: 2
     },
-    { 
-        nome: 'Alumínio', 
-        simbolo: 'Al', 
-        imagem: 'imagens/Al(2).png',
+    {
+        nome: 'Alumínio',
+        simbolo: 'Al',
+        imagem: 'imagens/Al.png', // Caminho da imagem da carta completa
         eletronegatividade: 1.61,
         raioAtomico: 143,
         massaAtomica: 26.98,
@@ -109,10 +109,10 @@ const dadosElementos = [
         grupo: 'Metais Representativos',
         periodo: 3
     },
-    { 
-        nome: 'Potássio', 
-        simbolo: 'K', 
-        imagem: 'imagens/K(2).png',
+    {
+        nome: 'Potássio',
+        simbolo: 'K',
+        imagem: 'imagens/K.png', // Caminho da imagem da carta completa
         eletronegatividade: 0.82,
         raioAtomico: 227,
         massaAtomica: 39.10,
@@ -125,10 +125,10 @@ const dadosElementos = [
         grupo: 'Metais Alcalinos',
         periodo: 4
     },
-    { 
-        nome: 'Bromo', 
-        simbolo: 'Br', 
-        imagem: 'imagens/Br(2).png',
+    {
+        nome: 'Bromo',
+        simbolo: 'Br',
+        imagem: 'imagens/Br.png', // Caminho da imagem da carta completa
         eletronegatividade: 2.96,
         raioAtomico: 114,
         massaAtomica: 79.90,
@@ -141,10 +141,10 @@ const dadosElementos = [
         grupo: 'Halogênios',
         periodo: 4
     },
-    { 
-        nome: 'Ferro', 
-        simbolo: 'Fe', 
-        imagem: 'imagens/Fe.png',
+    {
+        nome: 'Ferro',
+        simbolo: 'Fe',
+        imagem: 'imagens/Fe.png', // Caminho da imagem da carta completa
         eletronegatividade: 1.83,
         raioAtomico: 126,
         massaAtomica: 55.85,
@@ -157,10 +157,10 @@ const dadosElementos = [
         grupo: 'Metais de Transição',
         periodo: 4
     },
-    { 
-        nome: 'Carbono', 
-        simbolo: 'C', 
-        imagem: 'imagens/C.png',
+    {
+        nome: 'Carbono',
+        simbolo: 'C',
+        imagem: 'imagens/C.png', // Caminho da imagem da carta completa
         eletronegatividade: 2.55,
         raioAtomico: 67,
         massaAtomica: 12.01,
@@ -173,10 +173,10 @@ const dadosElementos = [
         grupo: 'Não-Metais',
         periodo: 2
     },
-    { 
-        nome: 'Hidrogênio', 
-        simbolo: 'H', 
-        imagem: 'imagens/H.png',
+    {
+        nome: 'Hidrogênio',
+        simbolo: 'H',
+        imagem: 'imagens/H.png', // Caminho da imagem da carta completa
         eletronegatividade: 2.20,
         raioAtomico: 53,
         massaAtomica: 1.008,
@@ -189,10 +189,10 @@ const dadosElementos = [
         grupo: 'Não-Metais',
         periodo: 1
     },
-    { 
-        nome: 'Nitrogênio', 
-        simbolo: 'N', 
-        imagem: 'imagens/N.png',
+    {
+        nome: 'Nitrogênio',
+        simbolo: 'N',
+        imagem: 'imagens/N.png', // Caminho da imagem da carta completa
         eletronegatividade: 3.04,
         raioAtomico: 56,
         massaAtomica: 14.01,
@@ -205,10 +205,10 @@ const dadosElementos = [
         grupo: 'Não-Metais',
         periodo: 2
     },
-    { 
-        nome: 'Cálcio', 
-        simbolo: 'Ca', 
-        imagem: 'imagens/Ca.png',
+    {
+        nome: 'Cálcio',
+        simbolo: 'Ca',
+        imagem: 'imagens/Ca.png', // Caminho da imagem da carta completa
         eletronegatividade: 1.00,
         raioAtomico: 197,
         massaAtomica: 40.08,
@@ -249,14 +249,14 @@ function salvarPartida(vencedor, pontosJ1, pontosJ2, duracao) {
         duracao: duracao,
         elementosUsados: dadosElementos.length
     };
-    
+
     historicoPartidas.unshift(partida); // Adiciona no início
-    
+
     // Manter apenas as últimas 50 partidas
     if (historicoPartidas.length > 50) {
         historicoPartidas = historicoPartidas.slice(0, 50);
     }
-    
+
     localStorage.setItem('historicoSuperTrunfo', JSON.stringify(historicoPartidas));
 }
 
@@ -273,16 +273,16 @@ function mostrarHistorico() {
         alert('Nenhuma partida registrada ainda!');
         return;
     }
-    
+
     let historicoTexto = '📊 HISTÓRICO DE PARTIDAS\n\n';
     historicoPartidas.slice(0, 10).forEach((partida, index) => {
-        const emoji = partida.vencedor === 'empate' ? '🤝' : 
-                     partida.vencedor === nomeJogador1 ? '🏆' : '🥈';
+        const emoji = partida.vencedor === 'empate' ? '🤝' :
+            partida.vencedor === nomeJogador1 ? '🏆' : '🥈';
         historicoTexto += `${emoji} ${partida.data}\n`;
         historicoTexto += `   ${partida.jogador1}: ${partida.pontosJ1} vs ${partida.jogador2}: ${partida.pontosJ2}\n`;
         historicoTexto += `   Vencedor: ${partida.vencedor} | Duração: ${partida.duracao}\n\n`;
     });
-    
+
     alert(historicoTexto);
 }
 
@@ -305,84 +305,44 @@ function embaralhar(baralho) {
 function distribuirCartas() {
     const baralhoCompleto = criarBaralho();
     embaralhar(baralhoCompleto);
-    
+
     // Divide o baralho entre jogador e CPU
     const meio = Math.ceil(baralhoCompleto.length / 2);
     baralhoJogador = baralhoCompleto.slice(0, meio);
     baralhoCPU = baralhoCompleto.slice(meio);
-    
+
     console.log('Cartas distribuídas:', baralhoJogador.length, 'para jogador,', baralhoCPU.length, 'para CPU');
 }
 
+/**
+ * MODIFICADO: Esta função agora cria uma tag <img> para exibir a carta como uma imagem única.
+ * @param {object} elemento - O objeto do elemento a ser exibido.
+ * @param {HTMLElement} container - O elemento HTML onde a carta será renderizada.
+ * @param {boolean} mostrarDados - Se true, mostra a frente da carta; se false, mostra o verso.
+ */
 function criarCarta(elemento, container, mostrarDados = true) {
+    // Limpa o conteúdo anterior do contêiner da carta.
     container.innerHTML = '';
-    
-    const carta = document.createElement('div');
-    carta.className = 'carta-super-trunfo-inner';
-    
-    // Cabeçalho da carta
-    const cabecalho = document.createElement('div');
-    cabecalho.className = 'carta-cabecalho';
-    cabecalho.innerHTML = `
-        <h4>${elemento.nome}</h4>
-        <div class="simbolo-elemento">${elemento.simbolo}</div>
-    `;
-    
-    // Imagem do elemento
-    const imagem = document.createElement('div');
-    imagem.className = 'carta-imagem';
-    imagem.style.backgroundImage = `url(${elemento.imagem})`;
-    
-    // Dados do elemento (se não for carta oculta)
-    const dados = document.createElement('div');
-    dados.className = 'carta-dados';
-    
+
+    // Cria o elemento da imagem da carta.
+    const cartaImagem = document.createElement('img');
+
     if (mostrarDados) {
-        dados.innerHTML = `
-            <div class="dado-elemento">
-                <span class="label">Eletronegatividade:</span>
-                <span class="valor">${elemento.eletronegatividade}</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Raio Atômico:</span>
-                <span class="valor">${elemento.raioAtomico} pm</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Massa Atômica:</span>
-                <span class="valor">${elemento.massaAtomica} u</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Ponto de Fusão:</span>
-                <span class="valor">${elemento.pontoFusao}°C</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Densidade:</span>
-                <span class="valor">${elemento.densidade} g/cm³</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Energia Ionização:</span>
-                <span class="valor">${elemento.energiaIonizacao} kJ/mol</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Grupo:</span>
-                <span class="valor">${elemento.grupo}</span>
-            </div>
-            <div class="dado-elemento">
-                <span class="label">Período:</span>
-                <span class="valor">${elemento.periodo}</span>
-            </div>
-        `;
+        // Se for para mostrar os dados, usa a imagem específica do elemento.
+        // A propriedade 'imagem' já contém o caminho correto (ex: 'imagens/Ca.png').
+        cartaImagem.src = elemento.imagem;
+        cartaImagem.alt = `Carta do elemento ${elemento.nome}`;
     } else {
-        dados.innerHTML = `
-            <div class="carta-oculta-texto">?</div>
-        `;
+        // Se a carta estiver oculta (CPU), mostra uma imagem de "verso de carta".
+        // Usando a mesma imagem de verso do Jogo da Memória para consistência.
+        cartaImagem.src = 'imagens/verso-institucional.png';
+        cartaImagem.alt = 'Carta Oculta';
     }
-    
-    carta.appendChild(cabecalho);
-    carta.appendChild(imagem);
-    carta.appendChild(dados);
-    container.appendChild(carta);
+
+    // Adiciona a imagem ao contêiner.
+    container.appendChild(cartaImagem);
 }
+
 
 function pegarProximaCarta(baralho) {
     return baralho.length > 0 ? baralho.shift() : null;
@@ -393,14 +353,14 @@ function escolherAtributo(atributo) {
         statusTexto.textContent = "Aguarde, preparando as cartas...";
         return;
     }
-    
+
     // Desabilita os botões durante a comparação
     botoesAtributos.forEach(botao => botao.disabled = true);
-    
 
-    criarCarta(cartaAtualCPU, cartaCPU, true);
+
+    criarCarta(cartaAtualCPU, cartaCPU, true); // Revela a carta da CPU
     cartaCPU.classList.remove('carta-oculta');
-    
+
     // Mapear atributo e comparar valores
     const mapaAtributos = {
         'eletronegatividade': 'eletronegatividade',
@@ -419,7 +379,7 @@ function escolherAtributo(atributo) {
 
     const valorJogador = cartaAtualJogador[chave];
     const valorCPU = cartaAtualCPU[chave];
-    
+
     let vencedor;
     let mensagem;
     let unidade = '';
@@ -491,7 +451,7 @@ function escolherAtributo(atributo) {
                 mensagem = 'Empate! Energias de ionização iguais';
             }
             break;
-        default: 
+        default:
             if (valorJogador > valorCPU) {
                 vencedor = 'jogador';
                 mensagem = `${nomeJogador1} vence! Eletronegatividade maior (${valorJogador} > ${valorCPU})`;
@@ -504,9 +464,9 @@ function escolherAtributo(atributo) {
             }
             break;
     }
-    
+
     statusTexto.textContent = mensagem;
-    
+
     if (vencedor === 'jogador') {
         pontosJogador1++;
         pontosJ1.textContent = pontosJogador1;
@@ -514,7 +474,7 @@ function escolherAtributo(atributo) {
         pontosJogador2++;
         pontosJ2.textContent = pontosJogador2;
     }
-    
+
     setTimeout(() => {
         proximaRodada();
     }, 3000);
@@ -523,26 +483,26 @@ function escolherAtributo(atributo) {
 function proximaRodada() {
     cartaAtualJogador = pegarProximaCarta(baralhoJogador);
     cartaAtualCPU = pegarProximaCarta(baralhoCPU);
-    
+
     if (!cartaAtualJogador || !cartaAtualCPU) {
 
         anunciarVencedor();
         return;
     }
-    
+
     criarCarta(cartaAtualJogador, cartaJogador, true);
-    criarCarta(cartaAtualCPU, cartaCPU, false);
+    criarCarta(cartaAtualCPU, cartaCPU, false); // A carta da CPU começa virada
     cartaCPU.classList.add('carta-oculta');
-    
+
     botoesAtributos.forEach(botao => botao.disabled = false);
-    
+
     statusTexto.textContent = "Escolha um atributo";
 }
 
 function anunciarVencedor() {
     let mensagemFinal = "Fim de Jogo! ";
     let vencedor;
-    
+
     if (pontosJogador1 > pontosJogador2) {
         mensagemFinal += `${nomeJogador1} venceu!`;
         vencedor = nomeJogador1;
@@ -553,18 +513,18 @@ function anunciarVencedor() {
         mensagemFinal += "Empate!";
         vencedor = 'empate';
     }
-    
+
     statusTexto.textContent = mensagemFinal;
-    
+
     // Toca som de vitória final (exceto em empate)
     if (vencedor !== 'empate') {
         tocarVitoriaFinal();
     }
-    
+
     // Salva a partida no histórico
     const duracao = calcularDuracao();
     salvarPartida(vencedor, pontosJogador1, pontosJogador2, duracao);
-    
+
     botoesAtributos.forEach(botao => botao.disabled = true);
 }
 
@@ -574,16 +534,16 @@ function iniciarJogo() {
     pontosJogador2 = 0;
     pontosJ1.textContent = pontosJogador1;
     pontosJ2.textContent = pontosJogador2;
-    
+
     // Atualiza nomes
     labelJ1.textContent = nomeJogador1;
     labelJ2.textContent = nomeJogador2;
-    
+
     inicioPartida = Date.now();
-    
+
     distribuirCartas();
-    
+
     proximaRodada();
 }
 
-iniciarJogo(); 
+iniciarJogo();

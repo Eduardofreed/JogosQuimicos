@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="fundo-quimico"></div>
-    
+
     <div id="tela-inicio">
         <div class="jogos-container">
             <header class="header-principal">
@@ -26,40 +28,47 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="instituicoes">
-                    <div class="logo-instituicao" id="logo-faperj">
-                        <img src="imagens/faperj-logo.png" alt="FAPERJ">
-                    </div>
-                    <div class="logo-instituicao" id="logo-iserj">
-                        <img src="imagens/iserj-logo.png" alt="ISERJ">
-                    </div>
+                    <a href="https://www.faperj.br/" target="_blank" rel="noopener noreferrer"
+                        style="text-decoration: none;">
+                        <div class="logo-instituicao" id="logo-faperj">
+                            <img src="imagens/faperj-logo.png" alt="FAPERJ">
+                        </div>
+                    </a>
+                    <a href="https://www.iserj.net/portalacademico/" target="_blank" rel="noopener noreferrer"
+                        style="text-decoration: none;">
+                        <div class="logo-instituicao" id="logo-iserj">
+                            <img src="imagens/iserj-logo.png" alt="ISERJ">
+                        </div>
+                    </a>
                 </div>
             </header>
 
             <main class="conteudo-principal">
                 <h1>Jogos Químicos Educacionais</h1>
-                <p class="subtitulo">Explore a química através de jogos interativos e divertidos. Aprenda sobre elementos, íons e reações químicas de forma lúdica e educativa.</p>
-                
+                <p class="subtitulo">Explore a química através de jogos interativos e divertidos. Aprenda sobre
+                    elementos, íons e reações químicas de forma lúdica e educativa.</p>
+
                 <div class="input-nomes">
                     <input type="text" id="nome-j1" placeholder="Nome do Jogador 1" maxlength="20">
                     <input type="text" id="nome-j2" placeholder="Nome do Jogador 2" maxlength="20">
                 </div>
-                
+
                 <div class="botoes-jogos">
                     <button id="botao-memoria-ionica" class="botao-jogo">
-                        <div class="botao-icon">🧪</div>
                         <div class="botao-conteudo">
                             <span class="titulo-jogo">Jogo da Memória Iônica</span>
-                            <span class="descricao-jogo">Combine íons para formar compostos químicos. Teste sua memória e aprenda sobre ligações iônicas!</span>
+                            <span class="descricao-jogo">Combine íons para formar compostos químicos. Teste sua memória
+                                e aprenda sobre ligações iônicas!</span>
                         </div>
                     </button>
-                    
+
                     <button id="botao-super-trunfo" class="botao-jogo">
-                        <div class="botao-icon">⚛️</div>
                         <div class="botao-conteudo">
                             <span class="titulo-jogo">Super Trunfo Químico</span>
-                            <span class="descricao-jogo">Compare propriedades dos elementos químicos. Eletronegatividade, raio atômico e muito mais!</span>
+                            <span class="descricao-jogo">Compare propriedades dos elementos químicos.
+                                Eletronegatividade, raio atômico e muito mais!</span>
                         </div>
                     </button>
                 </div>
@@ -83,7 +92,7 @@
         function salvarNomes() {
             const nome1 = inputNomeJ1.value.trim() || "Jogador 1";
             const nome2 = inputNomeJ2.value.trim() || "Jogador 2";
-            
+
             localStorage.setItem('nomeJogador1', nome1);
             localStorage.setItem('nomeJogador2', nome2);
         }
@@ -100,8 +109,13 @@
             window.location.href = 'supertrunfo.html';
         });
 
+        $('#btn-oculto').click(function () {
+            window.location = "http://pt.stackoverflow.com/";
+        });
+
     </script>
     <script src="sons.js"></script>
     <script src="particulas.js"></script>
 </body>
+
 </html>
