@@ -8,34 +8,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="telas.css">
+    <link rel="stylesheet" href="superTrunfo.css">
 </head>
 
 <body>
     <div id="fundo-quimico"></div>
-
     <header class="header-jogo">
         <div class="header-container">
             <div class="logo-container">
                 <div class="logo-jt">
-                    <div class="logo-bolinha">
-                        <span>JT</span>
-                    </div>
+                    <div class="logo-bolinha"><span>JT</span></div>
                     <div class="logo-texto">
                         <h2>Jovens Talentos</h2>
                         <p>Super Trunfo Químico</p>
                     </div>
                 </div>
             </div>
-
             <nav class="nav-jogo">
-                <a href="inicio.html" class="botao-voltar">
-                    Voltar ao Menu
-                </a>
+                <a href="inicio.html" class="botao-voltar">Voltar ao Menu</a>
             </nav>
         </div>
     </header>
-
     <main class="main-jogo">
         <div class="jogo-container">
             <section class="info-jogo-section">
@@ -48,7 +42,6 @@
                                 <span class="pontos-jogador" id="pontos-j1">0</span>
                             </div>
                         </div>
-
                         <div class="placar-jogador">
                             <div class="avatar-jogador">👤</div>
                             <div class="dados-jogador">
@@ -57,7 +50,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="status-container">
                         <div class="status-indicador">
                             <span class="status-texto" id="status-texto">Escolha um atributo</span>
@@ -65,14 +57,12 @@
                     </div>
                 </div>
             </section>
-
             <section class="tabuleiro-section">
                 <div id="area-jogo">
                     <div id="carta-jogador" class="area-carta">
                         <h3>Sua Carta</h3>
                         <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
                     </div>
-
                     <div id="area-atributos">
                         <h3>Escolha um Atributo</h3>
                         <div id="botoes-atributos">
@@ -86,25 +76,18 @@
                                 Ionização</button>
                         </div>
                     </div>
-
                     <div id="carta-cpu" class="area-carta">
                         <h3>Carta da CPU</h3>
                         <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
                     </div>
                 </div>
             </section>
-
             <section class="acoes-section">
-                <button id="botao-reiniciar" class="botao-acao">
-                    <span class="botao-texto">Novo Jogo</span>
-                </button>
-                <button id="botao-historico" class="botao-acao">
-                    <span class="botao-texto">Histórico</span>
-                </button>
+                <button id="botao-reiniciar" class="botao-acao"><span class="botao-texto">Novo Jogo</span></button>
+                <button id="botao-historico" class="botao-acao"><span class="botao-texto">Histórico</span></button>
             </section>
         </div>
     </main>
-
     <script src="sons.js"></script>
     <script src="supertrunfo.js"></script>
 </body>

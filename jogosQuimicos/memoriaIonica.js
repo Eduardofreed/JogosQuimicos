@@ -8,6 +8,10 @@ const pontosJ1 = document.getElementById('pontos-j1');
 const pontosJ2 = document.getElementById('pontos-j2');
 const statusTexto = document.getElementById('status-texto');
 const botaoReiniciar = document.getElementById('botao-reiniciar');
+const curiosidadeContainer = document.getElementById('curiosidade-container');
+const curiosidadeTitulo = document.getElementById('curiosidade-titulo');
+const curiosidadeTexto = document.getElementById('curiosidade-texto');
+
 
 // EVENT LISTENER DO JOGO
 botaoReiniciar.addEventListener('click', () => {
@@ -21,10 +25,32 @@ const dadosBaseCartas = [
     { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
     { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg.png' },
     { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O.png' },
-    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al(2).png' },
+    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al.png' },
     { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K.png' },
     { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
 ];
+
+const compostosValidos = [
+    'NaCl', 'KBr', 'KCl', 'NaBr',
+    'MgO',
+    'MgCl2', 'MgBr2',
+    'K2O', 'Na2O',
+    'AlCl3', 'AlBr3',
+    'Al2O3'
+];
+
+const compostosConhecidos = {
+    'NaCl': 'NaCl (Cloreto de Sódio), o famoso sal de cozinha!',
+    'MgO': 'MgO (Óxido de Magnésio), usado como antiácido.',
+    'Al2O3': 'Al₂O₃ (Óxido de Alumínio), conhecido como alumina, uma excelente isolante elétrica, muito utilizada em componentes eletrônicos.',
+    'KCl': 'KCl (Cloreto de Potássio), usado em fertilizantes.',
+    'KBr': 'KBr (Brometo de Potássio), um sal com propriedades sedativas.',
+    'NaBr': 'KBr (Brometo de Sódio), um sal usado para tratar epilepsia..',
+    'MgCl2': 'MgCl₂ (Cloreto de Magnésio), encontrado na água do mar.',
+    'Na2O': 'Na₂O (Óxido de Sódio), um óxido básico forte.',
+    'AlCl3': 'AlCl₃ (Cloreto de Alumínio), usado como catalisador.',
+};
+
 
 // VARIÁVEIS DE ESTADO DO JOGO
 let cartasViradas = [];
@@ -35,7 +61,7 @@ let jogadorAtual = 1;
 let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
 let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
 
-// FUNÇÕES DO JOGO
+// FUNÇÕES DO JOGO 
 function criarBaralho() {
     const baralho = [];
     dadosBaseCartas.forEach(tipoCarta => {
@@ -60,21 +86,18 @@ function distribuirCartas(baralho) {
         cartaElemento.classList.add('carta');
         cartaElemento.dataset.simbolo = infoCarta.simbolo;
         cartaElemento.dataset.carga = infoCarta.carga;
-
         const verso = document.createElement('div');
         verso.classList.add('face', 'verso');
-
         const frente = document.createElement('div');
         frente.classList.add('face', 'frente');
         frente.style.backgroundImage = `url('${infoCarta.imagem}')`;
-
         cartaElemento.appendChild(verso);
         cartaElemento.appendChild(frente);
-
         cartaElemento.addEventListener('click', virarCarta);
         tabuleiro.appendChild(cartaElemento);
     });
 }
+
 
 function virarCarta(evento) {
     if (travarCliques) return;
@@ -84,16 +107,16 @@ function virarCarta(evento) {
     if (cartasViradas.length < 5) {
         cartaClicada.classList.add('virada');
         cartasViradas.push(cartaClicada);
-        tocarVirarCarta(); // Som de virar carta
+        tocarVirarCarta();
     }
 
     if (cartasViradas.length === 5) {
         travarCliques = true;
-        statusTexto.textContent = "Verificando combinação...";
-        const resultado = verificarCombinacoes(cartasViradas);
+        statusTexto.textContent = "Verificando combinações...";
         setTimeout(() => {
-            if (resultado.encontrou) {
-                tratarSucesso(resultado.combinacao);
+            const combosEncontrados = encontrarTodosOsCombos(cartasViradas);
+            if (combosEncontrados.length > 0) {
+                tratarSucesso(combosEncontrados);
             } else {
                 tratarFalha();
             }
@@ -101,34 +124,40 @@ function virarCarta(evento) {
     }
 }
 
-function verificarCombinacoes(cartas) {
-    const cargas = cartas.map(c => parseInt(c.dataset.carga));
-    if (cargas.reduce((a, b) => a + b, 0) === 0 && cargas.length === 5)
-        return { encontrou: true, combinacao: [...cartas] };
+// NOVA FUNÇÃO PARA ENCONTRAR COMBOS
+function encontrarTodosOsCombos(cartas) {
+    let poolDeCartas = [...cartas];
+    const combosRealizados = [];
 
-    // 4 cartas
-    for (let i = 0; i < 5; i++)
-        for (let j = i + 1; j < 5; j++)
-            for (let k = j + 1; k < 5; k++)
-                for (let l = k + 1; l < 5; l++)
-                    if (cargas[i] + cargas[j] + cargas[k] + cargas[l] === 0)
-                        return { encontrou: true, combinacao: [cartas[i], cartas[j], cartas[k], cartas[l]] };
+    let encontrouComboNestaRodada = true;
+    while (encontrouComboNestaRodada) {
+        encontrouComboNestaRodada = false;
+        // Itera por todos os subconjuntos possíveis do pool de cartas atual
+        for (let i = (1 << poolDeCartas.length) - 1; i > 0; i--) {
+            const subconjunto = [];
+            let cargaTotal = 0;
+            for (let j = 0; j < poolDeCartas.length; j++) {
+                if ((i >> j) & 1) {
+                    subconjunto.push(poolDeCartas[j]);
+                    cargaTotal += parseInt(poolDeCartas[j].dataset.carga);
+                }
+            }
 
-    // 3 cartas
-    for (let i = 0; i < 5; i++)
-        for (let j = i + 1; j < 5; j++)
-            for (let k = j + 1; k < 5; k++)
-                if (cargas[i] + cargas[j] + cargas[k] === 0)
-                    return { encontrou: true, combinacao: [cartas[i], cartas[j], cartas[k]] };
-
-    // 2 cartas
-    for (let i = 0; i < 5; i++)
-        for (let j = i + 1; j < 5; j++)
-            if (cargas[i] + cargas[j] === 0)
-                return { encontrou: true, combinacao: [cartas[i], cartas[j]] };
-
-    return { encontrou: false, combinacao: [] };
+            if (subconjunto.length >= 2 && cargaTotal === 0) {
+                const formula = formatarComposto(subconjunto);
+                if (compostosValidos.includes(formula)) {
+                    combosRealizados.push(subconjunto);
+                    // Remove as cartas usadas do pool para a próxima iteração
+                    poolDeCartas = poolDeCartas.filter(carta => !subconjunto.includes(carta));
+                    encontrouComboNestaRodada = true;
+                    break; // Sai do loop de subconjuntos para recomeçar a busca no pool reduzido
+                }
+            }
+        }
+    }
+    return combosRealizados; // Retorna uma lista de combos (lista de listas de cartas)
 }
+
 
 function formatarComposto(combinacao) {
     const contagem = {};
@@ -141,7 +170,9 @@ function formatarComposto(combinacao) {
     simbolosUnicos.sort((a, b) => {
         const cargaA = parseInt(dadosBaseCartas.find(c => c.simbolo === a).carga);
         const cargaB = parseInt(dadosBaseCartas.find(c => c.simbolo === b).carga);
-        return cargaB - cargaA;
+        if (cargaA > 0 && cargaB < 0) return -1;
+        if (cargaA < 0 && cargaB > 0) return 1;
+        return a.localeCompare(b);
     });
 
     let formula = '';
@@ -155,10 +186,31 @@ function formatarComposto(combinacao) {
     return formula;
 }
 
-function tratarSucesso(combinacao) {
-    const compostoFormado = formatarComposto(combinacao);
-    const pontosGanhos = 1;
-    statusTexto.textContent = `Ponto para ${jogadorAtual === 1 ? nomeJogador1 : nomeJogador2}! +${pontosGanhos} (${compostoFormado})`;
+// FUNÇÃO DE SUCESSO ATUALIZADA PARA LIDAR COM COMBOS
+function tratarSucesso(combos) {
+    let pontosGanhos = 0;
+    let todasCartasDoCombo = [];
+    let textoCuriosidade = "";
+
+    // Calcula pontos e prepara mensagens para cada combo encontrado
+    combos.forEach(combo => {
+        pontosGanhos += combo.length >= 3 ? 2 : 1;
+        todasCartasDoCombo.push(...combo);
+        const compostoFormado = formatarComposto(combo);
+        textoCuriosidade += (compostosConhecidos[compostoFormado] || `Você formou o composto válido ${compostoFormado}!`) + "<br><br>";
+    });
+
+    // Adiciona um ponto de bônus se mais de um combo foi feito
+    if (combos.length > 1) {
+        pontosGanhos++;
+        curiosidadeTitulo.textContent = "COMBO!";
+    } else {
+        curiosidadeTitulo.textContent = "Composto Formado!";
+    }
+
+    statusTexto.textContent = `Ponto para ${jogadorAtual === 1 ? nomeJogador1 : nomeJogador2}! +${pontosGanhos}`;
+    curiosidadeTexto.innerHTML = textoCuriosidade;
+    curiosidadeContainer.className = 'curiosidade-container-visivel';
 
     if (jogadorAtual === 1) {
         pontosJogador1 += pontosGanhos;
@@ -169,27 +221,27 @@ function tratarSucesso(combinacao) {
     }
 
     tocarCombinacao();
+    todasCartasDoCombo.forEach(carta => carta.classList.add('combinada'));
 
-    combinacao.forEach(carta => carta.classList.add('combinada'));
     setTimeout(() => {
-        combinacao.forEach(carta => carta.remove());
+        curiosidadeContainer.className = 'curiosidade-container-oculto';
+        todasCartasDoCombo.forEach(carta => carta.remove());
+        const cartasNaoUsadas = cartasViradas.filter(c => !todasCartasDoCombo.includes(c));
+        cartasNaoUsadas.forEach(c => c.classList.remove('virada'));
+
         proximoTurno();
-    }, 2000);
+    }, 4500 + (combos.length * 2000)); // Adiciona tempo extra para ler múltiplos combos
 }
 
 function tratarFalha() {
-    statusTexto.textContent = "Nenhuma combinação encontrada.";
+    statusTexto.textContent = "Nenhuma combinação válida encontrada.";
     setTimeout(() => {
+        cartasViradas.forEach(c => c.classList.remove('virada'));
         proximoTurno();
     }, 1500);
 }
 
 function proximoTurno() {
-    cartasViradas.forEach(carta => {
-        if (document.body.contains(carta)) {
-            carta.classList.remove('virada');
-        }
-    });
     cartasViradas = [];
     travarCliques = false;
     jogadorAtual = (jogadorAtual === 1) ? 2 : 1;
@@ -220,7 +272,6 @@ function anunciarVencedor() {
     travarCliques = true;
     let mensagemFinal = "Fim de Jogo! ";
     let vencedor;
-    
     if (pontosJogador1 > pontosJogador2) {
         mensagemFinal += `${nomeJogador1} venceu!`;
         vencedor = nomeJogador1;
@@ -231,10 +282,7 @@ function anunciarVencedor() {
         mensagemFinal += "Empate!";
         vencedor = 'empate';
     }
-    
     statusTexto.textContent = mensagemFinal;
-    
-    // Toca som de vitória final (exceto em empate)
     if (vencedor !== 'empate') {
         tocarVitoriaFinal();
     }
@@ -251,6 +299,7 @@ function iniciarJogo() {
     statusTexto.textContent = `Vez de ${nomeJogador1}`;
     travarCliques = false;
     cartasViradas = [];
+    curiosidadeContainer.className = 'curiosidade-container-oculto';
     const baralho = criarBaralho();
     embaralhar(baralho);
     distribuirCartas(baralho);

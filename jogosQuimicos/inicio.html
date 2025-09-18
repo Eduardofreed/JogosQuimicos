@@ -8,53 +8,48 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="telainicio.css">
 </head>
 
 <body>
     <div id="fundo-quimico"></div>
-
     <div id="tela-inicio">
         <div class="jogos-container">
             <header class="header-principal">
                 <div class="logo-container">
                     <div class="logo-jt">
-                        <div class="logo-bolinha">
-                            <span>JT</span>
-                        </div>
+                        <div class="logo-bolinha"><span>JT</span></div>
                         <div class="logo-texto">
                             <h2>Jovens Talentos</h2>
                             <p>Programa de Iniciação Científica</p>
                         </div>
                     </div>
                 </div>
-
                 <div class="instituicoes">
                     <a href="https://www.faperj.br/" target="_blank" rel="noopener noreferrer"
                         style="text-decoration: none;">
-                        <div class="logo-instituicao" id="logo-faperj">
-                            <img src="imagens/faperj-logo.png" alt="FAPERJ">
+                        <div class="logo-instituicao" id="logo-faperj"><img src="imagens/faperj-logo.png" alt="FAPERJ">
                         </div>
                     </a>
                     <a href="https://www.iserj.net/portalacademico/" target="_blank" rel="noopener noreferrer"
                         style="text-decoration: none;">
-                        <div class="logo-instituicao" id="logo-iserj">
-                            <img src="imagens/iserj-logo.png" alt="ISERJ">
+                        <div class="logo-instituicao" id="logo-iserj"><img src="imagens/iserj-logo.png" alt="ISERJ">
                         </div>
                     </a>
+                    <a href="https://www.faetec.rj.gov.br/" target="_blank" rel="noopener noreferrer"
+                        style="text-decoration: none;">
+                        <div class="logo-instituicao" id="logo-faetec"><img src="imagens/faetec-logo.png" alt="FAETEC">
+                        </div>
                 </div>
             </header>
-
             <main class="conteudo-principal">
                 <h1>Jogos Químicos Educacionais</h1>
                 <p class="subtitulo">Explore a química através de jogos interativos e divertidos. Aprenda sobre
                     elementos, íons e reações químicas de forma lúdica e educativa.</p>
-
                 <div class="input-nomes">
                     <input type="text" id="nome-j1" placeholder="Nome do Jogador 1" maxlength="20">
                     <input type="text" id="nome-j2" placeholder="Nome do Jogador 2" maxlength="20">
                 </div>
-
                 <div class="botoes-jogos">
                     <button id="botao-memoria-ionica" class="botao-jogo">
                         <div class="botao-conteudo">
@@ -71,14 +66,22 @@
                                 Eletronegatividade, raio atômico e muito mais!</span>
                         </div>
                     </button>
+
+                    <button id="botao-balanceamento" class="botao-jogo">
+                        <div class="botao-conteudo">
+                            <span class="titulo-jogo">Balanceamento de Equações</span>
+                            <span class="descricao-jogo">Arraste os coeficientes e aprenda sobre estequiometria e
+                                conservação da massa de forma interativa.</span>
+                        </div>
+                    </button>
                 </div>
             </main>
         </div>
     </div>
-
     <script>
         const botaoMemoria = document.getElementById('botao-memoria-ionica');
         const botaoSuperTrunfo = document.getElementById('botao-super-trunfo');
+        const botaoBalanceamento = document.getElementById('botao-balanceamento');
         const inputNomeJ1 = document.getElementById('nome-j1');
         const inputNomeJ2 = document.getElementById('nome-j2');
 
@@ -88,31 +91,27 @@
             if (nome1) inputNomeJ1.value = nome1;
             if (nome2) inputNomeJ2.value = nome2;
         });
-
         function salvarNomes() {
             const nome1 = inputNomeJ1.value.trim() || "Jogador 1";
             const nome2 = inputNomeJ2.value.trim() || "Jogador 2";
-
             localStorage.setItem('nomeJogador1', nome1);
             localStorage.setItem('nomeJogador2', nome2);
         }
-
         botaoMemoria.addEventListener('click', () => {
             tocarClick();
             salvarNomes();
             window.location.href = 'memoriaIonica.html';
         });
-
         botaoSuperTrunfo.addEventListener('click', () => {
             tocarClick();
             salvarNomes();
             window.location.href = 'supertrunfo.html';
         });
-
-        $('#btn-oculto').click(function () {
-            window.location = "http://pt.stackoverflow.com/";
+        botaoBalanceamento.addEventListener('click', () => {
+            tocarClick();
+            salvarNomes();
+            window.location.href = 'balanceamento.html';
         });
-
     </script>
     <script src="sons.js"></script>
     <script src="particulas.js"></script>

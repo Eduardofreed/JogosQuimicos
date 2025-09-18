@@ -5,7 +5,7 @@ class GerenciadorSons {
         this.somHabilitado = true;
         this.volumeMusica = 0.3; // Volume baixo por padrão
         this.volumeEfeitos = 0.6;
-        
+
         this.inicializarSons();
         this.criarControles();
     }
@@ -15,7 +15,7 @@ class GerenciadorSons {
         this.musicaFundo = new Audio('sons/musica-calma.mp3');
         this.musicaFundo.loop = true;
         this.musicaFundo.volume = this.volumeMusica;
-        
+
         // Efeitos sonoros
         this.sons = {
             click: new Audio('sons/click-suave.mp3'),
@@ -92,7 +92,7 @@ class GerenciadorSons {
         this.somHabilitado = !this.somHabilitado;
         const icone = document.getElementById('icone-som');
         const controleVolume = document.getElementById('controle-volume');
-        
+
         if (this.somHabilitado) {
             icone.textContent = '🔊';
             this.iniciarMusicaFundo();
@@ -100,7 +100,7 @@ class GerenciadorSons {
             icone.textContent = '🔇';
             this.pararMusicaFundo();
         }
-        
+
         // Mostrar/ocultar controles de volume
         controleVolume.style.display = this.somHabilitado ? 'block' : 'none';
     }
@@ -182,7 +182,7 @@ let gerenciadorSons;
 // Inicializar quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
     gerenciadorSons = new GerenciadorSons();
-    
+
     // Iniciar música de fundo automaticamente
     setTimeout(() => {
         gerenciadorSons.iniciarMusicaFundo();

@@ -1,0 +1,132 @@
+.jogo-container-balanceamento {
+    max-width: 1000px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.equacao-section {
+    background: rgba(10, 25, 41, 0.7);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+}
+
+#area-equacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2em;
+    font-weight: 600;
+    gap: 15px;
+    color: var(--text-primary);
+    flex-wrap: wrap;
+}
+
+.coeficiente-slot {
+    width: 60px;
+    height: 70px;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    color: var(--text-muted);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.coeficiente-slot.hover {
+    background-color: var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+.formula-quimica {
+    padding: 0 10px;
+}
+
+.seta-reacao {
+    color: var(--primary-color);
+    padding: 0 15px;
+}
+
+.coeficientes-section,
+.contagem-section {
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(10, 25, 41, 0.5);
+}
+
+.coeficientes-section h3,
+.contagem-section h3 {
+    margin-bottom: 20px;
+    font-size: 1.4em;
+    color: var(--text-secondary);
+}
+
+#opcoes-coeficientes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.coeficiente-draggable {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: white;
+    cursor: grab;
+    box-shadow: 0 4px 15px var(--shadow-medium);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.coeficiente-draggable:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px var(--shadow-heavy);
+}
+
+#area-contagem {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 20px;
+}
+
+.contador-atomo {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    transition: border-color 0.5s, background-color 0.5s;
+}
+
+.contador-atomo.balanceado {
+    border-color: var(--success-color);
+    background-color: rgba(0, 255, 136, 0.1);
+}
+
+.contador-atomo .simbolo {
+    font-size: 1.6em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.contador-atomo .contagem {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.1em;
+}
+
+#botao-proxima:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--background-medium);
+}

@@ -49,9 +49,9 @@ function animarParticula(el) {
 function distancia(el1, el2) {
     const r1 = el1.getBoundingClientRect();
     const r2 = el2.getBoundingClientRect();
-    const cx1 = r1.left + r1.width/2, cy1 = r1.top + r1.height/2;
-    const cx2 = r2.left + r2.width/2, cy2 = r2.top + r2.height/2;
-    return Math.sqrt((cx1-cx2)**2 + (cy1-cy2)**2);
+    const cx1 = r1.left + r1.width / 2, cy1 = r1.top + r1.height / 2;
+    const cx2 = r2.left + r2.width / 2, cy2 = r2.top + r2.height / 2;
+    return Math.sqrt((cx1 - cx2) ** 2 + (cy1 - cy2) ** 2);
 }
 
 function checarFormacaoMoleculas() {
@@ -73,8 +73,8 @@ function checarFormacaoMoleculas() {
         }
         if (indices.length === mol.componentes.length) {
             let proximas = true;
-            for (let i = 0; i < indices.length-1; i++) {
-                if (distancia(todas[indices[i]], todas[indices[i+1]]) > 80) {
+            for (let i = 0; i < indices.length - 1; i++) {
+                if (distancia(todas[indices[i]], todas[indices[i + 1]]) > 80) {
                     proximas = false;
                     break;
                 }
@@ -82,8 +82,8 @@ function checarFormacaoMoleculas() {
             if (proximas) {
                 indices.forEach(idx => todas[idx].classList.add('brilho'));
                 setTimeout(() => {
-                    const x = indices.map(idx => parseFloat(todas[idx].style.left)).reduce((a,b)=>a+b,0)/indices.length;
-                    const y = indices.map(idx => parseFloat(todas[idx].style.top)).reduce((a,b)=>a+b,0)/indices.length;
+                    const x = indices.map(idx => parseFloat(todas[idx].style.left)).reduce((a, b) => a + b, 0) / indices.length;
+                    const y = indices.map(idx => parseFloat(todas[idx].style.top)).reduce((a, b) => a + b, 0) / indices.length;
                     indices.forEach(idx => todas[idx].remove());
                     criarMolecula(mol, x, y);
                 }, 600);
@@ -113,8 +113,8 @@ function criarMolecula(mol, x, y) {
 function efeitoCombustao(x, y) {
     const fogo = document.createElement('div');
     fogo.style.position = 'absolute';
-    fogo.style.left = (x+16) + 'px';
-    fogo.style.top = (y+16) + 'px';
+    fogo.style.left = (x + 16) + 'px';
+    fogo.style.top = (y + 16) + 'px';
     fogo.style.width = '32px';
     fogo.style.height = '32px';
     fogo.style.pointerEvents = 'none';
@@ -124,7 +124,7 @@ function efeitoCombustao(x, y) {
     fogo.style.zIndex = 10;
     fogo.style.animation = 'combustao 1s ease-out forwards';
     document.getElementById('fundo-quimico').appendChild(fogo);
-    setTimeout(()=>fogo.remove(), 1000);
+    setTimeout(() => fogo.remove(), 1000);
 }
 
 window.addEventListener('DOMContentLoaded', () => {

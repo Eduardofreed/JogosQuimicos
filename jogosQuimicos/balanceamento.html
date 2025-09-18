@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovens Talentos - Balanceamento de Equações</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="telas.css">
+    <link rel="stylesheet" href="balanceamento.css">
+</head>
+
+<body>
+    <div id="fundo-quimico"></div>
+    <header class="header-jogo">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo-jt">
+                    <div class="logo-bolinha"><span>JT</span></div>
+                    <div class="logo-texto">
+                        <h2>Jovens Talentos</h2>
+                        <p>Balanceamento de Equações</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-jogo">
+                <a href="inicio.html" class="botao-voltar">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-jogo">
+        <div class="jogo-container-balanceamento">
+            <section class="info-jogo-section">
+                <div class="info-container">
+                    <div class="placar-jogador">
+                        <div class="avatar-jogador">🧪</div>
+                        <div class="dados-jogador">
+                            <span class="nome-jogador" id="label-j1">Pontuação</span>
+                            <span class="pontos-jogador" id="pontos-j1">0</span>
+                        </div>
+                    </div>
+                    <div class="status-container">
+                        <div class="status-indicador">
+                            <span class="status-texto" id="status-texto">Arraste os coeficientes para balancear a
+                                equação.</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="equacao-section">
+                <div id="area-equacao">
+                </div>
+            </section>
+
+            <section class="coeficientes-section">
+                <h3>Coeficientes</h3>
+                <div id="opcoes-coeficientes">
+                </div>
+            </section>
+
+            <section class="contagem-section">
+                <h3>Contagem de Átomos</h3>
+                <div id="area-contagem">
+                </div>
+            </section>
+
+            <section class="acoes-section">
+                <button id="botao-proxima" class="botao-acao" disabled>
+                    <span class="botao-texto">Próxima Equação</span>
+                </button>
+            </section>
+        </div>
+    </main>
+
+    <script src="sons.js"></script>
+    <script src="balanceamento.js"></script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 ## Sobre o Projeto
 
-Este é um conjunto de jogos educacionais interativos desenvolvido para tornar o aprendizado de química mais divertido e acessível. O projeto foi criado no âmbito do **Programa Jovens Talentos** de Iniciação Científica, com o apoio da **FAPERJ** e **ISERJ**.
+Este é um conjunto de jogos educacionais interativos desenvolvido para tornar o aprendizado de química mais divertido e acessível. O projeto foi criado no âmbito do **Programa Jovens Talentos** de Iniciação Científica, com o apoio da **FAPERJ** e **ISERJ** da rede **FAETEC**.
 
 ### Objetivo
 Transformar conceitos complexos da química em experiências lúdicas e educativas, permitindo que estudantes aprendam através da interação e do jogo.
@@ -13,31 +13,42 @@ Transformar conceitos complexos da química em experiências lúdicas e educativ
 **Como funciona:** Combine íons para formar compostos químicos!
 
 - **Objetivo:** Encontrar 5 cartas que formem um composto químico válido
-- **Mecânica:** 
-  - Vire as cartas para revelar íons (cátions e ânions)
-  - Combine íons com cargas opostas para formar compostos
-  - Exemplo: Na⁺ + Cl⁻ = NaCl (cloreto de sódio)
-- **Pontuação:** Cada combinação válida vale pontos para o jogador
+- **Mecânica:**  
+  - Os jogadores viram até 5 cartas para revelar íons (cátions e ânions). 
+  - O objetivo é encontrar uma combinação de cartas cuja soma das cargas seja zero, formando um composto quimicamente estável.
+  - Exemplo: Na + Cl → NaCl (Cloreto de Sódio)
+  - Cada combinação válida dá 1 ponto ao jogador
+  - O jogador pode formar combinações de até 3 elementos ou um combo de dois compostos
+  - Exemplo: Virar NaCl e KBr ao mesmo tempo.
+  - Se o jogador conseguir uma combinação tripla ou um combo ganha 2 pontos.
 
-**Elementos incluídos:**
-- Sódio (Na⁺), Cloro (Cl⁻), Magnésio (Mg²⁺), Oxigênio (O²⁻)
-- Alumínio (Al³⁺), Potássio (K⁺), Bromo (Br⁻)
+**Aprendizado:** Foco em ligações iônicas, na interação entre cargas elétricas de cátions e ânions, e na formação e nomenclatura de compostos binários como sais e óxidos.
 
 ### 2. Super Trunfo Químico
-**Como funciona:** Compare propriedades dos elementos químicos!
+**Como funciona:** Compare propriedades dos elementos químicos para vencer!
 
 - **Objetivo:** Vencer rodadas escolhendo atributos onde seu elemento tem valores superiores
 - **Mecânica:**
-  - Cada jogador recebe uma carta com um elemento
-  - Escolha um atributo para comparar (eletronegatividade, raio atômico, etc.)
-  - O elemento com o melhor valor vence a rodada
+  - Cada jogador recebe cartas com diferentes elementos químicos. 
+  - A cada rodada, um jogador escolhe um atributo (ex: eletronegatividade, raio atômico). 
+  - O elemento com o valor superior ou inferior no atributo escolhido vence a rodada e o jogador ganha um ponto.
+  - Exemplo: Bromo > Alumínio | Eletronegatividade do Bromo (2,96) é maior que a do Alumínio (1,61).
+
 - **Atributos:** Eletronegatividade, Raio Atômico, Massa Atômica, Pontos de Fusão e Ebulição, Densidade
 
-## 🚀 Como Jogar
+**Aprendizado:** Explora propriedades periódicas (eletronegatividade, raio atômico), características físicas (ponto de fusão, densidade) e incentiva o conhecimento geral da Tabela Periódica.
 
-### Pré-requisitos
-- Navegador web moderno (Chrome, Firefox, Safari, Edge)
-- Conexão com internet (apenas para carregar fontes)
+### 3. Balanceamento de Equações Químicas
+**Como funciona:** Arraste os coeficientes corretos para balancear as equações químicas.
+
+- **Mecânica:** 
+  - O jogador arrasta e solta números (coeficientes) nos espaços antes de cada molécula em uma equação não balanceada. 
+  - O objetivo é fazer com que a quantidade de átomos de cada elemento seja idêntica nos dois lados da equação (reagentes e produtos).
+  - Exemplo: H₂ + O₂ → H₂O é balanceada para 2H₂ + O₂ → 2H₂O.
+
+**Aprendizado:** Ensina conceitos fundamentais de estequiometria e a importância da conservação de massa (Lei de Lavoisier) em reações químicas.
+
+## Como Jogar
 
 ### Instruções
 1. **Acesse o jogo:** Abra o arquivo `inicio.html` no seu navegador
@@ -56,17 +67,20 @@ Transformar conceitos complexos da química em experiências lúdicas e educativ
 ## Estrutura do Projeto
 
 jogosQuimicos/
-├── inicio.html # Página principal com menu de jogos
-├── memoriaIonica.html # Jogo da Memória Iônica
-├── supertrunfo.html # Super Trunfo Químico
-├── style.css # Estilos e animações
-├── memoriaIonica.js # Lógica do Jogo da Memória
-├── supertrunfo.js # Lógica do Super Trunfo
-├── particulas.js # Animações de partículas químicas
 └── imagens/ # Imagens dos elementos químicos
-├── Na.png, Cl.png, Mg.png, O.png, etc.
-└── logos institucionais
-
+├── Na.png, Cl.png, Mg.png, O.png, etc. e logos institucionais
+└── sons/ # Efeitos sonoros no jogo
+├── click-suave.mp3, som-combinacao.mp3, som-empate.mp3, som-vitoria.mp3 e virar-carta.mp3
+├── inicio.html # Página principal com menu de jogos
+├── telainicio.css # Estilos, animações da tela de início e partículas
+├── particulas.js # Lógica por trás das animações de partículas químicas
+├── memoriaIonica.html # Tela do jogo da Memória Iônica
+├── memoriaIonica.css # Estilos e animações do jogo da Memória Iônica
+├── memoriaIonica.js # Lógica do Jogo da Memória
+├── superTrunfo.html # Super Trunfo Químico
+├── superTrunfo.css # Estilos e animações do jogo Super Trunfo
+├── superTrunfo.js # Lógica do Super Trunfo
+README.md
 
 ## Características Visuais
 
@@ -104,7 +118,7 @@ jogosQuimicos/
 - **Compreensão:** Visualização de conceitos abstratos
 - **Colaboração:** Jogos para dois jogadores
 
-## 📚 Como Usar em Sala de Aula
+## Como Usar em Sala de Aula
 
 1. **Introdução:** Apresente os conceitos básicos
 2. **Demonstração:** Mostre como jogar
@@ -125,6 +139,8 @@ Os jogos podem ser facilmente expandidos:
 Para dúvidas ou sugestões sobre o projeto, entre em contato através das instituições parceiras:
 - **FAPERJ:** Fundação de Amparo à Pesquisa do Estado do Rio de Janeiro
 - **ISERJ:** Instituto Superior de Educação do Rio de Janeiro
+- **FAETEC:** Fundação de Apoio à Escola Técnica
+
 
 ## Licença
 

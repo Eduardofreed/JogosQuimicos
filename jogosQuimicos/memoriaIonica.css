@@ -1,0 +1,314 @@
+.main-jogo {
+    min-height: calc(100vh - 100px);
+    padding: 40px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.jogo-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.info-jogo-section {
+    background: rgba(10, 25, 41, 0.85);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+}
+
+.info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.placar-container {
+    display: flex;
+    gap: 35px;
+    align-items: center;
+}
+
+.placar-jogador {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.placar-jogador:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+    border-color: var(--primary-color);
+}
+
+.avatar-jogador {
+    font-size: 1.8em;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.dados-jogador {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nome-jogador {
+    font-size: 1em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.pontos-jogador {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.15) 0%, rgba(183, 33, 255, 0.15) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.status-texto {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1em;
+}
+
+.tabuleiro-section {
+    background: rgba(10, 25, 41, 0.7);
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+}
+
+.tabuleiro-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.acoes-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-acao {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px 35px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border: none;
+    border-radius: 20px;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 25px var(--shadow-medium), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.botao-acao:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 35px var(--shadow-heavy), 0 0 0 2px rgba(255, 255, 255, 0.2);
+    filter: brightness(1.1);
+}
+
+#tabuleiro-jogo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 25px;
+    max-width: 1100px;
+    width: 100%;
+    perspective: 1000px;
+    animation: tabuleiroFadeIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes tabuleiroFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.carta {
+    width: 120px;
+    height: 170px;
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.2s;
+    box-shadow: 0 6px 24px 0 rgba(33, 212, 253, 0.15), 0 1.5px 4px rgba(0, 0, 0, 0.10);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.10);
+    margin-bottom: 4px;
+    animation: cartaFadeIn 0.7s cubic-bezier(.68, -0.55, .27, 1.55);
+}
+
+@keyframes cartaFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) rotateY(30deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.carta:hover:not(.virada):not(.combinada) {
+    box-shadow: 0 12px 32px 0 #21d4fd44, 0 2px 8px rgba(0, 0, 0, 0.12);
+    transform: scale(1.04) rotateY(2deg);
+    z-index: 2;
+}
+
+.carta.virada {
+    transform: rotateY(180deg);
+}
+
+.carta.combinada {
+    box-shadow: 0 0 40px var(--primary-color), 0 0 0 2px var(--primary-color), 0 2px 8px rgba(0, 0, 0, 0.12);
+    transform: scale(1.08);
+    filter: brightness(1.12) saturate(1.05);
+}
+
+.carta.virada.combinada {
+    transform: rotateY(180deg) scale(1.08);
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
+    backface-visibility: hidden;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.verso {
+    background-image: url('imagens/verso-institucional.png');
+    background-size: cover;
+    background-position: center;
+    background-color: #4a6da7;
+}
+
+.frente {
+    background-color: #ffffff;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: rotateY(180deg);
+    border: 2px solid #21d4fd44;
+}
+
+.curiosidade-container-oculto {
+    display: none;
+}
+
+.curiosidade-container-visivel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 25, 41, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.5s ease;
+}
+
+#curiosidade-popup {
+    background: linear-gradient(135deg, var(--background-medium) 0%, var(--background-light) 100%);
+    padding: 30px 40px;
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 10px 50px var(--shadow-heavy);
+    max-width: 500px;
+    text-align: center;
+    transform: scale(1);
+    animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#curiosidade-titulo {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+#curiosidade-texto {
+    font-size: 1.1em;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
