@@ -1,6 +1,6 @@
 "use strict";
 
-// REFERÊNCIAS AOS ELEMENTOS DO JOGO
+// Referências aos elementos do jogo
 const cartaJogador = document.getElementById('carta-jogador-elemento');
 const cartaCPU = document.getElementById('carta-cpu-elemento');
 const labelJ1 = document.getElementById('label-j1');
@@ -11,7 +11,7 @@ const statusTexto = document.getElementById('status-texto');
 const botaoReiniciar = document.getElementById('botao-reiniciar');
 const botoesAtributos = document.querySelectorAll('.botao-atributo');
 
-// EVENT LISTENERS
+// Event Listeners
 botaoReiniciar.addEventListener('click', () => {
     tocarClick();
     iniciarJogo();
@@ -27,7 +27,7 @@ botoesAtributos.forEach(botao => {
     });
 });
 
-// DADOS DOS ELEMENTOS (BARALHO EXPANDIDO)
+// Dados dos elementos
 const dadosElementos = [
     { nome: 'Sódio', simbolo: 'Na', imagem: 'imagens/Na.png', eletronegatividade: 0.93, raioAtomico: 186, massaAtomica: 22.99, pontoFusao: 97.8, densidade: 0.97, energiaIonizacao: 495.8 },
     { nome: 'Cloro', simbolo: 'Cl', imagem: 'imagens/Cl.png', eletronegatividade: 3.16, raioAtomico: 99, massaAtomica: 35.45, pontoFusao: -101.5, densidade: 3.21, energiaIonizacao: 1251.2 },
@@ -44,7 +44,7 @@ const dadosElementos = [
     { nome: 'Flúor', simbolo: 'F', imagem: 'imagens/F.png', eletronegatividade: 3.98, raioAtomico: 50, massaAtomica: 18.998, pontoFusao: -219.6, densidade: 1.7, energiaIonizacao: 1681.0 } // Super Trunfo
 ];
 
-// VARIÁVEIS DE ESTADO DO JOGO
+// Variáveis de estado do jogo
 let baralhoJogador = [];
 let baralhoCPU = [];
 let cartaAtualJogador = null;
@@ -57,7 +57,7 @@ let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
 let historicoPartidas = JSON.parse(localStorage.getItem('historicoSuperTrunfo')) || [];
 let inicioPartida = null;
 
-// FUNÇÕES DO HISTÓRICO (sem alterações)
+// Funções do histórico
 function salvarPartida(vencedor, pontosJ1, pontosJ2, duracao) {
     const partida = { id: Date.now(), data: new Date().toLocaleString('pt-BR'), jogador1: nomeJogador1, jogador2: nomeJogador2, pontosJ1, pontosJ2, vencedor, duracao, elementosUsados: dadosElementos.length };
     historicoPartidas.unshift(partida);
@@ -88,7 +88,7 @@ function mostrarHistorico() {
     alert(historicoTexto);
 }
 
-// FUNÇÕES DO JOGO
+// Funções do jogo
 function criarBaralho() {
     return dadosElementos.map(el => ({ ...el }));
 }

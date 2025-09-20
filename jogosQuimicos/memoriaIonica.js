@@ -1,6 +1,6 @@
 "use strict";
 
-// REFERÊNCIAS AOS ELEMENTOS DO JOGO
+// Referências do DOM
 const tabuleiro = document.getElementById('tabuleiro-jogo');
 const labelJ1 = document.getElementById('label-j1');
 const labelJ2 = document.getElementById('label-j2');
@@ -15,7 +15,7 @@ const toggleCPU = document.getElementById('toggle-cpu');
 const dificuldadeContainer = document.getElementById('dificuldade-container');
 const selectDificuldade = document.getElementById('select-dificuldade');
 
-// EVENT LISTENER DE REINÍCIO
+// Event listener de reinício
 botaoReiniciar.addEventListener('click', () => {
     tocarClick();
     iniciarJogo();
@@ -36,7 +36,7 @@ selectDificuldade.addEventListener('change', function () {
     dificuldadeCPU = this.value;
 });
 
-// DADOS DO JOGO
+// Dados do jogo
 const dadosBaseCartas = [
     { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na.png' },
     { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
@@ -73,7 +73,7 @@ const compostosConhecidos = {
 };
 
 
-// VARIÁVEIS DE ESTADO DO JOGO
+// Variáveis de estado do Jogo
 let cartasViradas = [];
 let travarCliques = false;
 let pontosJogador1 = 0;
@@ -86,8 +86,7 @@ let modoCPU = false;
 let dificuldadeCPU = 'medio'; // 'facil', 'medio', 'dificil'
 
 
-// FUNÇÕES DO JOGO
-
+// Funções do jogo
 function jogadaCPU() {
     if (!modoCPU || jogadorAtual !== 2) return;
 
@@ -208,7 +207,6 @@ function virarCarta(evento) {
     }
 }
 
-// NOVA FUNÇÃO PARA ENCONTRAR COMBOS
 function encontrarTodosOsCombos(cartas) {
     let poolDeCartas = [...cartas];
     const combosRealizados = [];
@@ -270,7 +268,7 @@ function formatarComposto(combinacao) {
     return formula;
 }
 
-// FUNÇÃO DE SUCESSO ATUALIZADA PARA LIDAR COM COMBOS
+// Função de Sucesso para Combos
 function tratarSucesso(combos) {
     let pontosGanhos = 0;
     let todasCartasDoCombo = [];
@@ -341,7 +339,6 @@ function proximoTurno() {
     verificarFimDeJogo();
 }
 
-// Funções verificarFimDeJogo, anunciarVencedor e iniciarJogo permanecem as mesmas
 function verificarFimDeJogo() {
     const cartasRestantes = document.querySelectorAll('.carta');
     if (cartasRestantes.length < 2) {

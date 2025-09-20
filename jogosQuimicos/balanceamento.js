@@ -1,6 +1,6 @@
 "use strict";
 
-// DADOS DO JOGO
+// Dados do jogo
 const equacoes = [
     {
         reagentes: [{ formula: { H: 2 } }, { formula: { O: 2 } }],
@@ -29,7 +29,7 @@ const equacoes = [
     }
 ];
 
-// REFERÊNCIAS DO DOM
+// Referências do DOM
 const areaEquacao = document.getElementById('area-equacao');
 const opcoesCoeficientes = document.getElementById('opcoes-coeficientes');
 const areaContagem = document.getElementById('area-contagem');
@@ -37,18 +37,19 @@ const statusTexto = document.getElementById('status-texto');
 const botaoProxima = document.getElementById('botao-proxima');
 const pontosEl = document.getElementById('pontos-j1');
 
-// ESTADO DO JOGO
+// Estado do jogo
 let equacaoAtual;
 let coeficientes;
 let pontos = 0;
 
-// FUNÇÕES DO JOGO
+// Funções do jogo
 function iniciarJogo() {
     gerarCoeficientesArrastaveis();
     carregarProximaEquacao();
     botaoProxima.addEventListener('click', carregarProximaEquacao);
 }
 
+// Carrega a próxima equação química aleatoriamente
 function carregarProximaEquacao() {
     equacaoAtual = equacoes[Math.floor(Math.random() * equacoes.length)];
     coeficientes = {
@@ -149,8 +150,9 @@ function adicionarEventosDeDrop() {
     });
 }
 
+// Atualiza a contagem conforme o resultado final e corresponde balanceamento
 function atualizarContagem() {
-    const contagens = {};
+    const contagens = {}; // Contagem de início nula
 
     const contarAtomos = (moleculas, coefs, lado) => {
         moleculas.forEach((mol, index) => {
@@ -169,6 +171,7 @@ function atualizarContagem() {
     verificarBalanceamento(contagens);
 }
 
+// Realiza contagem de elemento a partir do div do reagente
 function renderizarContagem(contagens) {
     areaContagem.innerHTML = '';
     for (const elemento in contagens) {
@@ -187,6 +190,7 @@ function renderizarContagem(contagens) {
     }
 }
 
+// Conta balanceamento pela contagem de reagentes
 function verificarBalanceamento(contagens) {
     let tudoBalanceado = true;
     for (const elemento in contagens) {
@@ -208,6 +212,5 @@ function verificarBalanceamento(contagens) {
         tocarCombinacao();
     }
 }
-
 
 iniciarJogo();
