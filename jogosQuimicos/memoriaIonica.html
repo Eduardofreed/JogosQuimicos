@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="telas.css">
+    <link rel="stylesheet" href="telainicio.css">
     <link rel="stylesheet" href="memoriaIonica.css">
 </head>
 
@@ -62,6 +62,26 @@
                         <div class="status-indicador">
                             <span class="status-texto" id="status-texto">Vez do Jogador 1</span>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="modo-jogo-section">
+                <div class="modo-container">
+                    <div class="opcao-modo-jogo">
+                        <label class="switch">
+                            <input type="checkbox" id="toggle-cpu">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="modo-texto">Jogar contra CPU</span>
+                    </div>
+                    <div class="dificuldade-container" id="dificuldade-container" style="display: none;">
+                        <span class="dificuldade-label">Dificuldade:</span>
+                        <select id="select-dificuldade">
+                            <option value="facil">Fácil (2-3 cartas)</option>
+                            <option value="medio" selected>Médio (3-4 cartas)</option>
+                            <option value="dificil">Difícil (4-5 cartas)</option>
+                        </select>
                     </div>
                 </div>
             </section>

@@ -3,6 +3,9 @@ const particulasQuimicas = [
     { tipo: 'Cl', img: 'imagens/Cl_atomo.png' },
     { tipo: 'O', img: 'imagens/O_atomo.png' },
     { tipo: 'C', img: 'imagens/C_atomo.svg.png' },
+    { tipo: 'K', img: 'imagens/K_atomo.png' },
+    { tipo: 'Br', img: 'imagens/Br_atomo.png' },
+    { tipo: 'H', img: 'imagens/H_atomo.png' }
 ];
 
 const moleculas = [
@@ -15,6 +18,36 @@ const moleculas = [
         nome: 'CO2',
         componentes: ['C', 'O', 'O'],
         img: 'imagens/CO2_molecula.svg'
+    }
+    , {
+        nome: 'KBr',
+        componentes: ['K', 'Br'],
+        img: 'imagens/KBr.png'
+    }
+    , {
+        nome: 'H2O',
+        componentes: ['O', 'H', 'H'],
+        img: 'imagens/H2O_molecula.png'
+    }
+    , {
+        nome: 'O2',
+        componentes: ['O', 'O'],
+        img: 'imagens/O2_molecula.png'
+    }
+    , {
+        nome: 'CO',
+        componentes: ['C', 'O'],
+        img: 'imagens/CO_molecula.png'
+    }
+    , {
+        nome: 'CH4',
+        componentes: ['C', 'H', 'H', 'H', 'H'],
+        img: 'imagens/CH4_molecula.png'
+    }
+    , {
+        nome: 'KCl',
+        componentes: ['K', 'Cl'],
+        img: 'imagens/KCl.png'
     }
 ];
 

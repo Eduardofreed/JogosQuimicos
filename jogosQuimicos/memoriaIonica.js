@@ -11,12 +11,29 @@ const botaoReiniciar = document.getElementById('botao-reiniciar');
 const curiosidadeContainer = document.getElementById('curiosidade-container');
 const curiosidadeTitulo = document.getElementById('curiosidade-titulo');
 const curiosidadeTexto = document.getElementById('curiosidade-texto');
+const toggleCPU = document.getElementById('toggle-cpu');
+const dificuldadeContainer = document.getElementById('dificuldade-container');
+const selectDificuldade = document.getElementById('select-dificuldade');
 
-
-// EVENT LISTENER DO JOGO
+// EVENT LISTENER DE REINÍCIO
 botaoReiniciar.addEventListener('click', () => {
     tocarClick();
     iniciarJogo();
+});
+
+// Event listeners para o modo CPU
+toggleCPU.addEventListener('change', function () {
+    modoCPU = this.checked;
+    dificuldadeContainer.style.display = modoCPU ? 'flex' : 'none';
+    if (modoCPU) {
+        labelJ2.textContent = "CPU";
+    } else {
+        labelJ2.textContent = nomeJogador2;
+    }
+});
+
+selectDificuldade.addEventListener('change', function () {
+    dificuldadeCPU = this.value;
 });
 
 // DADOS DO JOGO
@@ -28,13 +45,14 @@ const dadosBaseCartas = [
     { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al.png' },
     { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K.png' },
     { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
+    { nome: 'Hidrogênio', simbolo: 'H', quantidade: 6, carga: 1, imagem: 'imagens/H.png' }
 ];
 
 const compostosValidos = [
     'NaCl', 'KBr', 'KCl', 'NaBr',
     'MgO',
     'MgCl2', 'MgBr2',
-    'K2O', 'Na2O',
+    'K2O', 'KOH', 'Na2O',
     'AlCl3', 'AlBr3',
     'Al2O3'
 ];
@@ -45,7 +63,10 @@ const compostosConhecidos = {
     'Al2O3': 'Al₂O₃ (Óxido de Alumínio), conhecido como alumina, uma excelente isolante elétrica, muito utilizada em componentes eletrônicos.',
     'KCl': 'KCl (Cloreto de Potássio), usado em fertilizantes.',
     'KBr': 'KBr (Brometo de Potássio), um sal com propriedades sedativas.',
-    'NaBr': 'KBr (Brometo de Sódio), um sal usado para tratar epilepsia..',
+    'NaBr': 'NaBr (Brometo de Sódio), um sal usado para tratar epilepsia.',
+    'KOH': 'KOH (Hidróxido de Potássio), também conhecido como potassa cáustica, é uma base forte usada em diversas aplicações industriais, incluindo a fabricação de sabão e como eletrólito em baterias.',
+    'K2O': 'K₂O (Óxido de Potássio), um óxido básico que reage vigorosamente com água para formar hidróxido de potássio (KOH).',
+    'MgBr2': 'MgBr₂ (Brometo de Magnésio), é empregado como retardante de chamas, reduzindo a inflamabilidade em materiais como algodão quando adicionado na concentração de 0,125 mol/L.',
     'MgCl2': 'MgCl₂ (Cloreto de Magnésio), encontrado na água do mar.',
     'Na2O': 'Na₂O (Óxido de Sódio), um óxido básico forte.',
     'AlCl3': 'AlCl₃ (Cloreto de Alumínio), usado como catalisador.',
@@ -60,8 +81,70 @@ let pontosJogador2 = 0;
 let jogadorAtual = 1;
 let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
 let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
+let modoJogo = localStorage.getItem('modoJogo') || 'multiplayer'; // 'singleplayer' ou 'multiplayer'
+let modoCPU = false;
+let dificuldadeCPU = 'medio'; // 'facil', 'medio', 'dificil'
 
-// FUNÇÕES DO JOGO 
+
+// FUNÇÕES DO JOGO
+
+function jogadaCPU() {
+    if (!modoCPU || jogadorAtual !== 2) return;
+
+    travarCliques = true;
+    statusTexto.textContent = "CPU está pensando...";
+
+    setTimeout(() => {
+        const cartasDisponiveis = Array.from(document.querySelectorAll('.carta:not(.virada):not(.combinada)'));
+
+        if (cartasDisponiveis.length < 2) {
+            verificarFimDeJogo();
+            return;
+        }
+
+        let cartasSelecionadas = [];
+        let maxCartas = 5;
+
+        // Define o número máximo de cartas com base na dificuldade
+        switch (dificuldadeCPU) {
+            case 'facil':
+                maxCartas = Math.floor(Math.random() * 2) + 2; // 2-3 cartas
+                break;
+            case 'medio':
+                maxCartas = Math.floor(Math.random() * 2) + 3; // 3-4 cartas
+                break;
+            case 'dificil':
+                maxCartas = Math.floor(Math.random() * 2) + 4; // 4-5 cartas
+                break;
+        }
+
+        // Limita ao número de cartas disponíveis
+        maxCartas = Math.min(maxCartas, cartasDisponiveis.length);
+
+        // Seleciona cartas aleatoriamente
+        for (let i = 0; i < maxCartas; i++) {
+            const indice = Math.floor(Math.random() * cartasDisponiveis.length);
+            const carta = cartasDisponiveis.splice(indice, 1)[0];
+            cartasSelecionadas.push(carta);
+            carta.classList.add('virada');
+            tocarVirarCarta();
+        }
+
+        cartasViradas = cartasSelecionadas;
+        statusTexto.textContent = "CPU está verificando combinações...";
+
+        setTimeout(() => {
+            const combosEncontrados = encontrarTodosOsCombos(cartasViradas);
+            if (combosEncontrados.length > 0) {
+                tratarSucesso(combosEncontrados);
+            } else {
+                tratarFalha();
+            }
+        }, 1500);
+
+    }, 1500); // 1.5 segundos de delay para parecer que está pensando
+}
+
 function criarBaralho() {
     const baralho = [];
     dadosBaseCartas.forEach(tipoCarta => {
@@ -98,9 +181,10 @@ function distribuirCartas(baralho) {
     });
 }
 
-
 function virarCarta(evento) {
-    if (travarCliques) return;
+    // Impede jogadas durante o turno da CPU
+    if (travarCliques || (modoCPU && jogadorAtual === 2)) return;
+
     const cartaClicada = evento.currentTarget;
     if (cartaClicada.classList.contains('virada')) return;
 
@@ -245,11 +329,19 @@ function proximoTurno() {
     cartasViradas = [];
     travarCliques = false;
     jogadorAtual = (jogadorAtual === 1) ? 2 : 1;
-    const nomeJogadorAtual = (jogadorAtual === 1) ? nomeJogador1 : nomeJogador2;
-    statusTexto.textContent = `Vez de ${nomeJogadorAtual}`;
+
+    if (modoCPU && jogadorAtual === 2) {
+        statusTexto.textContent = "Vez da CPU";
+        setTimeout(jogadaCPU, 1000);
+    } else {
+        const nomeJogadorAtual = (jogadorAtual === 1) ? nomeJogador1 : (modoCPU ? "CPU" : nomeJogador2);
+        statusTexto.textContent = `Vez de ${nomeJogadorAtual}`;
+    }
+
     verificarFimDeJogo();
 }
 
+// Funções verificarFimDeJogo, anunciarVencedor e iniciarJogo permanecem as mesmas
 function verificarFimDeJogo() {
     const cartasRestantes = document.querySelectorAll('.carta');
     if (cartasRestantes.length < 2) {
@@ -286,17 +378,25 @@ function anunciarVencedor() {
     if (vencedor !== 'empate') {
         tocarVitoriaFinal();
     }
+
 }
 
 function iniciarJogo() {
     pontosJogador1 = 0;
     pontosJogador2 = 0;
     labelJ1.textContent = nomeJogador1;
-    labelJ2.textContent = nomeJogador2;
+
+    // Ajusta o label do jogador 2 com base no modo
+    if (modoCPU) {
+        labelJ2.textContent = "CPU";
+    } else {
+        labelJ2.textContent = nomeJogador2;
+    }
+
     pontosJ1.textContent = pontosJogador1;
     pontosJ2.textContent = pontosJogador2;
     jogadorAtual = 1;
-    statusTexto.textContent = `Vez de ${nomeJogador1}`;
+    statusTexto.textContent = `Vez de ${modoCPU && jogadorAtual === 2 ? "CPU" : nomeJogador1}`;
     travarCliques = false;
     cartasViradas = [];
     curiosidadeContainer.className = 'curiosidade-container-oculto';

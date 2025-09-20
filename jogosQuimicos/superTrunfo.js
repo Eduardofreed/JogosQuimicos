@@ -27,7 +27,7 @@ botoesAtributos.forEach(botao => {
     });
 });
 
-// DADOS DOS ELEMENTOS
+// DADOS DOS ELEMENTOS (BARALHO EXPANDIDO)
 const dadosElementos = [
     { nome: 'Sódio', simbolo: 'Na', imagem: 'imagens/Na.png', eletronegatividade: 0.93, raioAtomico: 186, massaAtomica: 22.99, pontoFusao: 97.8, densidade: 0.97, energiaIonizacao: 495.8 },
     { nome: 'Cloro', simbolo: 'Cl', imagem: 'imagens/Cl.png', eletronegatividade: 3.16, raioAtomico: 99, massaAtomica: 35.45, pontoFusao: -101.5, densidade: 3.21, energiaIonizacao: 1251.2 },
