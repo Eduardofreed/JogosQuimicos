@@ -38,23 +38,27 @@ selectDificuldade.addEventListener('change', function () {
 
 // Dados do jogo
 const dadosBaseCartas = [
-    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na.png' },
-    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl.png' },
-    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg.png' },
-    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O.png' },
-    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al.png' },
-    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K.png' },
-    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br.png' },
-    { nome: 'Hidrogênio', simbolo: 'H', quantidade: 6, carga: 1, imagem: 'imagens/H.png' }
+    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na_memoriaIonica.png' },
+    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl_memoriaIonica.png' },
+    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg_memoriaIonica.png' },
+    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O_memoriaIonica.png' },
+    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al_memoriaIonica.png' },
+    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K_memoriaIonica.png' },
+    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br_memoriaIonica.png' },
+    { nome: 'Hidrogênio', simbolo: 'H', quantidade: 6, carga: 1, imagem: 'imagens/H_memoriaIonica.png' },
+    { nome: 'Carbono', simbolo: 'C', quantidade: 6, carga: 0, imagem: 'imagens/C_memoriaIonica.png' },
+    { nome: 'Nitrogênio', simbolo: 'N', quantidade: 6, carga: 0, imagem: 'imagens/N_memoriaIonica.png' }
 ];
 
 const compostosValidos = [
     'NaCl', 'KBr', 'KCl', 'NaBr',
-    'MgO',
-    'MgCl2', 'MgBr2',
-    'K2O', 'KOH', 'Na2O',
+    'MgO', 'MgCl2', 'MgBr2',
+    'K2O', 'KOH', 
+    'Na2O', 'NaOH',
     'AlCl3', 'AlBr3',
-    'Al2O3'
+    'Al2O3',
+    'HCl', 'H2O', 'HNO3',
+    'CO2', 'CH4' 
 ];
 
 const compostosConhecidos = {
@@ -70,6 +74,11 @@ const compostosConhecidos = {
     'MgCl2': 'MgCl₂ (Cloreto de Magnésio), encontrado na água do mar.',
     'Na2O': 'Na₂O (Óxido de Sódio), um óxido básico forte.',
     'AlCl3': 'AlCl₃ (Cloreto de Alumínio), usado como catalisador.',
+    'HCl': 'HCl (Ácido Clorídrico), um ácido forte usado em diversas aplicações industriais, incluindo a fabricação de produtos químicos e a remoção de impurezas.',
+    'H2O': 'H₂O (Água), a substância mais abundante na Terra.',
+    'HNO3': 'HNO₃ (Ácido Nítrico), um ácido forte usado na produção de fertilizantes, corantes e até mesmo explosivos como o TNT.',
+    'CO2': 'CO₂ (Dióxido de Carbono), um gás essencial para a fotossíntese das plantas e usado para gaseificar bebidas e em extintores de incêndio.',
+    'CH4': 'CH₄ (Metano), um gás conhecido como gás natural, usado principalmente como combustível para aquecimento e geração de eletricidade.'
 };
 
 
@@ -312,7 +321,7 @@ function tratarSucesso(combos) {
         cartasNaoUsadas.forEach(c => c.classList.remove('virada'));
 
         proximoTurno();
-    }, 4500 + (combos.length * 2000)); // Adiciona tempo extra para ler múltiplos combos
+    }, 1200 + (combos.length * 1000)); // Adiciona tempo extra para ler múltiplos combos
 }
 
 function tratarFalha() {
