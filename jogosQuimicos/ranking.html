@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking - Jogos Químicos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="telas.css">
+    <style>
+        .ranking-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(10, 25, 41, 0.85);
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+
+        .titulo-ranking {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            color: var(--text-secondary);
+        }
+
+        .botao-limpar {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 24px;
+            background: var(--secondary-color);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="fundo-quimico"></div>
+    <header class="header-jogo">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo-jt">
+                    <div class="logo-bolinha"><span>JT</span></div>
+                    <div class="logo-texto">
+                        <h2>Jovens Talentos</h2>
+                        <p>Ranking Geral</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-jogo">
+                <a href="inicio.html" class="botao-voltar">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="ranking-container">
+        <h1 class="titulo-ranking">Ranking Geral dos Jogadores</h1>
+        <table id="tabela-ranking">
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Jogador</th>
+                    <th>Vitórias</th>
+                    <th>Empates</th>
+                    <th>Derrotas</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-ranking"></tbody>
+        </table>
+        <button id="btn-limpar-ranking" class="botao-limpar">Limpar Ranking</button>
+    </main>
+
+    <script src="ranking.js"></script>
+    <script>
+        function carregarRanking() {
+            const ranking = calcularRanking();
+            const tbody = document.getElementById('tbody-ranking');
+            tbody.innerHTML = '';
+
+            ranking.forEach((jogador, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${jogador.nome}</td>
+                    <td>${jogador.vitorias}</td>
+                    <td>${jogador.empates}</td>
+                    <td>${jogador.derrotas}</td>
+                    <td>${jogador.total}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.getElementById('btn-limpar-ranking').addEventListener('click', () => {
+            if (confirm("Tem certeza que deseja limpar o ranking?")) {
+                limparRanking();
+                carregarRanking();
+            }
+        });
+
+        window.onload = () => {
+            carregarRanking();
+        };
+    </script>
+</body>
+
+</html>

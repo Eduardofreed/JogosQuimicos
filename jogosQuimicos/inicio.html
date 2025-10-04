@@ -40,6 +40,7 @@
                         style="text-decoration: none;">
                         <div class="logo-instituicao" id="logo-faetec"><img src="imagens/faetec-logo.png" alt="FAETEC">
                         </div>
+                    </a>
                 </div>
             </header>
             <main class="conteudo-principal">
@@ -74,6 +75,12 @@
                                 conservação da massa de forma interativa.</span>
                         </div>
                     </button>
+                    <button id="botao-ranking" class="botao-jogo">
+                        <div class="botao-conteudo">
+                            <span class="titulo-jogo">Ver Ranking</span>
+                            <span class="descricao-jogo">Confira o placar geral dos jogadores.</span>
+                        </div>
+                    </button>
                 </div>
             </main>
         </div>
@@ -82,6 +89,7 @@
         const botaoMemoria = document.getElementById('botao-memoria-ionica');
         const botaoSuperTrunfo = document.getElementById('botao-super-trunfo');
         const botaoBalanceamento = document.getElementById('botao-balanceamento');
+        const botaoRanking = document.getElementById('botao-ranking');
         const inputNomeJ1 = document.getElementById('nome-j1');
         const inputNomeJ2 = document.getElementById('nome-j2');
 
@@ -111,6 +119,10 @@
             tocarClick();
             salvarNomes();
             window.location.href = 'balanceamento.html';
+        });
+        botaoRanking.addEventListener('click', () => {
+            tocarClick();
+            window.location.href = 'ranking.html';
         });
     </script>
     <script src="sons.js"></script>

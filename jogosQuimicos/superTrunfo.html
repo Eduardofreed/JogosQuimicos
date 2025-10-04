@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="telainicio.css">
     <link rel="stylesheet" href="superTrunfo.css">
 </head>
 
@@ -52,41 +51,41 @@
                     </div>
                     <div class="status-container">
                         <div class="status-indicador">
-                            <span class="status-texto" id="status-texto">Escolha um atributo</span>
+                            <span class="status-texto" id="status-texto">Vez do Jogador 1</span>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="tabuleiro-section">
-                <div id="area-jogo">
-                    <div id="carta-jogador" class="area-carta">
-                        <h3>Sua Carta</h3>
-                        <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
-                    </div>
-                    <div id="area-atributos">
-                        <h3>Escolha um Atributo</h3>
-                        <div id="botoes-atributos">
-                            <button class="botao-atributo"
-                                data-atributo="eletronegatividade">Eletronegatividade</button>
-                            <button class="botao-atributo" data-atributo="raio-atomico">Raio Atômico</button>
-                            <button class="botao-atributo" data-atributo="massa-atomica">Massa Atômica</button>
-                            <button class="botao-atributo" data-atributo="ponto-fusao">Ponto de Fusão</button>
-                            <button class="botao-atributo" data-atributo="densidade">Densidade</button>
-                            <button class="botao-atributo" data-atributo="energia-ionizacao">Energia de
-                                Ionização</button>
-                        </div>
-                    </div>
-                    <div id="carta-cpu" class="area-carta">
-                        <h3>Carta da CPU</h3>
-                        <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
-                    </div>
-                </div>
-            </section>
-            <section class="acoes-section">
-                <button id="botao-reiniciar" class="botao-acao"><span class="botao-texto">Novo Jogo</span></button>
-                <button id="botao-historico" class="botao-acao"><span class="botao-texto">Histórico</span></button>
             </section>
         </div>
+
+        <section class="tabuleiro-section">
+            <div id="area-jogo">
+                <div id="carta-jogador" class="area-carta">
+                    <h3>Sua Carta</h3>
+                    <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
+                </div>
+                <div id="area-atributos">
+                    <h3>Escolha um Atributo</h3>
+                    <div id="botoes-atributos">
+                        <button class="botao-atributo" data-atributo="eletronegatividade">Eletronegatividade</button>
+                        <button class="botao-atributo" data-atributo="raio-atomico">Raio Atômico</button>
+                        <button class="botao-atributo" data-atributo="massa-atomica">Massa Atômica</button>
+                        <button class="botao-atributo" data-atributo="ponto-fusao">Ponto de Fusão</button>
+                        <button class="botao-atributo" data-atributo="densidade">Densidade</button>
+                        <button class="botao-atributo" data-atributo="energia-ionizacao">Energia de
+                            Ionização</button>
+                    </div>
+                </div>
+                <div id="carta-cpu" class="area-carta">
+                    <h3>Carta da CPU</h3>
+                    <div id="carta-cpu-elemento" class="carta-super-trunfo carta-oculta"></div>
+                </div>
+            </div>
+        </section>
+        <section class="acoes-section">
+            <button id="botao-reiniciar" class="botao-acao"><span class="botao-texto">Novo Jogo</span></button>
+            <button id="botao-historico" class="botao-acao"><span class="botao-texto">Histórico</span></button>
+        </section>
     </main>
     <script src="sons.js"></script>
     <script src="supertrunfo.js"></script>

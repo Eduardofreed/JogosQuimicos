@@ -59,7 +59,17 @@ let inicioPartida = null;
 
 // Funções do histórico
 function salvarPartida(vencedor, pontosJ1, pontosJ2, duracao) {
-    const partida = { id: Date.now(), data: new Date().toLocaleString('pt-BR'), jogador1: nomeJogador1, jogador2: nomeJogador2, pontosJ1, pontosJ2, vencedor, duracao, elementosUsados: dadosElementos.length };
+    const partida = { 
+        id: Date.now(), 
+        data: new Date().toLocaleString('pt-BR'), 
+        jogador1: nomeJogador1, 
+        jogador2: nomeJogador2, 
+        pontosJ1, 
+        pontosJ2, 
+        vencedor, 
+        duracao, 
+        elementosUsados: dadosElementos.length 
+    };
     historicoPartidas.unshift(partida);
     if (historicoPartidas.length > 50) {
         historicoPartidas = historicoPartidas.slice(0, 50);
@@ -198,19 +208,19 @@ function anunciarVencedor() {
     let mensagemFinal = "Fim de Jogo! ";
     let vencedor;
     if (pontosJogador1 > pontosJogador2) {
+        mensagemFinal += `${nomeJogador1} venceu!`;
         vencedor = nomeJogador1;
-        mensagemFinal += `${vencedor} venceu!`;
     } else if (pontosJogador2 > pontosJogador1) {
+        mensagemFinal += `${nomeJogador2} venceu!`;
         vencedor = nomeJogador2;
-        mensagemFinal += `${vencedor} venceu!`;
     } else {
-        vencedor = 'empate';
         mensagemFinal += "Empate!";
+        vencedor = 'empate';
     }
     statusTexto.textContent = mensagemFinal;
-    if (vencedor !== 'empate') tocarVitoriaFinal();
+
+    // Salvar partida no ranking
     salvarPartida(vencedor, pontosJogador1, pontosJogador2, calcularDuracao());
-    botoesAtributos.forEach(botao => botao.disabled = true);
 }
 
 function iniciarJogo() {
