@@ -8,16 +8,16 @@
     --primary-color: #21d4fd;
     --secondary-color: #b721ff;
     --accent-color: #00ff88;
-    --background-dark: #0a1929;
-    --background-medium: #1a365d;
-    --background-light: #2d5a87;
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.8);
-    --text-muted: rgba(255, 255, 255, 0.6);
-    --border-color: rgba(33, 212, 253, 0.2);
-    --shadow-light: rgba(33, 212, 253, 0.1);
-    --shadow-medium: rgba(33, 212, 253, 0.2);
-    --shadow-heavy: rgba(33, 212, 253, 0.3);
+    --background-dark: #050b12;
+    --background-medium: #0e2139;
+    --background-light: #173a5a;
+    --text-primary: #e6edf3;
+    --text-secondary: rgba(230, 237, 243, 0.82);
+    --text-muted: rgba(230, 237, 243, 0.64);
+    --border-color: rgba(33, 212, 253, 0.16);
+    --shadow-light: rgba(33, 212, 253, 0.08);
+    --shadow-medium: rgba(33, 212, 253, 0.18);
+    --shadow-heavy: rgba(33, 212, 253, 0.28);
     --success-color: #00ff88;
     --warning-color: #ffaa00;
     --error-color: #ff4757;
@@ -73,6 +73,21 @@ body::before {
     pointer-events: none;
 }
 
+/* Animação de rotação para partículas/átomos de fundo */
+@keyframes particulaSpin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.particula-quimica {
+    will-change: transform, left, top;
+}
+
 #tela-inicio {
     position: relative;
     z-index: 10;
@@ -85,7 +100,7 @@ body::before {
 }
 
 .jogos-container {
-    background: rgba(10, 25, 41, 0.65);
+    background: rgba(10, 25, 41, 0.66);
     border-radius: 28px;
     padding: 60px;
     box-shadow:
@@ -93,7 +108,7 @@ body::before {
         0 0 0 1px var(--border-color),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(15px);
-    max-width: 1100px;
+    max-width: 1280px;
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -362,10 +377,10 @@ body::before {
     cursor: pointer;
     border: none;
     border-radius: 20px;
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.08) 0%, rgba(183, 33, 255, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.14) 0%, rgba(183, 33, 255, 0.14) 100%);
     color: var(--text-primary);
     font-weight: 500;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.34), 0 0 0 1px var(--border-color), inset 0 1px 0 rgba(255, 255, 255, 0.12);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
     position: relative;
@@ -390,7 +405,7 @@ body::before {
 .botao-jogo:hover {
     transform: translateY(-5px) scale(1.02);
     box-shadow: 0 20px 60px var(--shadow-heavy), 0 0 0 2px var(--primary-color), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.15) 0%, rgba(183, 33, 255, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.22) 0%, rgba(183, 33, 255, 0.22) 100%);
 }
 
 .botao-conteudo {

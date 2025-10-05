@@ -51,12 +51,15 @@
                     <input type="text" id="nome-j1" placeholder="Nome do Jogador 1" maxlength="20">
                     <input type="text" id="nome-j2" placeholder="Nome do Jogador 2" maxlength="20">
                 </div>
+                <div class="input-nomes">
+                    <input type="text" id="nome-equipe" placeholder="Nome da Equipe (opcional)" maxlength="24">
+                </div>
                 <div class="botoes-jogos">
-                    <button id="botao-memoria-ionica" class="botao-jogo">
+                    <button id="botao-memoria-ligacoes" class="botao-jogo">
                         <div class="botao-conteudo">
-                            <span class="titulo-jogo">Jogo da Memória Iônica</span>
+                            <span class="titulo-jogo">Jogo da Memória de Ligações</span>
                             <span class="descricao-jogo">Combine íons para formar compostos químicos. Teste sua memória
-                                e aprenda sobre ligações iônicas!</span>
+                                e aprenda sobre ligações iônicas e covalentes!</span>
                         </div>
                     </button>
 
@@ -86,34 +89,43 @@
         </div>
     </div>
     <script>
-        const botaoMemoria = document.getElementById('botao-memoria-ionica');
+        const botaoMemoria = document.getElementById('botao-memoria-ligacoes');
         const botaoSuperTrunfo = document.getElementById('botao-super-trunfo');
         const botaoBalanceamento = document.getElementById('botao-balanceamento');
         const botaoRanking = document.getElementById('botao-ranking');
         const inputNomeJ1 = document.getElementById('nome-j1');
         const inputNomeJ2 = document.getElementById('nome-j2');
+        const inputNomeEquipe = document.getElementById('nome-equipe');
 
         window.addEventListener('load', () => {
             const nome1 = localStorage.getItem('nomeJogador1');
             const nome2 = localStorage.getItem('nomeJogador2');
+            const nomeEquipe = localStorage.getItem('nomeEquipe');
             if (nome1) inputNomeJ1.value = nome1;
             if (nome2) inputNomeJ2.value = nome2;
+            if (nomeEquipe) inputNomeEquipe.value = nomeEquipe;
         });
         function salvarNomes() {
             const nome1 = inputNomeJ1.value.trim() || "Jogador 1";
             const nome2 = inputNomeJ2.value.trim() || "Jogador 2";
+            const equipe = (inputNomeEquipe.value || '').trim();
             localStorage.setItem('nomeJogador1', nome1);
             localStorage.setItem('nomeJogador2', nome2);
+            if (equipe) {
+                localStorage.setItem('nomeEquipe', equipe);
+            } else {
+                localStorage.removeItem('nomeEquipe');
+            }
         }
         botaoMemoria.addEventListener('click', () => {
             tocarClick();
             salvarNomes();
-            window.location.href = 'memoriaIonica.html';
+            window.location.href = 'memoriaLigacoes.html';
         });
         botaoSuperTrunfo.addEventListener('click', () => {
             tocarClick();
             salvarNomes();
-            window.location.href = 'supertrunfo.html';
+            window.location.href = 'superTrunfo.html';
         });
         botaoBalanceamento.addEventListener('click', () => {
             tocarClick();

@@ -169,6 +169,53 @@
 
 .modo-container {
     display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tipo-ligacao-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+}
+
+.tipo-ligacao-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1.1em;
+}
+
+#select-tipo-ligacao {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-weight: 500;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+#select-tipo-ligacao:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#select-tipo-ligacao:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+}
+
+.opcoes-jogo-container {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
@@ -412,4 +459,16 @@ input:checked+.slider:before {
         transform: scale(1);
         opacity: 1;
     }
+}
+
+.tabuleiro-section {
+    background: rgba(10, 25, 41, 0.80);
+}
+
+.curiosidade-container-visivel {
+    background-color: rgba(10, 25, 41, 0.80);
+}
+
+.tipo-ligacao-container {
+    background: rgba(255, 255, 255, 0.04);
 }

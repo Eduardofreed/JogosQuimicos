@@ -14,6 +14,7 @@ const curiosidadeTexto = document.getElementById('curiosidade-texto');
 const toggleCPU = document.getElementById('toggle-cpu');
 const dificuldadeContainer = document.getElementById('dificuldade-container');
 const selectDificuldade = document.getElementById('select-dificuldade');
+const selectTipoLigacao = document.getElementById('select-tipo-ligacao');
 
 // Event listener de reinício
 botaoReiniciar.addEventListener('click', () => {
@@ -27,8 +28,11 @@ toggleCPU.addEventListener('change', function () {
     dificuldadeContainer.style.display = modoCPU ? 'flex' : 'none';
     if (modoCPU) {
         labelJ2.textContent = "CPU";
+        const nomeEquipeCustom = localStorage.getItem('nomeEquipe');
+        labelJ1.textContent = nomeEquipeCustom ? nomeEquipeCustom : "Equipe";
     } else {
         labelJ2.textContent = nomeJogador2;
+        labelJ1.textContent = nomeJogador1;
     }
 });
 
@@ -36,32 +40,86 @@ selectDificuldade.addEventListener('change', function () {
     dificuldadeCPU = this.value;
 });
 
-// Dados do jogo
+// Event listener para mudança de tipo de ligação
+selectTipoLigacao.addEventListener('change', function () {
+    tipoLigacao = this.value;
+    iniciarJogo(); // Reinicia o jogo com o novo tipo
+});
+
+// Dados do jogo - Elementos com suas propriedades
 const dadosBaseCartas = [
-    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na_memoriaIonica.png' },
-    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl_memoriaIonica.png' },
-    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg_memoriaIonica.png' },
-    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O_memoriaIonica.png' },
-    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al_memoriaIonica.png' },
-    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K_memoriaIonica.png' },
-    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br_memoriaIonica.png' },
-    { nome: 'Hidrogênio', simbolo: 'H', quantidade: 6, carga: 1, imagem: 'imagens/H_memoriaIonica.png' },
-    { nome: 'Carbono', simbolo: 'C', quantidade: 6, carga: 0, imagem: 'imagens/C_memoriaIonica.png' },
-    { nome: 'Nitrogênio', simbolo: 'N', quantidade: 6, carga: 0, imagem: 'imagens/N_memoriaIonica.png' }
+    // Metais (formam ligações iônicas)
+    { nome: 'Sódio', simbolo: 'Na', quantidade: 3, carga: 1, imagem: 'imagens/Na_memoriaIonica.png', tipo: 'metal' },
+    { nome: 'Magnésio', simbolo: 'Mg', quantidade: 2, carga: 2, imagem: 'imagens/Mg_memoriaIonica.png', tipo: 'metal' },
+    { nome: 'Alumínio', simbolo: 'Al', quantidade: 2, carga: 3, imagem: 'imagens/Al_memoriaIonica.png', tipo: 'metal' },
+    { nome: 'Potássio', simbolo: 'K', quantidade: 5, carga: 1, imagem: 'imagens/K_memoriaIonica.png', tipo: 'metal' },
+
+    // Não-metais (formam ligações covalentes e iônicas)
+    { nome: 'Cloro', simbolo: 'Cl', quantidade: 6, carga: -1, imagem: 'imagens/Cl_memoriaIonica.png', tipo: 'nao-metal' },
+    { nome: 'Oxigênio', simbolo: 'O', quantidade: 6, carga: -2, imagem: 'imagens/O_memoriaIonica.png', tipo: 'nao-metal' },
+    { nome: 'Bromo', simbolo: 'Br', quantidade: 5, carga: -1, imagem: 'imagens/Br_memoriaIonica.png', tipo: 'nao-metal' },
+    { nome: 'Hidrogênio', simbolo: 'H', quantidade: 6, carga: 1, imagem: 'imagens/H_memoriaIonica.png', tipo: 'nao-metal' },
+    { nome: 'Carbono', simbolo: 'C', quantidade: 6, carga: 0, imagem: 'imagens/C_memoriaIonica.png', tipo: 'nao-metal' },
+    { nome: 'Nitrogênio', simbolo: 'N', quantidade: 6, carga: 0, imagem: 'imagens/N_memoriaIonica.png', tipo: 'nao-metal' }
 ];
 
-const compostosValidos = [
+// Compostos válidos por tipo de ligação
+const compostosIonicos = [
     'NaCl', 'KBr', 'KCl', 'NaBr',
     'MgO', 'MgCl2', 'MgBr2',
-    'K2O', 'KOH', 
+    'K2O', 'KOH',
     'Na2O', 'NaOH',
     'AlCl3', 'AlBr3',
     'Al2O3',
-    'HCl', 'H2O', 'HNO3',
-    'CO2', 'CH4' 
+    'HCl'
 ];
 
+const compostosCovalentes = [
+    'H2O', 'HNO3',
+    'CO2', 'CH4', 'CO', 'O2', 'N2', 'H2', 'Cl2', 'Br2'
+];
+
+const compostosMistos = [
+    ...compostosIonicos,
+    ...compostosCovalentes
+];
+
+// Função para obter compostos válidos baseado no tipo de ligação
+function obterCompostosValidos(tipoLigacao) {
+    switch (tipoLigacao) {
+        case 'ionica':
+            return compostosIonicos;
+        case 'covalente':
+            return compostosCovalentes;
+        case 'mista':
+        default:
+            return compostosMistos;
+    }
+}
+
+// Função para verificar se uma combinação é válida para o tipo de ligação
+function verificarValidadeCombinacao(combinacao, tipoLigacao) {
+    const simbolos = combinacao.map(carta => carta.dataset.simbolo);
+    const tipos = simbolos.map(simbolo =>
+        dadosBaseCartas.find(c => c.simbolo === simbolo).tipo
+    );
+
+    switch (tipoLigacao) {
+        case 'ionica':
+            // Deve ter pelo menos um metal e um não-metal
+            return tipos.includes('metal') && tipos.includes('nao-metal');
+        case 'covalente':
+            // Deve ter apenas não-metais
+            return tipos.every(tipo => tipo === 'nao-metal');
+        case 'mista':
+        default:
+            // Qualquer combinação é válida
+            return true;
+    }
+}
+
 const compostosConhecidos = {
+    // Compostos iônicos
     'NaCl': 'NaCl (Cloreto de Sódio), o famoso sal de cozinha!',
     'MgO': 'MgO (Óxido de Magnésio), usado como antiácido.',
     'Al2O3': 'Al₂O₃ (Óxido de Alumínio), conhecido como alumina, uma excelente isolante elétrica, muito utilizada em componentes eletrônicos.',
@@ -75,10 +133,18 @@ const compostosConhecidos = {
     'Na2O': 'Na₂O (Óxido de Sódio), um óxido básico forte.',
     'AlCl3': 'AlCl₃ (Cloreto de Alumínio), usado como catalisador.',
     'HCl': 'HCl (Ácido Clorídrico), um ácido forte usado em diversas aplicações industriais, incluindo a fabricação de produtos químicos e a remoção de impurezas.',
+
+    // Compostos covalentes
     'H2O': 'H₂O (Água), a substância mais abundante na Terra.',
     'HNO3': 'HNO₃ (Ácido Nítrico), um ácido forte usado na produção de fertilizantes, corantes e até mesmo explosivos como o TNT.',
     'CO2': 'CO₂ (Dióxido de Carbono), um gás essencial para a fotossíntese das plantas e usado para gaseificar bebidas e em extintores de incêndio.',
-    'CH4': 'CH₄ (Metano), um gás conhecido como gás natural, usado principalmente como combustível para aquecimento e geração de eletricidade.'
+    'CH4': 'CH₄ (Metano), um gás conhecido como gás natural, usado principalmente como combustível para aquecimento e geração de eletricidade.',
+    'CO': 'CO (Monóxido de Carbono), um gás tóxico e incolor, formado pela combustão incompleta de materiais orgânicos.',
+    'O2': 'O₂ (Oxigênio molecular), essencial para a respiração dos seres vivos.',
+    'N2': 'N₂ (Nitrogênio molecular), constitui cerca de 78% da atmosfera terrestre.',
+    'H2': 'H₂ (Hidrogênio molecular), o elemento mais abundante do universo.',
+    'Cl2': 'Cl₂ (Cloro molecular), um gás amarelo-esverdeado usado para purificação de água.',
+    'Br2': 'Br₂ (Bromo molecular), um líquido vermelho-escuro usado em fotografia.'
 };
 
 
@@ -90,9 +156,11 @@ let pontosJogador2 = 0;
 let jogadorAtual = 1;
 let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
 let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
+let nomeEquipeCustom = localStorage.getItem('nomeEquipe') || null;
 let modoJogo = localStorage.getItem('modoJogo') || 'multiplayer'; // 'singleplayer' ou 'multiplayer'
 let modoCPU = false;
 let dificuldadeCPU = 'medio'; // 'facil', 'medio', 'dificil'
+let tipoLigacao = 'mista'; // 'ionica', 'covalente', 'mista'
 
 
 // Funções do jogo
@@ -219,6 +287,7 @@ function virarCarta(evento) {
 function encontrarTodosOsCombos(cartas) {
     let poolDeCartas = [...cartas];
     const combosRealizados = [];
+    const compostosValidos = obterCompostosValidos(tipoLigacao);
 
     let encontrouComboNestaRodada = true;
     while (encontrouComboNestaRodada) {
@@ -236,7 +305,7 @@ function encontrarTodosOsCombos(cartas) {
 
             if (subconjunto.length >= 2 && cargaTotal === 0) {
                 const formula = formatarComposto(subconjunto);
-                if (compostosValidos.includes(formula)) {
+                if (compostosValidos.includes(formula) && verificarValidadeCombinacao(subconjunto, tipoLigacao)) {
                     combosRealizados.push(subconjunto);
                     // Remove as cartas usadas do pool para a próxima iteração
                     poolDeCartas = poolDeCartas.filter(carta => !subconjunto.includes(carta));
@@ -390,7 +459,12 @@ function anunciarVencedor() {
 function iniciarJogo() {
     pontosJogador1 = 0;
     pontosJogador2 = 0;
-    labelJ1.textContent = nomeJogador1;
+    // Ajusta o label do jogador 1 com base no modo
+    if (modoCPU) {
+        labelJ1.textContent = nomeEquipeCustom ? nomeEquipeCustom : "Equipe";
+    } else {
+        labelJ1.textContent = nomeJogador1;
+    }
 
     // Ajusta o label do jogador 2 com base no modo
     if (modoCPU) {
@@ -402,7 +476,26 @@ function iniciarJogo() {
     pontosJ1.textContent = pontosJogador1;
     pontosJ2.textContent = pontosJogador2;
     jogadorAtual = 1;
-    statusTexto.textContent = `Vez de ${modoCPU && jogadorAtual === 2 ? "CPU" : nomeJogador1}`;
+
+    // Atualiza o título da página baseado no tipo de ligação
+    const titulo = document.querySelector('.logo-texto p');
+    switch (tipoLigacao) {
+        case 'ionica':
+            titulo.textContent = 'Memória Iônica';
+            break;
+        case 'covalente':
+            titulo.textContent = 'Memória Covalente';
+            break;
+        case 'mista':
+        default:
+            titulo.textContent = 'Memória Mista';
+            break;
+    }
+
+    const nomeAtual = (jogadorAtual === 1)
+        ? (modoCPU ? (nomeEquipeCustom ? nomeEquipeCustom : "Equipe") : nomeJogador1)
+        : (modoCPU ? "CPU" : nomeJogador2);
+    statusTexto.textContent = `Vez de ${nomeAtual}`;
     travarCliques = false;
     cartasViradas = [];
     curiosidadeContainer.className = 'curiosidade-container-oculto';

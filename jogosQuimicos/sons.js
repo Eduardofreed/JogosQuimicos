@@ -12,9 +12,13 @@ class GerenciadorSons {
 
     inicializarSons() {
         // Música de fundo
-        this.musicaFundo = new Audio('sons/musica-calma.mp3');
-        this.musicaFundo.loop = true;
-        this.musicaFundo.volume = this.volumeMusica;
+        try {
+            this.musicaFundo = new Audio('sons/musica-calma.mp3');
+            this.musicaFundo.loop = true;
+            this.musicaFundo.volume = this.volumeMusica;
+        } catch (e) {
+            this.musicaFundo = null;
+        }
 
         // Efeitos sonoros
         this.sons = {
@@ -39,8 +43,10 @@ class GerenciadorSons {
             som.preload = 'auto';
             som.load();
         });
-        this.musicaFundo.preload = 'auto';
-        this.musicaFundo.load();
+        if (this.musicaFundo) {
+            this.musicaFundo.preload = 'auto';
+            this.musicaFundo.load();
+        }
     }
 
     criarControles() {

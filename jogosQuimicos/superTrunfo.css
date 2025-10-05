@@ -1,14 +1,14 @@
 :root {
-    --primary-color: #4a90e2;
+    --primary-color: #4aa3ff;
     --secondary-color: #357abd;
-    --background-color: #f5f7fa;
-    --background-medium: #e8ecf0;
-    --text-primary: #2c3e50;
-    --text-secondary: #7f8c8d;
-    --border-color: #d1d8e0;
-    --shadow-light: rgba(0, 0, 0, 0.1);
-    --shadow-medium: rgba(0, 0, 0, 0.15);
-    --shadow-heavy: rgba(0, 0, 0, 0.25);
+    --background-color: #0b1623;
+    --background-medium: #11263b;
+    --text-primary: #e6edf3;
+    --text-secondary: #9fb3c8;
+    --border-color: #253449;
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.45);
+    --shadow-heavy: rgba(0, 0, 0, 0.6);
     --success-color: #27ae60;
     --warning-color: #f39c12;
     --error-color: #e74c3c;
@@ -34,12 +34,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #0c2036 0%, #151d2a 100%);
     z-index: -1;
 }
 
 .header-jogo {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(10, 25, 41, 0.95);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px var(--shadow-light);
     position: sticky;
@@ -98,19 +98,25 @@ body {
 }
 
 .botao-voltar {
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    color: var(--text-primary);
     text-decoration: none;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--shadow-medium);
+    font-weight: 500;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-voltar:hover {
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.2) 0%, rgba(183, 33, 255, 0.2) 100%);
+    border-color: var(--primary-color);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--shadow-heavy);
+    box-shadow: 0 8px 25px var(--shadow-medium);
 }
 
 .main-jogo {
@@ -120,7 +126,7 @@ body {
 }
 
 .jogo-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(10, 25, 41, 0.85);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 40px var(--shadow-medium);
@@ -147,11 +153,19 @@ body {
 .placar-jogador {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.8);
-    padding: 1rem 1.5rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px var(--shadow-light);
+    gap: 15px;
+    padding: 20px 25px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.placar-jogador:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+    border-color: var(--primary-color);
 }
 
 .avatar-jogador {
@@ -185,15 +199,25 @@ body {
 }
 
 .status-container {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    box-shadow: 0 4px 15px var(--shadow-medium);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.status-indicador {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, rgba(33, 212, 253, 0.15) 0%, rgba(183, 33, 255, 0.15) 100%);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .status-texto {
     font-weight: 600;
+    color: var(--text-primary);
     font-size: 1.1em;
 }
 
@@ -202,22 +226,33 @@ body {
 }
 
 #area-jogo {
-    display: flex;
-    justify-content: space-around;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
     align-items: center;
+    justify-content: center;
     width: 95%;
-    max-width: 1200px;
-    margin: 0 auto 35px auto;
-    gap: 35px;
-    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: 0 auto 24px auto;
+    gap: 24px;
 }
 
 .area-carta {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    min-width: 300px;
+    gap: 12px;
+}
+
+/* sobrepor cartas no centro quando em telas largas */
+#carta-jogador,
+#carta-cpu {
+    position: relative;
+}
+
+#carta-jogador .carta-super-trunfo,
+#carta-cpu .carta-super-trunfo {
+    margin: 0 auto;
 }
 
 .area-carta h3 {
@@ -230,12 +265,36 @@ body {
 .carta-super-trunfo {
     width: 320px;
     height: 480px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #11263b 0%, #0b1623 100%);
     border-radius: 20px;
     box-shadow: 0 12px 40px var(--shadow-medium), 0 0 0 1px var(--border-color);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid var(--border-color);
+}
+
+/* carta oculta fica alinhada e sobreposta levemente para dar sensação de duelo */
+#carta-cpu .carta-super-trunfo.carta-oculta {
+    transform: perspective(1000px) rotateY(-8deg) translateY(10px) scale(0.98);
+    filter: brightness(0.9) saturate(0.9);
+}
+
+/* orientar cartas se encarando */
+#carta-jogador .carta-super-trunfo {
+    transform: perspective(1000px) rotateY(8deg);
+}
+
+#carta-cpu .carta-super-trunfo {
+    transform: perspective(1000px) rotateY(-8deg);
+}
+
+/* manter orientação ao passar mouse */
+#carta-jogador .carta-super-trunfo:hover {
+    transform: perspective(1000px) rotateY(8deg) translateY(-8px);
+}
+
+#carta-cpu .carta-super-trunfo:hover {
+    transform: perspective(1000px) rotateY(-8deg) translateY(-8px);
 }
 
 .carta-super-trunfo img {
@@ -308,7 +367,50 @@ body {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
+}
+
+.botao-dica {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--warning-color), #e67e22);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.05em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.botao-dica:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.dicas-section {
+    max-width: 900px;
+    margin: 0.5rem auto 0 auto;
+    display: grid;
+    gap: 10px;
+}
+
+.dica {
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+
+    #carta-jogador .carta-super-trunfo,
+    #carta-cpu .carta-super-trunfo,
+    #carta-cpu .carta-super-trunfo.carta-oculta {
+        transform: none;
+    }
 }
 
 .botao-acao {

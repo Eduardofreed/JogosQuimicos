@@ -41,6 +41,9 @@ const pontosEl = document.getElementById('pontos-j1');
 let equacaoAtual;
 let coeficientes;
 let pontos = 0;
+let nomeJogador1 = localStorage.getItem('nomeJogador1') || "Jogador 1";
+let nomeJogador2 = localStorage.getItem('nomeJogador2') || "Jogador 2";
+let nomeEquipeCustom = localStorage.getItem('nomeEquipe') || "Equipe";
 
 // Funções do jogo
 function iniciarJogo() {
@@ -58,7 +61,7 @@ function carregarProximaEquacao() {
     };
     renderizarEquacao();
     atualizarContagem();
-    statusTexto.textContent = equacaoAtual.dica;
+    statusTexto.textContent = `${equacaoAtual.dica} - ${nomeEquipeCustom}: ${nomeJogador1} e ${nomeJogador2}, trabalhem juntos!`;
     botaoProxima.disabled = true;
     tocarClick();
 }
@@ -205,7 +208,7 @@ function verificarBalanceamento(contagens) {
     }
 
     if (tudoBalanceado) {
-        statusTexto.textContent = 'Equação Balanceada! Parabéns!';
+        statusTexto.textContent = `Equação Balanceada! Parabéns ${nomeEquipeCustom}: ${nomeJogador1} e ${nomeJogador2}!`;
         botaoProxima.disabled = false;
         pontos++;
         pontosEl.textContent = pontos;

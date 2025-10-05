@@ -9,7 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="superTrunfo.css">
-    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -38,31 +37,43 @@
                         <div class="placar-jogador">
                             <div class="avatar-jogador">👤</div>
                             <div class="dados-jogador">
-                                <span class="nome-jogador" id="label-j1">Jogador 1</span>
+                                <span class="nome-jogador" id="label-j1">Equipe</span>
                                 <span class="pontos-jogador" id="pontos-j1">0</span>
                             </div>
                         </div>
                         <div class="placar-jogador">
-                            <div class="avatar-jogador">👤</div>
+                            <div class="avatar-jogador">🤖</div>
                             <div class="dados-jogador">
-                                <span class="nome-jogador" id="label-j2">Jogador 2</span>
+                                <span class="nome-jogador" id="label-j2">CPU</span>
                                 <span class="pontos-jogador" id="pontos-j2">0</span>
                             </div>
                         </div>
                     </div>
                     <div class="status-container">
                         <div class="status-indicador">
-                            <span class="status-texto" id="status-texto">Vez do Jogador 1</span>
+                            <span class="status-texto" id="status-texto">Escolha um atributo para a equipe</span>
                         </div>
+                        <button id="botao-dica" class="botao-dica" title="Sugestão de melhor atributo"><span
+                                class="botao-texto">Dica (5)</span></button>
                     </div>
                 </div>
             </section>
         </div>
 
+        <section class="dicas-section" aria-live="polite">
+            <div class="dica" id="dica-inicial">
+                <strong>Dica:</strong> Escolha um atributo que favoreça sua carta. Em eletronegatividade, o Flúor é o
+                Super Trunfo!
+            </div>
+            <div class="dica" id="dica-regras">
+                <strong>Regras:</strong> Maior vence, exceto Raio Atômico e Ponto de Fusão (menor vence).
+            </div>
+        </section>
+
         <section class="tabuleiro-section">
             <div id="area-jogo">
                 <div id="carta-jogador" class="area-carta">
-                    <h3>Sua Carta</h3>
+                    <h3>Carta da Equipe</h3>
                     <div id="carta-jogador-elemento" class="carta-super-trunfo"></div>
                 </div>
                 <div id="area-atributos">
@@ -89,7 +100,7 @@
         </section>
     </main>
     <script src="sons.js"></script>
-    <script src="supertrunfo.js"></script>
+    <script src="superTrunfo.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,7 @@ const moleculas = [
     {
         nome: 'CO2',
         componentes: ['C', 'O', 'O'],
-        img: 'imagens/CO2_molecula.svg'
+        img: 'imagens/CO2_molecula.svg.png'
     }
     , {
         nome: 'KBr',
@@ -40,11 +40,6 @@ const moleculas = [
         img: 'imagens/CO_molecula.png'
     }
     , {
-        nome: 'CH4',
-        componentes: ['C', 'H', 'H', 'H', 'H'],
-        img: 'imagens/CH4_molecula.png'
-    }
-    , {
         nome: 'KCl',
         componentes: ['K', 'Cl'],
         img: 'imagens/KCl.png'
@@ -62,6 +57,10 @@ function criarParticula(tipo, x, y) {
     el.style.width = '48px';
     el.style.height = '48px';
     el.style.pointerEvents = 'none';
+    // spin/roll animation per particle (random duration and direction)
+    const spinDurationSec = 18 + Math.random() * 12; // 14s to 26s
+    el.style.animation = `particulaSpin ${spinDurationSec}s linear infinite`;
+    el.style.animationDirection = Math.random() < 0.5 ? 'reverse' : 'normal';
     document.getElementById('fundo-quimico').appendChild(el);
     animarParticula(el);
 }
@@ -71,10 +70,11 @@ function animarParticula(el) {
     const mover = () => {
         const x = Math.random() * (window.innerWidth - 60);
         const y = Math.random() * (window.innerHeight - 60);
-        el.style.transition = 'left 4s linear, top 4s linear';
+        // move mais devagar
+        el.style.transition = 'left 10s linear, top 10s linear';
         el.style.left = x + 'px';
         el.style.top = y + 'px';
-        setTimeout(mover, 4000 + Math.random() * 2000);
+        setTimeout(mover, 10000 + Math.random() * 6000);
     };
     mover();
 }
@@ -136,6 +136,10 @@ function criarMolecula(mol, x, y) {
     el.style.width = '64px';
     el.style.height = '64px';
     el.style.pointerEvents = 'none';
+    // spin/roll para moléculas também
+    const spinDurationSec = 16 + Math.random() * 12;
+    el.style.animation = `particulaSpin ${spinDurationSec}s linear infinite`;
+    el.style.animationDirection = Math.random() < 0.5 ? 'reverse' : 'normal';
     document.getElementById('fundo-quimico').appendChild(el);
     if (mol.nome === 'CO2') {
         efeitoCombustao(x, y);

@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jovens Talentos - Jogo da Memória Iônica</title>
+    <title>Jovens Talentos - Jogo da Memória de Ligações</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="memoriaIonica.css">
+    <link rel="stylesheet" href="memoriaLigacoes.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                     <div class="logo-bolinha"><span>JT</span></div>
                     <div class="logo-texto">
                         <h2>Jovens Talentos</h2>
-                        <p>Memória Iônica</p>
+                        <p>Memória de Ligações</p>
                     </div>
                 </div>
             </div>
@@ -68,20 +68,30 @@
 
             <section class="modo-jogo-section">
                 <div class="modo-container">
-                    <div class="opcao-modo-jogo">
-                        <label class="switch">
-                            <input type="checkbox" id="toggle-cpu">
-                            <span class="slider"></span>
-                        </label>
-                        <span class="modo-texto">Jogar contra CPU</span>
-                    </div>
-                    <div class="dificuldade-container" id="dificuldade-container" style="display: none;">
-                        <span class="dificuldade-label">Dificuldade:</span>
-                        <select id="select-dificuldade">
-                            <option value="facil">Fácil (2-3 cartas)</option>
-                            <option value="medio" selected>Médio (3-4 cartas)</option>
-                            <option value="dificil">Difícil (4-5 cartas)</option>
+                    <div class="tipo-ligacao-container">
+                        <span class="tipo-ligacao-label">Tipo de Ligação:</span>
+                        <select id="select-tipo-ligacao">
+                            <option value="ionica">Memória de Ligações Iônicas</option>
+                            <option value="covalente">Memória de Ligações Covalentes</option>
+                            <option value="mista" selected>Memória de Ligações Mistas</option>
                         </select>
+                    </div>
+                    <div class="opcoes-jogo-container">
+                        <div class="opcao-modo-jogo">
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-cpu">
+                                <span class="slider"></span>
+                            </label>
+                            <span class="modo-texto">Jogar contra CPU</span>
+                        </div>
+                        <div class="dificuldade-container" id="dificuldade-container" style="display: none;">
+                            <span class="dificuldade-label">Dificuldade:</span>
+                            <select id="select-dificuldade">
+                                <option value="facil">Fácil (2-3 cartas)</option>
+                                <option value="medio" selected>Médio (3-4 cartas)</option>
+                                <option value="dificil">Difícil (4-5 cartas)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -98,7 +108,7 @@
         </div>
     </main>
     <script src="sons.js"></script>
-    <script src="memoriaIonica.js"></script>
+    <script src="memoriaLigacoes.js"></script>
 </body>
 
 </html>
