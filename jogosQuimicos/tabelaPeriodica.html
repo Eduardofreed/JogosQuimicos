@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jovens Talentos - Quebra-Cabeça da Tabela Periódica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="tabelaPeriodica.css">
+</head>
+
+<body>
+    <div id="fundo-quimico"></div>
+    <header class="header-jogo">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo-jt">
+                    <div class="logo-bolinha"><span>JT</span></div>
+                    <div class="logo-texto">
+                        <h2>Jovens Talentos</h2>
+                        <p>Quebra-Cabeça da Tabela Periódica</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="nav-jogo">
+                <a href="index.html" class="botao-voltar">Voltar ao Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-jogo">
+        <div class="jogo-container-tabela">
+            <section class="info-jogo-section">
+                <div class="info-container">
+                    <div class="placar-jogador">
+                        <div class="avatar-jogador">👥</div>
+                        <div class="dados-jogador">
+                            <span class="nome-jogador" id="label-equipe">Equipe</span>
+                            <span class="pontos-jogador" id="pontos-equipe">0</span>
+                        </div>
+                    </div>
+                    <div class="status-container">
+                        <div class="status-indicador">
+                            <span class="status-texto" id="status-texto">Arraste os elementos para seus lugares corretos
+                                na tabela periódica!</span>
+                        </div>
+                        <div class="nivel-indicador">
+                            <span class="nivel-texto" id="nivel-texto">Nível: Grupos</span>
+                            <div class="barra-progresso">
+                                <div class="progresso-fill" id="progresso-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="controles-section">
+                <div class="controles-container">
+                    <div class="dificuldade-container">
+                        <span class="dificuldade-label">Modo de Jogo:</span>
+                        <select id="select-modo">
+                            <option value="grupos">Grupos (Fácil)</option>
+                            <option value="periodos" selected>Períodos (Médio)</option>
+                            <option value="completo">Tabela Completa (Difícil)</option>
+                        </select>
+                    </div>
+                    <div class="opcoes-jogo">
+                        <div class="opcao-mostrar-numeros">
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-numeros" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="modo-texto">Mostrar números atômicos</span>
+                        </div>
+                        <div class="opcao-mostrar-simbolos">
+                            <label class="switch">
+                                <input type="checkbox" id="toggle-simbolos" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span class="modo-texto">Mostrar símbolos</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tabela-section">
+                <div class="tabela-container">
+                    <div class="tabela-periodica" id="tabela-periodica">
+                        <!-- Tabela será gerada dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="elementos-section">
+                <div class="elementos-container">
+                    <h3>Elementos para posicionar:</h3>
+                    <div class="elementos-paleta" id="elementos-paleta">
+                        <!-- Elementos serão adicionados dinamicamente -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="acoes-section">
+                <button id="botao-novo-jogo" class="botao-acao">
+                    <span class="botao-texto">Novo Jogo</span>
+                </button>
+                <button id="botao-dica" class="botao-acao">
+                    <span class="botao-texto">Dica</span>
+                </button>
+            </section>
+        </div>
+    </main>
+
+    <script src="sons.js"></script>
+    <script src="tabelaPeriodica.js"></script>
+</body>
+
+</html>

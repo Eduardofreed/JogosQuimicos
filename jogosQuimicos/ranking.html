@@ -54,6 +54,382 @@
             font-weight: 600;
             cursor: pointer;
         }
+
+        /* Estilos do Ranking Aprimorado */
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .ranking-controls {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .botao-controle {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .botao-controle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .botao-controle.danger {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .ranking-content {
+            display: flex;
+            gap: 30px;
+        }
+
+        .ranking-principal {
+            flex: 2;
+            min-width: 500px;
+        }
+
+        .detalhes-laterais {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .painel-detalhes {
+            background: rgba(10, 25, 41, 0.8);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .painel-detalhes.oculto {
+            display: none;
+        }
+
+        /* Tabela aprimorada */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(10, 25, 41, 0.6);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        tbody tr:hover {
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        tbody tr:nth-child(odd) {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .posicao-medalha {
+            font-weight: bold;
+            color: #fbbf24;
+        }
+
+        .posicao-prata {
+            color: #9ca3af;
+        }
+
+        .posicao-bronze {
+            color: #d97706;
+        }
+
+        /* Modal de detalhes */
+        .modal-detalhes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-detalhes.oculto {
+            display: none;
+        }
+
+        .modal-conteudo {
+            background: linear-gradient(135deg, var(--background-medium) 0%, var(--background-light) 100%);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        .botao-fechar {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .botao-fechar:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* Notificações de conquista */
+        .notificacao-conquista {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notificacao-conteudo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .conquista-icone {
+            font-size: 24px;
+        }
+
+        .conquista-texto h4 {
+            margin: 0 0 4px 0;
+            font-size: 1.1em;
+        }
+
+        .conquista-texto p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .ranking-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .ranking-controls {
+                justify-content: center;
+            }
+
+            .ranking-content {
+                flex-direction: column;
+            }
+
+            .ranking-principal {
+                min-width: auto;
+            }
+
+            .detalhes-laterais {
+                min-width: auto;
+            }
+
+            table {
+                font-size: 0.9em;
+            }
+
+            th,
+            td {
+                padding: 10px 8px;
+            }
+
+            .modal-conteudo {
+                margin: 20px;
+                padding: 20px;
+                max-width: calc(100% - 40px);
+            }
+        }
+
+        /* Estilos adicionais para o ranking aprimorado */
+        .linha-jogador {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .linha-jogador.selecionado {
+            background: rgba(79, 70, 229, 0.15);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .btn-detalhes {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .btn-detalhes:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .stat-value {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .jogos-por-tipo {
+            margin-top: 20px;
+        }
+
+        .jogos-por-tipo h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .tipo-jogo {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        .nome-jogo {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .dados-jogo {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .conquistas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .conquista-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .conquista-icone {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .conquista-info h5 {
+            margin: 0 0 5px 0;
+            color: var(--primary-color);
+            font-size: 1em;
+        }
+
+        .conquista-info p {
+            margin: 0 0 5px 0;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .conquista-info small {
+            color: var(--text-muted);
+            font-size: 0.8em;
+        }
     </style>
 </head>
 
@@ -77,25 +453,71 @@
     </header>
 
     <main class="ranking-container">
-        <h1 class="titulo-ranking">Ranking Geral dos Jogadores</h1>
-        <table id="tabela-ranking">
-            <thead>
-                <tr>
-                    <th>Posição</th>
-                    <th>Jogador</th>
-                    <th>Vitórias</th>
-                    <th>Empates</th>
-                    <th>Derrotas</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody id="tbody-ranking"></tbody>
-        </table>
-        <button id="btn-limpar-ranking" class="botao-limpar">Limpar Ranking</button>
+        <div class="ranking-header">
+            <h1 class="titulo-ranking">🏆 Ranking Geral dos Jogadores</h1>
+            <div class="ranking-controls">
+                <button id="btn-estatisticas" class="botao-controle">📊 Estatísticas</button>
+                <button id="btn-conquistas" class="botao-controle">🏅 Conquistas</button>
+                <button id="btn-exportar" class="botao-controle">💾 Backup</button>
+                <button id="btn-importar" class="botao-controle">📤 Restaurar</button>
+                <button id="btn-limpar-ranking" class="botao-controle danger">🗑️ Limpar Dados</button>
+            </div>
+        </div>
+
+        <div class="ranking-content">
+            <div class="ranking-principal">
+                <table id="tabela-ranking">
+                    <thead>
+                        <tr>
+                            <th>Posição</th>
+                            <th>Jogador</th>
+                            <th>Vitórias</th>
+                            <th>Empates</th>
+                            <th>Derrotas</th>
+                            <th>Total</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-ranking"></tbody>
+                </table>
+            </div>
+
+            <div class="detalhes-laterais">
+                <div id="painel-estatisticas" class="painel-detalhes oculto">
+                    <h3>📊 Estatísticas Detalhadas</h3>
+                    <div id="conteudo-estatisticas">
+                        <p>Clique em um jogador na tabela para ver suas estatísticas detalhadas.</p>
+                    </div>
+                </div>
+
+                <div id="painel-conquistas" class="painel-detalhes oculto">
+                    <h3>🏅 Conquistas</h3>
+                    <div id="conteudo-conquistas">
+                        <p>Clique em um jogador na tabela para ver suas conquistas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Estatísticas Detalhadas -->
+        <div id="modal-estatisticas" class="modal-detalhes oculto">
+            <div class="modal-conteudo">
+                <div class="modal-header">
+                    <h3 id="modal-titulo">Estatísticas Detalhadas</h3>
+                    <button id="fechar-modal" class="botao-fechar">&times;</button>
+                </div>
+                <div id="modal-corpo" class="modal-corpo">
+                    <!-- Conteúdo será preenchido dinamicamente -->
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="ranking.js"></script>
     <script>
+        let jogadorSelecionado = null;
+        let painelAtivo = null;
+
         function carregarRanking() {
             const ranking = calcularRanking();
             const tbody = document.getElementById('tbody-ranking');
@@ -103,22 +525,194 @@
 
             ranking.forEach((jogador, index) => {
                 const tr = document.createElement('tr');
+                tr.className = 'linha-jogador';
+                tr.dataset.jogador = jogador.nome;
+
+                // Adicionar medalhas para os primeiros lugares
+                let posicaoClass = '';
+                if (index === 0) posicaoClass = 'posicao-medalha';
+                else if (index === 1) posicaoClass = 'posicao-prata';
+                else if (index === 2) posicaoClass = 'posicao-bronze';
+
                 tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${jogador.nome}</td>
+                    <td class="${posicaoClass}">${index + 1}º</td>
+                    <td class="nome-jogador">${jogador.nome}</td>
                     <td>${jogador.vitorias}</td>
                     <td>${jogador.empates}</td>
                     <td>${jogador.derrotas}</td>
-                    <td>${jogador.total}</td>
+                    <td class="total-jogos">${jogador.total}</td>
+                    <td><button class="btn-detalhes" onclick="mostrarDetalhes('${jogador.nome}')">👁️</button></td>
                 `;
+
+                tr.addEventListener('click', () => {
+                    if (jogadorSelecionado !== jogador.nome) {
+                        mostrarDetalhes(jogador.nome);
+                    }
+                });
+
                 tbody.appendChild(tr);
             });
         }
 
+        function mostrarDetalhes(jogador) {
+            jogadorSelecionado = jogador;
+
+            // Remover seleção anterior
+            document.querySelectorAll('.linha-jogador').forEach(linha => {
+                linha.classList.remove('selecionado');
+            });
+
+            // Adicionar seleção à linha atual
+            document.querySelector(`[data-jogador="${jogador}"]`).classList.add('selecionado');
+
+            // Mostrar estatísticas
+            mostrarEstatisticas(jogador);
+        }
+
+        function mostrarEstatisticas(jogador) {
+            const painelEstatisticas = document.getElementById('painel-estatisticas');
+            const painelConquistas = document.getElementById('painel-conquistas');
+
+            // Ocultar painéis
+            painelEstatisticas.classList.add('oculto');
+            painelConquistas.classList.add('oculto');
+
+            const stats = obterEstatisticasJogador(jogador);
+            const conquistas = obterConquistasJogador(jogador);
+
+            if (stats) {
+                painelEstatisticas.classList.remove('oculto');
+                painelAtivo = 'estatisticas';
+
+                const conteudo = document.getElementById('conteudo-estatisticas');
+                conteudo.innerHTML = `
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Jogos Jogados:</span>
+                            <span class="stat-value">${stats.jogosJogados}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Vitórias:</span>
+                            <span class="stat-value">${stats.vitorias}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Empates:</span>
+                            <span class="stat-value">${stats.empates}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Derrotas:</span>
+                            <span class="stat-value">${stats.derrotas}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pontuação Total:</span>
+                            <span class="stat-value">${stats.pontosTotais}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Pontuação Média:</span>
+                            <span class="stat-value">${stats.pontuacaoMedia.toFixed(1)}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Maior Pontuação:</span>
+                            <span class="stat-value">${stats.maiorPontuacao}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Sequência Atual:</span>
+                            <span class="stat-value">${stats.sequenciaAtual}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Melhor Sequência:</span>
+                            <span class="stat-value">${stats.melhorSequencia}</span>
+                        </div>
+                    </div>
+                    <div class="jogos-por-tipo">
+                        <h4>Desempenho por Jogo:</h4>
+                        ${Object.entries(stats.jogosPorTipo).map(([jogo, dados]) =>
+                    `<div class="tipo-jogo">
+                                <span class="nome-jogo">${jogo}:</span>
+                                <span class="dados-jogo">${dados.jogos} jogos, ${dados.pontos} pts</span>
+                            </div>`
+                ).join('')}
+                    </div>
+                `;
+            }
+
+            if (conquistas && conquistas.length > 0) {
+                painelConquistas.classList.remove('oculto');
+
+                const conteudo = document.getElementById('conteudo-conquistas');
+                conteudo.innerHTML = `
+                    <div class="conquistas-grid">
+                        ${conquistas.map(conquista => `
+                            <div class="conquista-item">
+                                <span class="conquista-icone">${conquista.icone}</span>
+                                <div class="conquista-info">
+                                    <h5>${conquista.nome}</h5>
+                                    <p>${conquista.descricao}</p>
+                                    <small>Obtida em: ${new Date(conquista.data).toLocaleDateString('pt-BR')}</small>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // Event listeners para os controles
+        document.getElementById('btn-estatisticas').addEventListener('click', () => {
+            if (jogadorSelecionado) {
+                mostrarEstatisticas(jogadorSelecionado);
+            } else {
+                alert('Selecione um jogador na tabela para ver as estatísticas.');
+            }
+        });
+
+        document.getElementById('btn-conquistas').addEventListener('click', () => {
+            if (jogadorSelecionado) {
+                const conquistas = obterConquistasJogador(jogadorSelecionado);
+                if (conquistas.length > 0) {
+                    mostrarEstatisticas(jogadorSelecionado); // Reutiliza a função para mostrar conquistas
+                } else {
+                    alert('Este jogador ainda não possui conquistas.');
+                }
+            } else {
+                alert('Selecione um jogador na tabela para ver as conquistas.');
+            }
+        });
+
+        document.getElementById('btn-exportar').addEventListener('click', () => {
+            exportarDados();
+        });
+
+        document.getElementById('btn-importar').addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                if (e.target.files[0]) {
+                    importarDados(e.target.files[0]);
+                }
+            };
+            input.click();
+        });
+
         document.getElementById('btn-limpar-ranking').addEventListener('click', () => {
-            if (confirm("Tem certeza que deseja limpar o ranking?")) {
+            if (confirm("Tem certeza que deseja limpar TODO o ranking, estatísticas e conquistas?")) {
                 limparRanking();
                 carregarRanking();
+                // Limpar painéis laterais
+                document.getElementById('painel-estatisticas').classList.add('oculto');
+                document.getElementById('painel-conquistas').classList.add('oculto');
+                jogadorSelecionado = null;
+            }
+        });
+
+        document.getElementById('fechar-modal').addEventListener('click', () => {
+            document.getElementById('modal-estatisticas').classList.add('oculto');
+        });
+
+        document.getElementById('modal-estatisticas').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal-estatisticas')) {
+                document.getElementById('modal-estatisticas').classList.add('oculto');
             }
         });
 

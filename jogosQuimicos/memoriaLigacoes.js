@@ -104,6 +104,14 @@ function verificarValidadeCombinacao(combinacao, tipoLigacao) {
         dadosBaseCartas.find(c => c.simbolo === simbolo).tipo
     );
 
+    // Primeiro verifica se a fórmula formada é válida independente do tipo
+    const formula = formatarComposto(combinacao);
+    const compostosValidos = obterCompostosValidos(tipoLigacao);
+
+    if (!compostosValidos.includes(formula)) {
+        return false;
+    }
+
     switch (tipoLigacao) {
         case 'ionica':
             // Deve ter pelo menos um metal e um não-metal
@@ -113,7 +121,7 @@ function verificarValidadeCombinacao(combinacao, tipoLigacao) {
             return tipos.every(tipo => tipo === 'nao-metal');
         case 'mista':
         default:
-            // Qualquer combinação é válida
+            // Para modo misto, aceitamos qualquer combinação válida
             return true;
     }
 }
@@ -162,15 +170,28 @@ let modoCPU = false;
 let dificuldadeCPU = 'medio'; // 'facil', 'medio', 'dificil'
 let tipoLigacao = 'mista'; // 'ionica', 'covalente', 'mista'
 
+// Controle de tempo e vitória
+let tempoRestante = 300; // 5 minutos em segundos
+let timerInterval = null;
+let jogoIniciado = false;
 
 // Funções do jogo
 function jogadaCPU() {
-    if (!modoCPU || jogadorAtual !== 2) return;
+    // Verificações de segurança
+    if (!modoCPU || jogadorAtual !== 2 || travarCliques) {
+        return;
+    }
 
     travarCliques = true;
     statusTexto.textContent = "CPU está pensando...";
 
     setTimeout(() => {
+        // Verificação adicional antes de jogar
+        if (jogadorAtual !== 2 || !modoCPU) {
+            travarCliques = false;
+            return;
+        }
+
         const cartasDisponiveis = Array.from(document.querySelectorAll('.carta:not(.virada):not(.combinada)'));
 
         if (cartasDisponiveis.length < 2) {
@@ -198,7 +219,7 @@ function jogadaCPU() {
         maxCartas = Math.min(maxCartas, cartasDisponiveis.length);
 
         // Seleciona cartas aleatoriamente
-        for (let i = 0; i < maxCartas; i++) {
+        for (let i = 0; i < maxCartas && cartasDisponiveis.length > 0; i++) {
             const indice = Math.floor(Math.random() * cartasDisponiveis.length);
             const carta = cartasDisponiveis.splice(indice, 1)[0];
             cartasSelecionadas.push(carta);
@@ -210,11 +231,17 @@ function jogadaCPU() {
         statusTexto.textContent = "CPU está verificando combinações...";
 
         setTimeout(() => {
-            const combosEncontrados = encontrarTodosOsCombos(cartasViradas);
-            if (combosEncontrados.length > 0) {
-                tratarSucesso(combosEncontrados);
+            // Verificação final antes de processar
+            if (jogadorAtual === 2 && modoCPU) {
+                const combosEncontrados = encontrarTodosOsCombos(cartasViradas);
+                if (combosEncontrados.length > 0) {
+                    tratarSucesso(combosEncontrados);
+                } else {
+                    tratarFalha();
+                }
             } else {
-                tratarFalha();
+                // Se o estado mudou, apenas libera os cliques
+                travarCliques = false;
             }
         }, 1500);
 
@@ -228,6 +255,36 @@ function criarBaralho() {
             baralho.push({ ...tipoCarta });
         }
     });
+
+    // Otimizar número de cartas baseado no tamanho da tela
+    const larguraTela = window.innerWidth;
+    let maxCartas;
+
+    if (larguraTela >= 1200) {
+        maxCartas = 20; // Desktop grande
+    } else if (larguraTela >= 768) {
+        maxCartas = 16; // Tablet
+    } else if (larguraTela >= 480) {
+        maxCartas = 12; // Mobile médio
+    } else {
+        maxCartas = 8;  // Mobile pequeno
+    }
+
+    // Se temos mais cartas que o máximo, reduzir proporcionalmente
+    if (baralho.length > maxCartas) {
+        const proporcao = maxCartas / baralho.length;
+        const novoBaralho = [];
+
+        dadosBaseCartas.forEach(tipoCarta => {
+            const cartasTipo = Math.max(2, Math.floor(tipoCarta.quantidade * proporcao));
+            for (let i = 0; i < cartasTipo; i++) {
+                novoBaralho.push({ ...tipoCarta });
+            }
+        });
+
+        return novoBaralho;
+    }
+
     return baralho;
 }
 
@@ -303,14 +360,19 @@ function encontrarTodosOsCombos(cartas) {
                 }
             }
 
-            if (subconjunto.length >= 2 && cargaTotal === 0) {
+            if (subconjunto.length >= 2) {
                 const formula = formatarComposto(subconjunto);
-                if (compostosValidos.includes(formula) && verificarValidadeCombinacao(subconjunto, tipoLigacao)) {
-                    combosRealizados.push(subconjunto);
-                    // Remove as cartas usadas do pool para a próxima iteração
-                    poolDeCartas = poolDeCartas.filter(carta => !subconjunto.includes(carta));
-                    encontrouComboNestaRodada = true;
-                    break; // Sai do loop de subconjuntos para recomeçar a busca no pool reduzido
+
+                // Verifica se a fórmula está na lista de compostos válidos
+                if (compostosValidos.includes(formula)) {
+                    // Para compostos covalentes, aceitamos independente da soma das cargas
+                    // Para compostos iônicos, verificamos se é válido pelo tipo de ligação
+                    if (verificarValidadeCombinacao(subconjunto, tipoLigacao)) {
+                        combosRealizados.push(subconjunto);
+                        poolDeCartas = poolDeCartas.filter(carta => !subconjunto.includes(carta));
+                        encontrouComboNestaRodada = true;
+                        break;
+                    }
                 }
             }
         }
@@ -406,11 +468,20 @@ function proximoTurno() {
     travarCliques = false;
     jogadorAtual = (jogadorAtual === 1) ? 2 : 1;
 
+    // Atualizar indicador visual do jogador ativo
+    atualizarIndicadorJogadorAtivo();
+
     if (modoCPU && jogadorAtual === 2) {
         statusTexto.textContent = "Vez da CPU";
-        setTimeout(jogadaCPU, 1000);
+        setTimeout(() => {
+            if (jogadorAtual === 2 && modoCPU) { // Verificação adicional de segurança
+                jogadaCPU();
+            }
+        }, 1000);
     } else {
-        const nomeJogadorAtual = (jogadorAtual === 1) ? nomeJogador1 : (modoCPU ? "CPU" : nomeJogador2);
+        const nomeJogadorAtual = (jogadorAtual === 1)
+            ? (modoCPU ? (nomeEquipeCustom ? nomeEquipeCustom : "Equipe") : nomeJogador1)
+            : nomeJogador2;
         statusTexto.textContent = `Vez de ${nomeJogadorAtual}`;
     }
 
@@ -419,10 +490,14 @@ function proximoTurno() {
 
 function verificarFimDeJogo() {
     const cartasRestantes = document.querySelectorAll('.carta');
+
+    // Verifica se acabou as cartas
     if (cartasRestantes.length < 2) {
         anunciarVencedor();
         return;
     }
+
+    // Verifica se não há mais combinações possíveis
     let temPositivo = false;
     let temNegativo = false;
     for (let carta of cartasRestantes) {
@@ -430,13 +505,96 @@ function verificarFimDeJogo() {
         if (carga > 0) temPositivo = true;
         if (carga < 0) temNegativo = true;
     }
+
     if (!temPositivo || !temNegativo) {
-        anunciarVencedor();
+        // Se não há mais possibilidades, força vitória por pontos
+        travarCliques = true;
+        pararTimer();
+
+        let mensagemFinal = "Não há mais combinações possíveis! ";
+        if (pontosJogador1 > pontosJogador2) {
+            mensagemFinal += `${nomeJogador1} venceu por pontos!`;
+        } else if (pontosJogador2 > pontosJogador1) {
+            mensagemFinal += `${nomeJogador2} venceu por pontos!`;
+        } else {
+            mensagemFinal += "Empate por pontos!";
+        }
+
+        statusTexto.textContent = mensagemFinal;
+        tocarSomEmpate();
+        return;
     }
+
+    // Se ainda há tempo e possibilidades, continua o jogo
+    if (tempoRestante > 0 && (temPositivo && temNegativo)) {
+        return;
+    }
+}
+
+// Funções de controle de tempo
+function iniciarTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+    }
+
+    tempoRestante = 300; // 5 minutos
+    atualizarDisplayTimer();
+
+    timerInterval = setInterval(() => {
+        tempoRestante--;
+        atualizarDisplayTimer();
+
+        if (tempoRestante <= 0) {
+            finalizarJogoPorTempo();
+        } else if (tempoRestante <= 60) {
+            // Modo urgente nos últimos 60 segundos
+            const timerText = document.getElementById('timer-text');
+            if (timerText) {
+                timerText.classList.add('urgente');
+            }
+        }
+    }, 1000);
+}
+
+function atualizarDisplayTimer() {
+    const timerText = document.getElementById('timer-text');
+    if (!timerText) return;
+
+    const minutos = Math.floor(tempoRestante / 60);
+    const segundos = tempoRestante % 60;
+    timerText.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+}
+
+function finalizarJogoPorTempo() {
+    clearInterval(timerInterval);
+    travarCliques = true;
+
+    // Verificar vencedor por pontos
+    let mensagemFinal = "Tempo esgotado! ";
+    if (pontosJogador1 > pontosJogador2) {
+        mensagemFinal += `${nomeJogador1} venceu por pontos!`;
+    } else if (pontosJogador2 > pontosJogador1) {
+        mensagemFinal += `${nomeJogador2} venceu por pontos!`;
+    } else {
+        mensagemFinal += "Empate por pontos!";
+    }
+
+    statusTexto.textContent = mensagemFinal;
+    tocarSomEmpate();
+}
+
+function pararTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+    jogoIniciado = false;
 }
 
 function anunciarVencedor() {
     travarCliques = true;
+    pararTimer(); // Para o timer quando o jogo acabar
+
     let mensagemFinal = "Fim de Jogo! ";
     let vencedor;
     if (pontosJogador1 > pontosJogador2) {
@@ -454,11 +612,16 @@ function anunciarVencedor() {
         tocarVitoriaFinal();
     }
 
+    // Salvar partida no ranking com dados aprimorados
+    const jogo = tipoLigacao === 'mista' ? 'Memória Mista' :
+        tipoLigacao === 'ionica' ? 'Memória Iônica' : 'Memória Covalente';
+    salvarPartida(nomeJogador1, nomeJogador2, pontosJogador1, pontosJogador2, jogo, tipoLigacao, tempoRestante);
 }
 
 function iniciarJogo() {
     pontosJogador1 = 0;
     pontosJogador2 = 0;
+
     // Ajusta o label do jogador 1 com base no modo
     if (modoCPU) {
         labelJ1.textContent = nomeEquipeCustom ? nomeEquipeCustom : "Equipe";
@@ -492,6 +655,9 @@ function iniciarJogo() {
             break;
     }
 
+    // Inicia o controle de tempo
+    iniciarTimer();
+
     const nomeAtual = (jogadorAtual === 1)
         ? (modoCPU ? (nomeEquipeCustom ? nomeEquipeCustom : "Equipe") : nomeJogador1)
         : (modoCPU ? "CPU" : nomeJogador2);
@@ -499,9 +665,30 @@ function iniciarJogo() {
     travarCliques = false;
     cartasViradas = [];
     curiosidadeContainer.className = 'curiosidade-container-oculto';
+    jogoIniciado = true;
+
     const baralho = criarBaralho();
     embaralhar(baralho);
     distribuirCartas(baralho);
 }
 
 iniciarJogo();
+
+// Função para otimizar layout baseado no tamanho da tela
+function otimizarLayout() {
+    const tabuleiro = document.getElementById('tabuleiro-jogo');
+    if (tabuleiro) {
+        // Forçar recálculo do grid
+        tabuleiro.style.display = 'none';
+        setTimeout(() => {
+            tabuleiro.style.display = 'grid';
+        }, 10);
+    }
+}
+
+// Otimizar layout quando a janela for redimensionada
+window.addEventListener('resize', () => {
+    // Debounce para evitar muitas chamadas
+    clearTimeout(window.resizeTimeout);
+    window.resizeTimeout = setTimeout(otimizarLayout, 250);
+});

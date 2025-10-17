@@ -78,6 +78,13 @@
                                 conservação da massa de forma interativa.</span>
                         </div>
                     </button>
+                    <button id="botao-tabela-periodica" class="botao-jogo">
+                        <div class="botao-conteudo">
+                            <span class="titulo-jogo">Quebra-Cabeça da Tabela Periódica</span>
+                            <span class="descricao-jogo">Arraste os elementos químicos para suas posições corretas na
+                                tabela periódica. Aprenda sobre organização e propriedades dos elementos!</span>
+                        </div>
+                    </button>
                     <button id="botao-ranking" class="botao-jogo">
                         <div class="botao-conteudo">
                             <span class="titulo-jogo">Ver Ranking</span>
@@ -92,6 +99,7 @@
         const botaoMemoria = document.getElementById('botao-memoria-ligacoes');
         const botaoSuperTrunfo = document.getElementById('botao-super-trunfo');
         const botaoBalanceamento = document.getElementById('botao-balanceamento');
+        const botaoTabelaPeriodica = document.getElementById('botao-tabela-periodica');
         const botaoRanking = document.getElementById('botao-ranking');
         const inputNomeJ1 = document.getElementById('nome-j1');
         const inputNomeJ2 = document.getElementById('nome-j2');
@@ -131,6 +139,11 @@
             tocarClick();
             salvarNomes();
             window.location.href = 'balanceamento.html';
+        });
+        botaoTabelaPeriodica.addEventListener('click', () => {
+            tocarClick();
+            salvarNomes();
+            window.location.href = 'tabelaPeriodica.html';
         });
         botaoRanking.addEventListener('click', () => {
             tocarClick();

@@ -5,27 +5,27 @@
 }
 
 :root {
-    --primary-color: #21d4fd;
-    --secondary-color: #b721ff;
-    --accent-color: #00ff88;
-    --background-dark: #050b12;
-    --background-medium: #0e2139;
-    --background-light: #173a5a;
-    --text-primary: #e6edf3;
-    --text-secondary: rgba(230, 237, 243, 0.82);
-    --text-muted: rgba(230, 237, 243, 0.64);
-    --border-color: rgba(33, 212, 253, 0.16);
-    --shadow-light: rgba(33, 212, 253, 0.08);
-    --shadow-medium: rgba(33, 212, 253, 0.18);
-    --shadow-heavy: rgba(33, 212, 253, 0.28);
-    --success-color: #00ff88;
-    --warning-color: #ffaa00;
-    --error-color: #ff4757;
+    --primary-color: #4f46e5;
+    --secondary-color: #7c3aed;
+    --accent-color: #06b6d4;
+    --background-dark: #020617;
+    --background-medium: #0f172a;
+    --background-light: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: rgba(241, 245, 249, 0.85);
+    --text-muted: rgba(241, 245, 249, 0.65);
+    --border-color: rgba(79, 70, 229, 0.2);
+    --shadow-light: rgba(79, 70, 229, 0.12);
+    --shadow-medium: rgba(79, 70, 229, 0.22);
+    --shadow-heavy: rgba(79, 70, 229, 0.32);
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 50%, var(--background-light) 100%);
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 40%, var(--background-light) 100%);
     color: var(--text-primary);
     text-align: center;
     min-height: 100vh;
@@ -43,12 +43,12 @@ body::before {
     height: 100%;
     background-image:
         radial-gradient(circle, var(--shadow-light) 1px, transparent 1px),
-        radial-gradient(circle, var(--shadow-light) 1px, transparent 1px);
-    background-size: 20px 20px, 40px 40px;
-    background-position: 0 0, 20px 20px;
+        radial-gradient(circle, var(--shadow-medium) 1px, transparent 1px);
+    background-size: 25px 25px, 50px 50px;
+    background-position: 0 0, 25px 25px;
     pointer-events: none;
     z-index: 1;
-    animation: backgroundFloat 20s ease-in-out infinite;
+    animation: backgroundFloat 25s ease-in-out infinite;
 }
 
 @keyframes backgroundFloat {
@@ -97,21 +97,23 @@ body::before {
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    gap: 40px;
 }
 
 .jogos-container {
-    background: rgba(10, 25, 41, 0.66);
-    border-radius: 28px;
-    padding: 60px;
+    background: rgba(2, 6, 23, 0.85);
+    border-radius: 32px;
+    padding: 70px 60px;
     box-shadow:
-        0 25px 80px rgba(0, 0, 0, 0.3),
+        0 30px 90px rgba(0, 0, 0, 0.45),
         0 0 0 1px var(--border-color),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(15px);
-    max-width: 1280px;
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    max-width: 1300px;
     width: 100%;
     position: relative;
     overflow: hidden;
+    margin: 0 auto;
 }
 
 .jogos-container::before {
@@ -121,8 +123,8 @@ body::before {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-    animation: borderGlow 3s ease-in-out infinite;
+    background: linear-gradient(90deg, transparent, var(--primary-color), var(--secondary-color), transparent);
+    animation: borderGlow 4s ease-in-out infinite;
 }
 
 @keyframes borderGlow {
@@ -142,10 +144,11 @@ body::before {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-    padding: 20px 0 35px 0;
+    padding: 25px 0 40px 0;
     border-bottom: 1px solid var(--border-color);
     position: relative;
-    min-height: 120px;
+    min-height: 130px;
+    width: 100%;
 }
 
 .header-principal::after {
@@ -173,7 +176,7 @@ body::before {
 .logo-bolinha {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -181,7 +184,7 @@ body::before {
     font-weight: bold;
     font-size: 1.4em;
     color: white;
-    box-shadow: 0 0 30px var(--shadow-medium), 0 0 60px var(--shadow-light);
+    box-shadow: 0 0 35px var(--shadow-medium), 0 0 70px var(--shadow-light);
     animation: logoPulse 3s ease-in-out infinite;
     position: relative;
     overflow: hidden;
@@ -247,7 +250,7 @@ body::before {
 .logo-instituicao {
     width: 200px;
     height: 120px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     border: 1px solid var(--border-color);
     display: flex;
@@ -275,7 +278,7 @@ body::before {
 }
 
 .logo-instituicao:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
     border-color: var(--primary-color);
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 8px 25px var(--shadow-medium), 0 0 0 1px var(--primary-color);
@@ -300,36 +303,43 @@ body::before {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 45px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .conteudo-principal h1 {
-    font-size: 3em;
+    font-size: 3.2em;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 40%, var(--accent-color) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    margin-bottom: 15px;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     letter-spacing: -0.02em;
+    text-align: center;
+    line-height: 1.1;
 }
 
 .conteudo-principal .subtitulo {
-    font-size: 1.3em;
+    font-size: 1.4em;
     color: var(--text-secondary);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     font-weight: 400;
-    max-width: 600px;
-    line-height: 1.5;
+    max-width: 650px;
+    line-height: 1.6;
+    text-align: center;
 }
 
 .input-nomes {
     display: flex;
-    gap: 20px;
-    margin-bottom: 40px;
+    gap: 25px;
+    margin-bottom: 45px;
     width: 100%;
-    max-width: 500px;
+    max-width: 550px;
+    justify-content: center;
 }
 
 .input-nomes input {
@@ -338,10 +348,10 @@ body::before {
     font-size: 1.1em;
     border: none;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.06);
     color: var(--text-primary);
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
     outline: none;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid var(--border-color);
@@ -355,36 +365,38 @@ body::before {
 
 .input-nomes input:focus {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px var(--shadow-light), 0 8px 25px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 4px var(--shadow-light), 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
     transform: translateY(-2px);
 }
 
 .botoes-jogos {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 28px;
     width: 100%;
-    max-width: 600px;
+    max-width: 650px;
+    margin: 0 auto;
 }
 
 .botao-jogo {
     display: flex;
     align-items: center;
-    gap: 25px;
-    padding: 30px;
-    font-size: 1.2em;
+    gap: 28px;
+    padding: 32px 35px;
+    font-size: 1.25em;
     cursor: pointer;
     border: none;
-    border-radius: 20px;
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.14) 0%, rgba(183, 33, 255, 0.14) 100%);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
     color: var(--text-primary);
     font-weight: 500;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.34), 0 0 0 1px var(--border-color), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--border-color), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: left;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .botao-jogo::before {
@@ -403,9 +415,9 @@ body::before {
 }
 
 .botao-jogo:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 20px 60px var(--shadow-heavy), 0 0 0 2px var(--primary-color), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.22) 0%, rgba(183, 33, 255, 0.22) 100%);
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: 0 24px 70px var(--shadow-heavy), 0 0 0 2px var(--primary-color), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(124, 58, 237, 0.2) 100%);
 }
 
 .botao-conteudo {
@@ -416,27 +428,29 @@ body::before {
 }
 
 .titulo-jogo {
-    font-size: 1.4em;
+    font-size: 1.45em;
     font-weight: 600;
     color: var(--text-primary);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    margin-bottom: 4px;
 }
 
 .descricao-jogo {
-    font-size: 1em;
+    font-size: 1.05em;
     color: var(--text-secondary);
-    line-height: 1.4;
+    line-height: 1.5;
+    opacity: 0.9;
 }
 
 .header-jogo {
-    background: rgba(10, 25, 41, 0.95);
-    backdrop-filter: blur(20px);
+    background: rgba(2, 6, 23, 0.95);
+    backdrop-filter: blur(25px);
     border-bottom: 1px solid var(--border-color);
-    padding: 25px 0;
+    padding: 28px 0;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
 }
 
 .header-container {
@@ -452,20 +466,183 @@ body::before {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 15px 25px;
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    padding: 16px 28px;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
     border: 1px solid var(--border-color);
-    border-radius: 16px;
+    border-radius: 18px;
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
+    font-size: 1.05em;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.32);
 }
 
 .botao-voltar:hover {
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.2) 0%, rgba(183, 33, 255, 0.2) 100%);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.16) 0%, rgba(124, 58, 237, 0.16) 100%);
     border-color: var(--primary-color);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--shadow-medium);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px var(--shadow-medium);
+}
+
+/* Responsividade melhorada */
+@media (max-width: 1400px) {
+    .jogos-container {
+        max-width: 1200px;
+        padding: 60px 50px;
+    }
+
+    .header-principal {
+        min-height: 110px;
+    }
+
+    .conteudo-principal {
+        max-width: 800px;
+    }
+
+    .botoes-jogos {
+        max-width: 600px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .jogos-container {
+        padding: 50px 40px;
+    }
+
+    .header-principal {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        min-height: auto;
+        padding: 20px 0 30px 0;
+    }
+
+    .instituicoes {
+        margin-left: 0;
+        justify-content: center;
+    }
+
+    .conteudo-principal h1 {
+        font-size: 2.8em;
+    }
+
+    .botoes-jogos {
+        max-width: 550px;
+    }
+
+    .botao-jogo {
+        padding: 28px 30px;
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 768px) {
+    #tela-inicio {
+        padding: 15px;
+        gap: 30px;
+    }
+
+    .jogos-container {
+        padding: 40px 25px;
+        border-radius: 24px;
+    }
+
+    .header-principal {
+        margin-bottom: 35px;
+    }
+
+    .logo-jt {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .instituicoes {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo-instituicao {
+        width: 180px;
+        height: 100px;
+    }
+
+    .conteudo-principal {
+        gap: 35px;
+    }
+
+    .conteudo-principal h1 {
+        font-size: 2.4em;
+    }
+
+    .conteudo-principal .subtitulo {
+        font-size: 1.2em;
+    }
+
+    .input-nomes {
+        flex-direction: column;
+        gap: 15px;
+        max-width: 400px;
+    }
+
+    .botoes-jogos {
+        gap: 22px;
+        max-width: 100%;
+    }
+
+    .botao-jogo {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 25px 20px;
+    }
+
+    .titulo-jogo {
+        font-size: 1.3em;
+    }
+
+    .descricao-jogo {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .jogos-container {
+        padding: 30px 20px;
+    }
+
+    .conteudo-principal h1 {
+        font-size: 2em;
+    }
+
+    .conteudo-principal .subtitulo {
+        font-size: 1.1em;
+    }
+
+    .botao-jogo {
+        padding: 20px 15px;
+    }
+
+    .titulo-jogo {
+        font-size: 1.2em;
+    }
+
+    .descricao-jogo {
+        font-size: 0.95em;
+    }
+
+    .logo-bolinha {
+        width: 60px;
+        height: 60px;
+        font-size: 1.2em;
+    }
+
+    .logo-texto h2 {
+        font-size: 1.4em;
+    }
+
+    .logo-texto p {
+        font-size: 0.9em;
+    }
 }

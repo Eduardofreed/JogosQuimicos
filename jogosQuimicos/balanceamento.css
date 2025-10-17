@@ -7,10 +7,10 @@
 }
 
 .equacao-section {
-    background: rgba(10, 25, 41, 0.80);
+    background: rgba(2, 6, 23, 0.9);
     border-radius: 24px;
     padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px var(--border-color);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
 }
@@ -258,4 +258,92 @@
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 12px 35px var(--shadow-heavy), 0 0 0 2px rgba(255, 255, 255, 0.2);
     filter: brightness(1.1);
+}
+
+/* Sistema de progresso e níveis */
+.progresso-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    min-width: 200px;
+}
+
+.nivel-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.nivel-label {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.nivel-texto {
+    color: var(--primary-color);
+    font-size: 1em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.barra-progresso {
+    width: 150px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.progresso-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.5s ease;
+}
+
+.equacao-counter {
+    font-size: 0.85em;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.mensagem-inicial-contagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    color: var(--text-secondary);
+    text-align: center;
+    min-height: 80px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px dashed var(--border-color);
+}
+
+
+
+/* Responsividade para progresso */
+@media (max-width: 768px) {
+    .progresso-container {
+        min-width: 150px;
+    }
+
+    .barra-progresso {
+        width: 120px;
+    }
+
+    .status-container {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .status-indicador {
+        width: 100%;
+        justify-content: center;
+    }
 }

@@ -1,7 +1,7 @@
 "use strict";
 
 // Referências aos elementos do jogo (preenchidas após DOM pronto)
-let cartaJogador, cartaCPU, labelJ1, labelJ2, pontosJ1, pontosJ2, statusTexto, botaoReiniciar, botoesAtributos, botaoDica;
+let cartaJogador, cartaCPU, labelJ1, labelJ2, pontosJ1, pontosJ2, statusTexto, botaoReiniciar, botoesAtributos, botaoDica, botaoRegras, regrasContainer, fecharRegras;
 
 function setupSuperTrunfo() {
     cartaJogador = document.getElementById('carta-jogador-elemento');
@@ -13,6 +13,9 @@ function setupSuperTrunfo() {
     statusTexto = document.getElementById('status-texto');
     botaoReiniciar = document.getElementById('botao-reiniciar');
     botaoDica = document.getElementById('botao-dica');
+    botaoRegras = document.getElementById('botao-regras');
+    regrasContainer = document.getElementById('regras-container');
+    fecharRegras = document.getElementById('fechar-regras');
     botoesAtributos = document.querySelectorAll('.botao-atributo');
 
     if (botaoReiniciar) {
@@ -26,6 +29,31 @@ function setupSuperTrunfo() {
         botaoHistorico.addEventListener('click', () => {
             tocarClick();
             mostrarHistorico();
+        });
+    }
+
+    // Event listeners para o popup de regras
+    if (botaoRegras) {
+        botaoRegras.addEventListener('click', () => {
+            tocarClick();
+            abrirRegras();
+        });
+    }
+
+    if (fecharRegras) {
+        fecharRegras.addEventListener('click', () => {
+            tocarClick();
+            fecharPopupRegras();
+        });
+    }
+
+    // Fechar popup ao clicar fora dele
+    if (regrasContainer) {
+        regrasContainer.addEventListener('click', (e) => {
+            if (e.target === regrasContainer) {
+                tocarClick();
+                fecharPopupRegras();
+            }
         });
     }
     botoesAtributos.forEach(botao => {
@@ -83,14 +111,24 @@ let inicioPartida = null;
 function salvarPartida(vencedor, pontosEquipe, pontosCPU, duracao) {
     const partida = {
         id: Date.now(),
-        data: new Date().toLocaleString('pt-BR'),
-        equipe: nomeEquipeCustom ? nomeEquipeCustom : `${nomeJogador1} & ${nomeJogador2}`,
-        pontosEquipe,
-        pontosCPU,
-        vencedor,
-        duracao,
-        elementosUsados: dadosElementos.length
+        jogo: 'Super Trunfo Químico',
+        data: new Date().toLocaleDateString('pt-BR'),
+        hora: new Date().toLocaleTimeString('pt-BR'),
+        dataHora: new Date().toISOString(),
+        jogador1: nomeEquipeCustom ? nomeEquipeCustom : `${nomeJogador1} & ${nomeJogador2}`,
+        jogador2: 'CPU',
+        pontos1: pontosEquipe,
+        pontos2: pontosCPU,
+        dificuldade: 'normal',
+        tempoGasto: Math.floor((Date.now() - inicioPartida) / 1000),
+        vencedor: vencedor
     };
+
+    // Salvar no sistema de ranking aprimorado
+    if (typeof window !== 'undefined' && window.salvarPartidaRanking) {
+        window.salvarPartidaRanking(partida.jogador1, partida.jogador2, partida.pontos1, partida.pontos2, partida.jogo, partida.dificuldade, partida.tempoGasto);
+    }
+
     historicoPartidas.unshift(partida);
     if (historicoPartidas.length > 50) {
         historicoPartidas = historicoPartidas.slice(0, 50);
@@ -256,18 +294,34 @@ function iniciarJogo() {
     proximaRodada();
 }
 
-// Sistema de dicas (3 usos): sugere o melhor atributo previsto pela carta atual da equipe
+// Sistema de dicas aprimorado (5 usos): sugere estratégias baseadas na carta atual da equipe
 let dicasRestantes = 5;
+let historicoDicas = []; // Para evitar repetições
+
 function inicializarDicas() {
     atualizarRotuloDica();
     botaoDica.addEventListener('click', () => {
         if (dicasRestantes <= 0 || !cartaAtualEquipe) return;
         tocarClick();
-        const sugestao = gerarSugestaoTexto(cartaAtualEquipe);
+        const sugestao = gerarSugestaoInteligente(cartaAtualEquipe);
         statusTexto.textContent = sugestao;
+
+        // Adicionar ao histórico para evitar repetições
+        historicoDicas.push(sugestao);
+
         dicasRestantes--;
         atualizarRotuloDica();
-        if (dicasRestantes === 0) botaoDica.disabled = true;
+        if (dicasRestantes === 0) {
+            botaoDica.disabled = true;
+            botaoDica.title = "Todas as dicas foram usadas";
+        }
+
+        // Auto-limpar mensagem após 8 segundos
+        setTimeout(() => {
+            if (statusTexto.textContent === sugestao) {
+                statusTexto.textContent = "Escolha um atributo para a equipe";
+            }
+        }, 8000);
     });
 }
 
@@ -275,23 +329,126 @@ function atualizarRotuloDica() {
     botaoDica.querySelector('.botao-texto').textContent = `Dica (${dicasRestantes})`;
 }
 
-function gerarSugestaoTexto(carta) {
-    // Regras de texto por atributo com thresholds simples para evitar sempre a mesma dica
-    if (carta.nome === 'Flúor') {
-        return 'Dica: O flúor tem altíssima eletronegatividade. Pense nesse atributo.';
-    }
-    const dicas = [];
-    if (carta.eletronegatividade >= 3.2) dicas.push('Sua carta é bastante eletronegativa.');
-    if (carta.raioAtomico <= 80) dicas.push('Raio atômico pequeno tende a ser vantajoso.');
-    if (carta.massaAtomica >= 40) dicas.push('Massa atômica elevada pode ajudar.');
-    if (carta.pontoFusao <= -150) dicas.push('Ponto de fusão muito baixo é interessante (menor vence).');
-    if (carta.densidade >= 3) dicas.push('Densidade alta pode ser uma boa aposta.');
-    if (carta.energiaIonizacao >= 900) dicas.push('Energia de ionização alta é um bom indicativo.');
+function gerarSugestaoInteligente(carta) {
+    const dicasUsadas = historicoDicas.length;
+    const dicasDisponiveis = obterDicasDisponiveis(carta);
 
-    if (dicas.length === 0) {
-        return 'Dica: avalie cuidadosamente cada atributo; pequenas diferenças podem decidir.';
+    // Remove dicas já usadas para evitar repetição
+    const dicasNaoUsadas = dicasDisponiveis.filter(dica =>
+        !historicoDicas.some(usada => usada.includes(dica.texto))
+    );
+
+    if (dicasNaoUsadas.length === 0) {
+        return "Dica: Analise cuidadosamente todos os atributos. Cada elemento tem suas forças e fraquezas únicas!";
     }
-    // Rotaciona as mensagens para evitar repetição constante
-    const idx = Math.floor(Math.random() * dicas.length);
-    return `Dica: ${dicas[idx]}`;
+
+    // Seleciona uma dica aleatória das disponíveis
+    const dicaSelecionada = dicasNaoUsadas[Math.floor(Math.random() * dicasNaoUsadas.length)];
+
+    let mensagem = `Dica ${dicasUsadas + 1}/5: ${dicaSelecionada.texto}`;
+
+    // Adiciona contexto educativo se for uma boa oportunidade
+    if (dicasUsadas < 2 && dicaSelecionada.atributo) {
+        mensagem += ` ${dicaSelecionada.contexto}`;
+    }
+
+    return mensagem;
 }
+
+function obterDicasDisponiveis(carta) {
+    const dicas = [];
+
+    // Dica especial para o Flúor (Super Trunfo)
+    if (carta.nome === 'Flúor') {
+        dicas.push({
+            texto: "O Flúor é o Super Trunfo! Ele sempre vence em eletronegatividade.",
+            atributo: "eletronegatividade",
+            contexto: "Este elemento tem a maior eletronegatividade de toda a tabela periódica."
+        });
+    }
+
+    // Análise por atributo com contexto educativo
+    if (carta.eletronegatividade >= 3.0) {
+        dicas.push({
+            texto: "Sua carta tem alta eletronegatividade - vantagem neste atributo!",
+            atributo: "eletronegatividade",
+            contexto: "A eletronegatividade mede a capacidade de um átomo atrair elétrons."
+        });
+    }
+
+    if (carta.raioAtomico <= 100) {
+        dicas.push({
+            texto: "Raio atômico pequeno pode ser vantajoso (menor vence neste atributo).",
+            atributo: "raioAtomico",
+            contexto: "Elementos com raios menores geralmente são mais densos e têm pontos de fusão mais altos."
+        });
+    }
+
+    if (carta.massaAtomica >= 50) {
+        dicas.push({
+            texto: "Massa atômica elevada pode ajudar em alguns confrontos.",
+            atributo: "massaAtomica",
+            contexto: "A massa atômica influencia a densidade e outras propriedades físicas."
+        });
+    }
+
+    if (carta.pontoFusao >= 1000) {
+        dicas.push({
+            texto: "Alto ponto de fusão é uma vantagem quando este atributo é escolhido.",
+            atributo: "pontoFusao",
+            contexto: "Lembre-se: em ponto de fusão, o menor valor vence!"
+        });
+    }
+
+    if (carta.densidade >= 5) {
+        dicas.push({
+            texto: "Densidade alta pode ser uma boa escolha estratégica.",
+            atributo: "densidade",
+            contexto: "A densidade é influenciada pela massa atômica e pelo volume ocupado pelos átomos."
+        });
+    }
+
+    if (carta.energiaIonizacao >= 1000) {
+        dicas.push({
+            texto: "Energia de ionização alta indica vantagem neste atributo.",
+            atributo: "energiaIonizacao",
+            contexto: "Quanto maior a energia de ionização, mais difícil é remover elétrons do átomo."
+        });
+    }
+
+    // Dicas gerais se nenhuma específica se aplicar
+    if (dicas.length === 0) {
+        dicas.push({
+            texto: "Analise cuidadosamente cada atributo antes de escolher.",
+            contexto: "Cada elemento tem propriedades únicas que podem ser vantajosas em diferentes situações."
+        });
+
+        dicas.push({
+            texto: "Considere a posição do elemento na tabela periódica.",
+            contexto: "Elementos do mesmo grupo geralmente compartilham propriedades similares."
+        });
+
+        dicas.push({
+            texto: "Lembre-se das regras: maior vence, exceto raio atômico e ponto de fusão.",
+            contexto: "Para raio atômico e ponto de fusão, o menor valor vence!"
+        });
+    }
+
+    return dicas;
+}
+
+// Funções do popup de regras
+function abrirRegras() {
+    if (regrasContainer) {
+        regrasContainer.className = 'regras-container-visivel';
+    }
+}
+
+function fecharPopupRegras() {
+    if (regrasContainer) {
+        regrasContainer.className = 'regras-container-oculto';
+    }
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', setupSuperTrunfo);

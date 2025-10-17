@@ -1,25 +1,26 @@
 .main-jogo {
     min-height: calc(100vh - 100px);
-    padding: 40px 25px;
+    padding: 45px 30px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
 }
 
 .jogo-container {
-    max-width: 1200px;
+    max-width: 1300px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 38px;
+    margin: 0 auto;
 }
 
 .info-jogo-section {
-    background: rgba(10, 25, 41, 0.85);
-    border-radius: 24px;
-    padding: 30px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
-    backdrop-filter: blur(20px);
+    background: rgba(2, 6, 23, 0.9);
+    border-radius: 28px;
+    padding: 32px 35px;
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(22px);
     border: 1px solid var(--border-color);
 }
 
@@ -42,17 +43,42 @@
     align-items: center;
     gap: 15px;
     padding: 20px 25px;
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.1) 0%, rgba(183, 33, 255, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(124, 58, 237, 0.08) 100%);
     border-radius: 20px;
     border: 1px solid var(--border-color);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .placar-jogador:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px var(--shadow-medium);
     border-color: var(--primary-color);
+}
+
+.placar-jogador.ativo {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.25) 0%, rgba(124, 58, 237, 0.25) 100%);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+    transform: scale(1.02);
+}
+
+.placar-jogador.ativo .avatar-jogador {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
 }
 
 .avatar-jogador {
@@ -96,10 +122,10 @@
     align-items: center;
     gap: 12px;
     padding: 15px 25px;
-    background: linear-gradient(135deg, rgba(33, 212, 253, 0.15) 0%, rgba(183, 33, 255, 0.15) 100%);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.12) 0%, rgba(124, 58, 237, 0.12) 100%);
     border-radius: 16px;
     border: 1px solid var(--border-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .status-texto {
@@ -108,47 +134,130 @@
     font-size: 1.1em;
 }
 
-.tabuleiro-section {
-    background: rgba(10, 25, 41, 0.7);
-    border-radius: 24px;
-    padding: 35px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
-    backdrop-filter: blur(20px);
+.timer-container {
+    display: flex;
+    align-items: center;
+}
+
+.timer-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+    border-radius: 16px;
     border: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.timer-icon {
+    font-size: 1.2em;
+}
+
+.timer-text {
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    min-width: 60px;
+}
+
+.timer-text.urgente {
+    color: var(--error-color);
+    animation: timerPulse 1s ease-in-out infinite;
+}
+
+@keyframes timerPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+.tabuleiro-section {
+    background: rgba(2, 6, 23, 0.85);
+    border-radius: 28px;
+    padding: 38px 40px;
+    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(22px);
+    border: 1px solid var(--border-color);
+}
+
+/* Header fixo para melhor visibilidade dos jogadores */
+.main-jogo .header-jogo {
+    background: rgba(2, 6, 23, 0.98);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Área de jogadores sempre visível */
+.info-jogo-section {
+    background: rgba(2, 6, 23, 0.95);
+    border-radius: 0;
+    padding: 20px 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 99;
 }
 
 .tabuleiro-container {
     display: flex;
     justify-content: center;
     align-items: center;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) transparent;
 }
 
 .acoes-section {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .botao-acao {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
-    padding: 20px 35px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 22px 38px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
     border: none;
-    border-radius: 20px;
+    border-radius: 22px;
     color: var(--text-primary);
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.25em;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 8px 25px var(--shadow-medium), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-medium), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    min-width: 160px;
 }
 
 .botao-acao:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 35px var(--shadow-heavy), 0 0 0 2px rgba(255, 255, 255, 0.2);
-    filter: brightness(1.1);
+    transform: translateY(-4px) scale(1.025);
+    box-shadow: 0 14px 40px var(--shadow-heavy), 0 0 0 2px rgba(255, 255, 255, 0.1);
+    filter: brightness(1.12);
 }
 
 .placar-jogador.cpu-vez {
@@ -158,13 +267,13 @@
 }
 
 .modo-jogo-section {
-    background: rgba(10, 25, 41, 0.85);
-    border-radius: 24px;
-    padding: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border-color);
-    backdrop-filter: blur(20px);
+    background: rgba(2, 6, 23, 0.9);
+    border-radius: 26px;
+    padding: 22px 25px;
+    box-shadow: 0 11px 42px rgba(0, 0, 0, 0.42), 0 0 0 1px var(--border-color);
+    backdrop-filter: blur(22px);
     border: 1px solid var(--border-color);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .modo-container {
@@ -301,12 +410,14 @@ input:checked+.slider:before {
 
 #tabuleiro-jogo {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 25px;
-    max-width: 1100px;
-    width: 100%;
+    grid-template-columns: repeat(auto-fit, 100px);
+    gap: 12px;
+    min-width: min-content;
+    width: max-content;
     perspective: 1000px;
     animation: tabuleiroFadeIn 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0 20px;
+    justify-content: center;
 }
 
 @keyframes tabuleiroFadeIn {
@@ -321,18 +432,38 @@ input:checked+.slider:before {
     }
 }
 
+/* Scrollbar personalizada para o tabuleiro */
+.tabuleiro-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.tabuleiro-container::-webkit-scrollbar-track {
+    background: rgba(79, 70, 229, 0.1);
+    border-radius: 4px;
+}
+
+.tabuleiro-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: 4px;
+}
+
+.tabuleiro-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+}
+
 .carta {
-    width: 120px;
-    height: 170px;
+    width: 100px;
+    height: 140px;
     position: relative;
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.6s cubic-bezier(.68, -0.55, .27, 1.55), box-shadow 0.2s;
-    box-shadow: 0 6px 24px 0 rgba(33, 212, 253, 0.15), 0 1.5px 4px rgba(0, 0, 0, 0.10);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.10);
-    margin-bottom: 4px;
+    box-shadow: 0 6px 20px 0 rgba(79, 70, 229, 0.15), 0 2px 4px rgba(0, 0, 0, 0.10);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    margin-bottom: 3px;
     animation: cartaFadeIn 0.7s cubic-bezier(.68, -0.55, .27, 1.55);
+    flex-shrink: 0;
 }
 
 @keyframes cartaFadeIn {
@@ -348,7 +479,7 @@ input:checked+.slider:before {
 }
 
 .carta:hover:not(.virada):not(.combinada) {
-    box-shadow: 0 12px 32px 0 #21d4fd44, 0 2px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 10px 25px 0 rgba(79, 70, 229, 0.22), 0 2px 8px rgba(0, 0, 0, 0.12);
     transform: scale(1.04) rotateY(2deg);
     z-index: 2;
 }
@@ -471,4 +602,176 @@ input:checked+.slider:before {
 
 .tipo-ligacao-container {
     background: rgba(255, 255, 255, 0.04);
+}
+
+/* Responsividade melhorada para memória */
+@media (max-width: 1200px) {
+    .jogo-container {
+        max-width: 1100px;
+        gap: 32px;
+    }
+
+    .carta {
+        width: 90px;
+        height: 125px;
+    }
+
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, 90px);
+        gap: 10px;
+    }
+
+    .info-jogo-section {
+        padding: 28px 30px;
+    }
+
+    .tabuleiro-section {
+        padding: 32px 35px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-jogo {
+        padding: 35px 20px;
+    }
+
+    .jogo-container {
+        gap: 28px;
+    }
+
+    .tabuleiro-container {
+        padding: 8px 0;
+    }
+
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, 75px);
+        gap: 8px;
+        padding: 0 15px;
+    }
+
+    .carta {
+        width: 75px;
+        height: 105px;
+    }
+
+    .info-jogo-section {
+        padding: 25px;
+        border-radius: 24px;
+    }
+
+    .info-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .placar-container {
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .status-container {
+        justify-content: center;
+    }
+
+    .modo-jogo-section {
+        padding: 20px;
+        border-radius: 22px;
+    }
+
+    .modo-container {
+        gap: 18px;
+    }
+
+    .tabuleiro-section {
+        padding: 28px 25px;
+        border-radius: 24px;
+    }
+
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 12px;
+    }
+
+    .carta {
+        width: 80px;
+        height: 110px;
+    }
+
+    .acoes-section {
+        gap: 15px;
+    }
+
+    .botao-acao {
+        padding: 18px 30px;
+        font-size: 1.15em;
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-jogo {
+        padding: 25px 15px;
+    }
+
+    .jogo-container {
+        gap: 22px;
+    }
+
+    .tabuleiro-container {
+        padding: 5px 0;
+    }
+
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, 65px);
+        gap: 6px;
+        padding: 0 10px;
+    }
+
+    .carta {
+        width: 65px;
+        height: 90px;
+    }
+
+    .info-jogo-section {
+        padding: 20px;
+    }
+
+    .placar-jogador {
+        padding: 18px 20px;
+        gap: 12px;
+    }
+
+    .status-indicador {
+        padding: 12px 20px;
+    }
+
+    .modo-jogo-section {
+        padding: 18px;
+    }
+
+    .tabuleiro-section {
+        padding: 22px 18px;
+    }
+
+    #tabuleiro-jogo {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 10px;
+    }
+
+    .carta {
+        width: 70px;
+        height: 95px;
+    }
+
+    .acoes-section {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .botao-acao {
+        padding: 16px 25px;
+        font-size: 1.1em;
+        min-width: 120px;
+    }
 }
